@@ -6,7 +6,7 @@ import logo from '../img/logo-inverted.svg';
 const Footer = class extends React.Component {
   render() {
     return (
-      <footer className="footer has-background-black has-text-white-ter">
+      <footer className="footer">
         <div
           className="content has-text-centered"
           style={{
