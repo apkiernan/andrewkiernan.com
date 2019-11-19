@@ -1,59 +1,45 @@
-import React from 'react'
+import React from 'react';
 import SVG from 'react-inlinesvg';
-import { Link } from 'gatsby'
-import logo from '../img/logo-inverted.svg'
+import { Link } from 'gatsby';
+import logo from '../img/logo-inverted.svg';
 
 const Navbar = class extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       active: false,
-      navBarActiveClass: '',
-    }
+      navBarActiveClass: ''
+    };
   }
 
   toggleHamburger = () => {
     // toggle the active boolean in the state
     this.setState(
       {
-        active: !this.state.active,
+        active: !this.state.active
       },
       // after state has been updated,
       () => {
         // set the class in state for the navbar accordingly
         this.state.active
           ? this.setState({
-            navBarActiveClass: 'is-active',
-          })
+              navBarActiveClass: 'is-active'
+            })
           : this.setState({
-            navBarActiveClass: '',
-          })
+              navBarActiveClass: ''
+            });
       }
-    )
-  }
+    );
+  };
 
   render() {
     return (
-      <nav
-        className="navbar"
-        role="navigation"
-        aria-label="main-navigation"
-      >
+      <nav className="navbar" role="navigation" aria-label="main-navigation">
         <div className="container">
           <div className="navbar-brand">
             <Link to="/" className="navbar-item" title="Logo">
               <SVG src={logo} />
             </Link>
-            {/* Hamburger menu */}
-            <div
-              className={`navbar-burger burger ${this.state.navBarActiveClass}`}
-              data-target="navMenu"
-              onClick={() => this.toggleHamburger()}
-            >
-              <span />
-              <span />
-              <span />
-            </div>
           </div>
           <div
             id="navMenu"
@@ -73,8 +59,8 @@ const Navbar = class extends React.Component {
           </div>
         </div>
       </nav>
-    )
+    );
   }
-}
+};
 
-export default Navbar
+export default Navbar;

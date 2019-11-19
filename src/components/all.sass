@@ -20,6 +20,21 @@ $gray-bg: #3e3e3e;
       svg 
         height: 100%
 
+@media screen and (max-width: 1023px) 
+  .navbar > .container 
+    display: flex !important
+    height: 100%
+
+  .navbar-brand 
+    align-items: center !important
+
+  .navbar-menu
+    display: flex !important
+
+  .navbar-start
+    display: flex
+    align-items: center
+
 .content .taglist
   list-style: none
   margin-bottom: 0
@@ -158,8 +173,9 @@ $menu-label-color: $white-ter
         color: $white;
         text-decoration: underline;
 
-  .navbar-burger 
-    color: $white;
+.navbar-burger 
+  color: $white;
+  display: none !important // Fuck bulma burger menu
 
 .footer
   background: $gray-bg;
