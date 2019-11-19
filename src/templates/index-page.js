@@ -18,7 +18,8 @@ export const IndexPageTemplate = ({
         backgroundImage: `url(${
           !!image.childImageSharp ? image.childImageSharp.fluid.src : image
         })`,
-        backgroundAttachment: `fixed`
+        backgroundAttachment: `fixed`,
+        backgroundPosition: 'top -300px'
       }}
     ></div>
     <section className="section section--gradient">
