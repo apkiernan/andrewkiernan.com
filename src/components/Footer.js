@@ -8,7 +8,6 @@ const Footer = class extends React.Component {
     return (
       <footer className="footer">
         <div
-          className="content has-text-centered"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -16,12 +15,8 @@ const Footer = class extends React.Component {
             flexDirection: 'column'
           }}
         >
-          <SVG
-            src={logo}
-            alt="AK logo"
-            style={{ width: '7em', height: '5em' }}
-          />
-          <span>&copy; andrewkiernan.com {new Date().getFullYear()}</span>
+          <SVG src={logo} alt="AK logo" style={{ width: '5em', height: '3.5em', marginBottom: '1rem' }} />
+          <span>&copy; Andrew Kiernan {new Date().getFullYear()}</span>
         </div>
       </footer>
     );
