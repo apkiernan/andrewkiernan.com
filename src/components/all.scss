@@ -29,6 +29,14 @@ body {
   margin: 0 auto;
 }
 
+.full-width-image {
+  height: 9rem;
+
+  @media screen and (min-width: 48em) {
+    height: 20rem;
+  }
+}
+
 .content {
   background: $white;
   flex: 1;
