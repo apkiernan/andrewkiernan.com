@@ -1,0 +1,172 @@
+@import "~bulma/sass/utilities/initial-variables";
+
+$white: #fff;
+$primary: #729FE3;
+$primary-invert: $white;
+$body-color: #333;
+$black: #2b2523;
+$gray-bg: #3e3e3e;
+
+.navbar-burger {
+  color: $white;
+  display: none !important; // Fuck bulma burger menu
+}
+
+.footer {
+  background: $gray-bg;
+  color: $white;
+}
+
+
+@media screen and (max-width: 1023px) { 
+  .navbar > .container {
+    display: flex !important;
+    height: 100%;
+  }
+
+  .navbar-brand { 
+    align-items: center !important;
+  }
+
+  .navbar-menu {
+    display: flex !important;
+  }
+
+  .navbar-start {
+    display: flex;
+    align-items: center;
+  }
+}
+
+// Helper Classes
+.full-width-image-container {
+  width: 100vw;
+  height: 400px;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin: 2em -50vw;
+  background-size: cover;
+  background-position: bottom;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.full-width-image {
+  width: 100vw;
+  height: 400px;
+  background-size: cover;
+  background-position: bottom;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 16px 10px;
+  font-size: 18px;
+  font-size: 1rem;
+  line-height: 1.25;
+  background-color: #fff;
+  border-radius: .25rem;
+  text-decoration: none;
+  font-weight: 700;
+  color: #CC3700;
+  text-align: center;
+  -webkit-box-shadow: inset 0 0 0 2px #CC3700;
+  box-shadow: inset 0 0 0 2px #f40;
+  -webkit-transition: all .15s ease;
+  transition: all .15s ease;
+}
+
+.margin-top-0 {
+  margin-top: 0 !important;
+}
+
+.navbar-item .icon {
+  color: $primary;
+}
+// Override for use of svg's from https://simpleicons.org/
+.icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: currentColor;
+}
+.navbar-brand .navbar-item.logo {
+  padding: 0 1rem;
+}
+
+footer.footer {
+  padding: 1.5rem;
+}
+
+//Menu overrides
+$menu-item-color: $white-ter;
+$menu-item-hover-color: $black !important;
+$menu-item-hover-background-color: $black;
+$menu-item-active-color: $white;
+$menu-item-active-background-color:	$white;
+$menu-list-border-left: 1px solid $white;
+$menu-label-color: $white-ter;
+
+
+.menu-label {
+  font-size: 1em !important;
+  text-align: left;
+}
+.menu-list {
+  list-style: none !important;
+  text-align: left;
+}
+
+// blog roll
+.blog-list-item.is-featured {
+  background-color: #d6400033;
+}
+
+.blog-list-item header {
+  display: flex;
+  margin-bottom: 1em;
+}
+.blog-list-item .featured-thumbnail {
+  flex-basis: 35%;
+  margin: 0 1.5em 0 0;
+}
+
+
+@import "~bulma";
+
+.navbar .navbar-menu {
+  box-shadow: none !important;
+}
+
+.navbar-brand {
+  height: 100%;
+  flex-shrink: 1 !important;
+
+  a {
+    svg {
+      height: 100%;
+    }
+  }
+}
+
+.navbar {
+  height: 5rem;
+}
+
+.navbar,
+.navbar-menu {
+  background: $gray-bg;
+
+  .navbar-item {
+    color: $white;
+    &:hover {
+        background-color: $gray-bg;
+        color: $white;
+        text-decoration: underline;
+    }
+  }
+}
