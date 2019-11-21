@@ -11,9 +11,8 @@ export const IndexPageTemplate = ({ image, heading, mainpitch, description }) =>
       className="full-width-image margin-top-0"
       style={{
         backgroundImage: `url(${!!image.childImageSharp ? image.childImageSharp.fluid.src : image})`,
-        backgroundAttachment: `fixed`,
-        backgroundPosition: 'top left',
-        backgroundSize: 'contain',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat'
       }}
     ></div>
