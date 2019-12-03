@@ -1,7 +1,7 @@
 ---
 templateKey: index-page
 title: Boston Based Web Development Solutions
-image: /img/osman-rana-xjuegjjhnws-unsplash.jpg
+image: /img/celtics-banner.jpeg
 heading: Great coffee with a conscience
 subheading: Support sustainable farming while enjoying a cup
 mainpitch:
