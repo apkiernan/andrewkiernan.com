@@ -1,6 +1,10 @@
 $white: #fff;
 $gray-bg: #3c3c3c;
-$blue-lightest: #EBF3FF;
+$blue-lightest: #FAFCFF;
+$navbar-blue: #08234F;
+$blue-active: #729FE3;
+
+$xs-media: 500px;
 
 *,
 *::before,
@@ -43,25 +47,38 @@ body {
 }
 
 .navbar {
-  background: $gray-bg;
+  background: $navbar-blue;
   height: 5rem;
+
+  @media screen and (max-width: $xs-media) {
+    height: 3.5rem;
+  }
 
   .container {
     align-items: center;
     display: flex;
     height: 100%;
-    justify-content: flex-start;
+    justify-content: space-between;
     padding: 0 2rem;
+
+
+    @media screen and (max-width: $xs-media) {
+      padding: 0 1rem;
+    }
   }
 
   .navbar-brand {
     height: 100%;
     padding: 1rem;
 
+    @media screen and (max-width: $xs-media) {
+      padding: 0.5rem;
+    }
+  
+
     a {
       svg {
         height: 100%;
-        width: 100%;
       }
     }
   }
@@ -71,13 +88,37 @@ body {
     display: flex;
     align-items: center;
 
-    .navbar-item {
-      margin-right: 1rem;
+    .navbar-start {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      width: 100%;
     }
-  }
 
-  .navbar-item {
-    color: $white;
+    .navbar-item {
+      align-items: center;
+      color: $white;
+      display: flex;
+      font-size: 1.25rem;
+      height: 100%;
+      justify-content: center;
+      padding: 2rem;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &.active {
+        background: $blue-active;
+        color: $navbar-blue;
+      }
+
+      @media screen and (max-width: $xs-media) {
+        font-size: 0.875rem;
+        padding: 1rem;
+      }
+    }
   }
 }
 
