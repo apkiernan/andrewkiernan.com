@@ -16,42 +16,7 @@ export const IndexPageTemplate = ({ image, heading, mainpitch, description }) =>
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat'
       }}
-    >
-      <p
-        style={{
-          position: 'absolute',
-          color: 'white',
-          bottom: 0,
-          right: 0,
-          marginRight: '2rem',
-          textShadow: '1px 1px 2px black'
-        }}
-      >
-        <span>Photo by </span>
-        <a
-          style={{
-            color: 'white',
-            cursor: 'pointer'
-          }}
-          href="https://unsplash.com/@osmanrana?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-        >
-          Osman Rana
-        </a>
-        <span>
-          {' '}
-          on{' '}
-          <a
-            style={{
-              color: 'white',
-              cursor: 'pointer'
-            }}
-            href="https://unsplash.com/s/photos/boston?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
-          >
-            Unsplash
-          </a>
-        </span>
-      </p>
-    </div>
+    ></div>
     <section className="section section--gradient">
       <div className="container">
         <div className="section">
