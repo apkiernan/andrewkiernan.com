@@ -3,6 +3,7 @@ import { Link, graphql } from 'gatsby';
 
 import Layout from '../components/Layout';
 import BlogRoll from '../components/BlogRoll';
+import Helmet from 'react-helmet';
 
 type Img = {
   childImageSharp: {
@@ -84,6 +85,13 @@ const IndexPage = ({ data }: PageProps) => {
 
   return (
     <Layout>
+      <Helmet titleTemplate="Andrew Kiernan | %s">
+        <title>{`${frontmatter.title}`}</title>
+        <meta
+          name="description"
+          content={`${frontmatter.description}`}
+        />
+      </Helmet>
       <IndexPageTemplate
         image={frontmatter.image}
         title={frontmatter.title}
@@ -111,12 +119,9 @@ export const pageQuery = graphql`
         }
         heading
         subheading
-        mainpitch {
-          title
-          description
-        }
         description
-      }
+      },
+      html
     }
   }
 `;
