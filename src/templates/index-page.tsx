@@ -1,17 +1,37 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link, graphql } from 'gatsby';
 
 import Layout from '../components/Layout';
 import BlogRoll from '../components/BlogRoll';
 
-export const IndexPageTemplate = ({ image, heading, mainpitch, description }) => (
+type Img = {
+  childImageSharp: {
+    fluid: {
+      src: string;
+    }
+  }
+};
+
+type Props = {
+  image: Img | string;
+  title: string;
+  heading: string;
+  subheading: string;
+  mainpitch: {
+    description: string;
+    title: string;
+  };
+  description: string;
+  intro: any;
+};
+
+export const IndexPageTemplate = ({ image, heading, mainpitch, description }: Props) => (
   <div>
     <div
       className="full-width-image"
       style={{
         position: 'relative',
-        backgroundImage: `url(${!!image.childImageSharp ? image.childImageSharp.fluid.src : image})`,
+        backgroundImage: `url(${typeof image === 'string' ? image : image.childImageSharp.fluid.src})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat'
@@ -62,17 +82,15 @@ export const IndexPageTemplate = ({ image, heading, mainpitch, description }) =>
   </div>
 );
 
-IndexPageTemplate.propTypes = {
-  image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  title: PropTypes.string,
-  heading: PropTypes.string,
-  subheading: PropTypes.string,
-  mainpitch: PropTypes.object,
-  description: PropTypes.string,
-  intro: PropTypes.shape()
+type PageProps = {
+  data: {
+    markdownRemark: {
+      frontmatter: any;
+    }
+  }
 };
 
-const IndexPage = ({ data }) => {
+const IndexPage = ({ data }: PageProps) => {
   const { frontmatter } = data.markdownRemark;
 
   return (
@@ -88,14 +106,6 @@ const IndexPage = ({ data }) => {
       />
     </Layout>
   );
-};
-
-IndexPage.propTypes = {
-  data: PropTypes.shape({
-    markdownRemark: PropTypes.shape({
-      frontmatter: PropTypes.object
-    })
-  })
 };
 
 export default IndexPage;
