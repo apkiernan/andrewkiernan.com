@@ -6,4 +6,4 @@ heading: Hi! I'm Andrew
 subheading: Boston Based Web Development Solutions
 description: 'I am a Boston based web developer, currently employed at Salsify. '
 ---
-I am a Boston based web developer, currently employed at [Salsify](https://salsify.com). Testing
+I am a Boston based web developer, currently employed at [Salsify](https://salsify.com).
