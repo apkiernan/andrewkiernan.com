@@ -36,7 +36,7 @@ export const IndexPageTemplate = ({ image, heading, html }: Props) => (
     ></div>
     <section className="section section--gradient">      
       <div className="column is-12">
-        <h1 className="has-text-weight-semibold is-size-2">{heading}</h1>
+        <h1>{heading}</h1>
         <HTMLContent content={html} />
       </div>
     </section>
