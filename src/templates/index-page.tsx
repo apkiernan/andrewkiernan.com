@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 
 import Layout from '../components/Layout';
 import Helmet from 'react-helmet';
+import Content, { HTMLContent } from '../components/Content';
 
 type Img = {
   childImageSharp: {
@@ -18,9 +19,10 @@ type Props = {
   heading: string;
   subheading: string;
   description: string;
+  html: string;
 };
 
-export const IndexPageTemplate = ({ image, heading, description }: Props) => (
+export const IndexPageTemplate = ({ image, heading, html }: Props) => (
   <div>
     <div
       className="full-width-image"
@@ -34,8 +36,8 @@ export const IndexPageTemplate = ({ image, heading, description }: Props) => (
     ></div>
     <section className="section section--gradient">      
       <div className="column is-12">
-        <h3 className="has-text-weight-semibold is-size-2">{heading}</h3>
-        <p>{description}</p>
+        <h1 className="has-text-weight-semibold is-size-2">{heading}</h1>
+        <HTMLContent content={html} />
       </div>
     </section>
   </div>
@@ -44,13 +46,20 @@ export const IndexPageTemplate = ({ image, heading, description }: Props) => (
 type PageProps = {
   data: {
     markdownRemark: {
-      frontmatter: any;
+      frontmatter: {
+        image: Img | string;
+        title: string;
+        heading: string;
+        subheading: string;
+        description: string;
+      };
+      html: string;
     }
   }
 };
 
 const IndexPage = ({ data }: PageProps) => {
-  const { frontmatter } = data.markdownRemark;
+  const { frontmatter, html } = data.markdownRemark;
 
   return (
     <Layout>
@@ -67,6 +76,7 @@ const IndexPage = ({ data }: PageProps) => {
         heading={frontmatter.heading}
         subheading={frontmatter.subheading}
         description={frontmatter.description}
+        html={html}
       />
     </Layout>
   );
