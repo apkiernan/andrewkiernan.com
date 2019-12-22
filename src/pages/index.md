@@ -9,4 +9,5 @@ html: >-
   I am a Boston based web developer, currently employed at
   [Salsify](https://salsify.com).
 ---
+I am a Boston based web developer, currently employed at [Salsify](https://salsify.com).
 
