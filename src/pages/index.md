@@ -6,8 +6,19 @@ heading: Hi! I'm Andrew
 subheading: Boston Based Web Development Solutions
 description: 'I am a Boston based web developer, currently employed at Salsify. '
 html: >-
-  I am a Boston based web developer, currently employed at
-  [Salsify](https://salsify.com).
+  I am a Boston based web developer 
+
+
+  I'm originally from Abington, Massachusetts, but have been living all around
+  Boston for the last 8 years, currently residing in the North End
+  neighborhood. 
+
+
+  If I'm not working on various side projects, and it is between the months of
+  October and June (playoffs permitting), you will most likely find me heading
+  to the TD Garden for a Celtics game. 
+
+
+  ![Andrew going to a Celtics game](/img/celtics-banner.jpeg "Let's go Celtics")
 ---
-I am a Boston based web developer, currently employed at [Salsify](https://salsify.com).
 
