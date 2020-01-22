@@ -7,7 +7,7 @@ subheading: Boston Based Web Development Solutions
 description: 'I am a Boston based web developer, currently employed at Salsify. '
 html: >-
   I am a Boston based web developer, currently employed at
-  [Salsify](https://salsify.com).
+  [Salsify](https://www.salsify.com).
 
 
   I'm originally from Abington, Massachusetts, but have been living all around
