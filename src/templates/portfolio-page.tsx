@@ -8,13 +8,13 @@ type PageContentProps = {
   content: string;
 };
 
-type AboutPageTemplateProps = {
+type PortfolioPageTemplateProps = {
   title: string;
   content?: string;
   contentComponent: (p: PageContentProps) => ReactElement;
 };
 
-export const AboutPageTemplate = ({ title, content, contentComponent }: AboutPageTemplateProps) => {
+export const PortfolioPageTemplate = ({ title, content, contentComponent }: PortfolioPageTemplateProps) => {
   const PageContent = contentComponent || Content;
 
   return (
@@ -27,7 +27,7 @@ export const AboutPageTemplate = ({ title, content, contentComponent }: AboutPag
   );
 };
 
-type AboutPageProps = {
+type PortfolioPageProps = {
   data: {
     markdownRemark: {
       html: string;
@@ -38,20 +38,20 @@ type AboutPageProps = {
   };
 };
 
-const AboutPage = ({ data }: AboutPageProps) => {
+const PortfolioPage = ({ data }: PortfolioPageProps) => {
   const { markdownRemark: post } = data;
 
   return (
     <Layout>
-      <AboutPageTemplate contentComponent={HTMLContent} title={post.frontmatter.title} content={post.html} />
+      <PortfolioPageTemplate contentComponent={HTMLContent} title={post.frontmatter.title} content={post.html} />
     </Layout>
   );
 };
 
-export default AboutPage;
+export default PortfolioPage;
 
-export const aboutPageQuery = graphql`
-  query AboutPage($id: String!) {
+export const PortfolioPageQuery = graphql`
+  query PortfolioPage($id: String!) {
     markdownRemark(id: { eq: $id }) {
       html
       frontmatter {

@@ -44,10 +44,10 @@ collections:
           - { label: Subheading, name: subheading, widget: string }
           - { label: Description, name: description, widget: string }
           - { label: 'Body', name: 'html', widget: 'markdown' }
-      - file: 'src/pages/about/index.md'
-        label: 'About'
-        name: 'about'
+      - file: 'src/pages/portfolio/index.md'
+        label: 'Portfolio'
+        name: 'portfolio'
         fields:
-          - { label: 'Template Key', name: 'templateKey', widget: 'hidden', default: 'about-page' }
+          - { label: 'Template Key', name: 'templateKey', widget: 'hidden', default: 'portfolio-page' }
           - { label: 'Title', name: 'title', widget: 'string' }
           - { label: 'Body', name: 'body', widget: 'markdown' }

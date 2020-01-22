@@ -1,6 +1,6 @@
 ---
-templateKey: about-page
-title: About me
+templateKey: portfolio-page
+title: Portfolio
 ---
 I'm originally from Abington, Massachusetts, but have been living all around Boston for the last 8 years, currently residing in the North End neighborhood. 
 
