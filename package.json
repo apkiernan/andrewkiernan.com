@@ -31,6 +31,7 @@
     "react-dom": "^16.8.4",
     "react-helmet": "^5.2.0",
     "react-inlinesvg": "^1.2.0",
+    "reset-css": "^5.0.1",
     "uuid": "^3.2.1"
   },
   "keywords": [

@@ -3,14 +3,14 @@ import { graphql } from 'gatsby';
 
 import Layout from '../components/Layout';
 import Helmet from 'react-helmet';
-import Content, { HTMLContent } from '../components/Content';
+import { HTMLContent } from '../components/Content';
 
 type Img = {
   childImageSharp: {
     fluid: {
       src: string;
-    }
-  }
+    };
+  };
 };
 
 type Props = {
@@ -22,25 +22,13 @@ type Props = {
   html: string;
 };
 
-export const IndexPageTemplate = ({ image, heading, html }: Props) => (
-  <div>
-    <div
-      className="full-width-image"
-      style={{
-        position: 'relative',
-        backgroundImage: `url(${typeof image === 'string' ? image : image.childImageSharp.fluid.src})`,
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat'
-      }}
-    ></div>
-    <section className="section section--gradient">      
-      <div className="column is-12">
-        <h1>{heading}</h1>
-        <HTMLContent content={html} />
-      </div>
-    </section>
-  </div>
+export const IndexPageTemplate = ({ heading, html }: Props) => (
+  <section className="section">
+    <div>
+      <h1>{heading}</h1>
+      <HTMLContent content={html} />
+    </div>
+  </section>
 );
 
 type PageProps = {
@@ -54,8 +42,8 @@ type PageProps = {
         description: string;
       };
       html: string;
-    }
-  }
+    };
+  };
 };
 
 const IndexPage = ({ data }: PageProps) => {
@@ -65,10 +53,7 @@ const IndexPage = ({ data }: PageProps) => {
     <Layout>
       <Helmet titleTemplate="Andrew Kiernan | %s">
         <title>{`${frontmatter.title}`}</title>
-        <meta
-          name="description"
-          content={`${frontmatter.description}`}
-        />
+        <meta name="description" content={`${frontmatter.description}`} />
       </Helmet>
       <IndexPageTemplate
         image={frontmatter.image}
@@ -99,7 +84,7 @@ export const pageQuery = graphql`
         heading
         subheading
         description
-      },
+      }
       html
     }
   }

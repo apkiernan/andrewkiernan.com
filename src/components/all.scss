@@ -1,3 +1,5 @@
+@import '~reset-css';
+
 $white: #fff;
 $gray-bg: #3c3c3c;
 $blue-lightest: #FAFCFF;
@@ -10,8 +12,26 @@ $xs-media: 500px;
 *::before,
 *::after {
   box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
   font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span,
+li,
+div,
+article,
+section,
+dt,
+td,
+th {
+  font-family: 'Open Sans', sans-serif;
 }
 
 body {
@@ -20,8 +40,27 @@ body {
   padding: 0;
 }
 
+h1 {
+  color: $blue-active;
+  font-family: 'Londrina Shadow', sans-serif;
+  font-size: 3.5rem;
+
+  @media screen and (max-width: $xs-media) {
+    font-size: 2rem;
+  }
+}
+
+h1,
+p {
+  margin-bottom: 1rem;
+}
+
 .section {
-  padding: 1rem;
+  padding: 1rem 3rem;
+}
+
+.navbar .navbar-menu .navbar-item.active:hover {
+  text-decoration: none;
 }
 
 .page {
