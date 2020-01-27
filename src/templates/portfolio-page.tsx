@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import Content, { HTMLContent } from '../components/Content';
+import Helmet from 'react-helmet';
 
 type PageContentProps = {
   className: string;
@@ -33,6 +34,7 @@ type PortfolioPageProps = {
       html: string;
       frontmatter: {
         title: string;
+        description: string;
       };
     };
   };
@@ -43,6 +45,10 @@ const PortfolioPage = ({ data }: PortfolioPageProps) => {
 
   return (
     <Layout>
+      <Helmet titleTemplate="Andrew Kiernan | %s">
+        <title>{`${post.frontmatter.title}`}</title>
+        <meta name="description" content={`${post.frontmatter.description}`} />
+      </Helmet>
       <PortfolioPageTemplate contentComponent={HTMLContent} title={post.frontmatter.title} content={post.html} />
     </Layout>
   );
@@ -56,6 +62,7 @@ export const PortfolioPageQuery = graphql`
       html
       frontmatter {
         title
+        description
       }
     }
   }

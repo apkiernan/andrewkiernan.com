@@ -1,44 +1,35 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { graphql } from 'gatsby';
 
 import Layout from '../components/Layout';
 import Helmet from 'react-helmet';
-import { HTMLContent } from '../components/Content';
-
-type Img = {
-  childImageSharp: {
-    fluid: {
-      src: string;
-    };
-  };
-};
+import Content, { HTMLContent } from '../components/Content';
 
 type Props = {
-  image: Img | string;
   title: string;
   heading: string;
-  subheading: string;
-  description: string;
   html: string;
+  contentComponent: (p: any) => ReactElement;
 };
 
-export const IndexPageTemplate = ({ heading, html }: Props) => (
-  <section className="section">
-    <div>
-      <h1>{heading}</h1>
-      <HTMLContent content={html} />
-    </div>
-  </section>
-);
+export const IndexPageTemplate = ({ heading, html, contentComponent }: Props) => {
+  const PageContent = contentComponent || Content;
+  return (
+    <section className="section">
+      <div>
+        <h1>{heading}</h1>
+        <PageContent content={html} />
+      </div>
+    </section>
+  );
+};
 
 type PageProps = {
   data: {
     markdownRemark: {
       frontmatter: {
-        image: Img | string;
         title: string;
         heading: string;
-        subheading: string;
         description: string;
       };
       html: string;
@@ -55,14 +46,7 @@ const IndexPage = ({ data }: PageProps) => {
         <title>{`${frontmatter.title}`}</title>
         <meta name="description" content={`${frontmatter.description}`} />
       </Helmet>
-      <IndexPageTemplate
-        image={frontmatter.image}
-        title={frontmatter.title}
-        heading={frontmatter.heading}
-        subheading={frontmatter.subheading}
-        description={frontmatter.description}
-        html={html}
-      />
+      <IndexPageTemplate title={frontmatter.title} heading={frontmatter.heading} html={html} contentComponent={HTMLContent} />
     </Layout>
   );
 };
@@ -74,15 +58,7 @@ export const pageQuery = graphql`
     markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
       frontmatter {
         title
-        image {
-          childImageSharp {
-            fluid(maxWidth: 2048, quality: 100) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
         heading
-        subheading
         description
       }
       html
