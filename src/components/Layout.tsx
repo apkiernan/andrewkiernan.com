@@ -1,12 +1,12 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
+import Footer from './Footer';
+import Navbar from './Navbar';
 import './all.scss';
 import useSiteMetadata from './SiteMetadata';
 import { withPrefix } from 'gatsby';
 
-const TemplateWrapper = ({ children }) => {
+export const Layout = ({ children }) => {
   const { title, description } = useSiteMetadata();
   return (
     <div className="page">
@@ -18,7 +18,7 @@ const TemplateWrapper = ({ children }) => {
         <link rel="apple-touch-icon" sizes="180x180" href={`${withPrefix('/')}img/apple-touch-icon.png`} />
         <link rel="icon" type="image/png" href={`${withPrefix('/')}img/favicon-32x32.png`} sizes="32x32" />
         <link rel="icon" type="image/png" href={`${withPrefix('/')}img/favicon-16x16.png`} sizes="16x16" />
-        <link href="https://fonts.googleapis.com/css?family=Londrina+Shadow|Open+Sans&display=swap" rel="stylesheet"></link>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Londrina+Shadow|Nunito+Sans&display=swap" />
 
         <link rel="mask-icon" href={`${withPrefix('/')}img/safari-pinned-tab.svg`} color="#ff4400" />
         <meta name="theme-color" content="#fff" />
@@ -34,5 +34,3 @@ const TemplateWrapper = ({ children }) => {
     </div>
   );
 };
-
-export default TemplateWrapper;
