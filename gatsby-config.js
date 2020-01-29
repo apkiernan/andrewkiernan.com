@@ -16,6 +16,14 @@ module.exports = {
       }
     },
     {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Londrina Shadow', 'Nunito Sans']
+        }
+      }
+    },
+    {
       resolve: 'gatsby-plugin-typescript',
       options: {
         isTSX: true,
