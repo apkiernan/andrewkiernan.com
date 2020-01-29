@@ -5,6 +5,7 @@ $gray-bg: #3c3c3c;
 $blue-lightest: #FAFCFF;
 $navbar-blue: #08234F;
 $blue-active: #729FE3;
+$blue-header: #000FB3;
 
 $xs-media: 500px;
 
@@ -41,7 +42,7 @@ body {
 }
 
 h1 {
-  color: $blue-active;
+  color: $blue-header;
   font-family: 'Londrina Shadow', sans-serif;
   font-size: 3.5rem;
 
