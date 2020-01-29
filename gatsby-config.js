@@ -16,6 +16,18 @@ module.exports = {
       }
     },
     {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Andrew Kiernan`,
+        short_name: `Andrew Kiernan`,
+        start_url: `/`,
+        background_color: `#000966`,
+        theme_color: `#729FE3`,
+        display: `standalone`,
+        icon: `src/img/logo-inverted.svg`
+      }
+    },
+    {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
         google: {
