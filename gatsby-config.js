@@ -28,6 +28,12 @@ module.exports = {
       }
     },
     {
+      resolve: 'gatsby-plugin-offline',
+      options: {
+        preCachePages: [`/`, `/contact`]
+      }
+    },
+    {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
         google: {
