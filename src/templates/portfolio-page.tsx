@@ -1,8 +1,11 @@
 import React, { ReactElement } from 'react';
-import { graphql } from 'gatsby';
-import { Layout } from '../components/Layout';
-import Content, { HTMLContent } from '../components/Content';
 import Helmet from 'react-helmet';
+import { graphql } from 'gatsby';
+import { RemarkForm } from 'gatsby-tinacms-remark';
+
+import Content, { HTMLContent } from '../components/Content';
+import { Layout } from '../components/Layout';
+import { RemarkNode } from 'gatsby-tinacms-remark/src/remark-node';
 
 type PageContentProps = {
   className: string;
@@ -30,13 +33,7 @@ export const PortfolioPageTemplate = ({ title, content, contentComponent }: Port
 
 type PortfolioPageProps = {
   data: {
-    markdownRemark: {
-      html: string;
-      frontmatter: {
-        title: string;
-        description: string;
-      };
-    };
+    markdownRemark: RemarkNode & { html: string };
   };
 };
 
@@ -49,7 +46,12 @@ const PortfolioPage = ({ data }: PortfolioPageProps) => {
         <title>{`${post.frontmatter.title}`}</title>
         <meta name="description" content={`${post.frontmatter.description}`} />
       </Helmet>
-      <PortfolioPageTemplate contentComponent={HTMLContent} title={post.frontmatter.title} content={post.html} />
+      <RemarkForm
+        remark={post}
+        render={({ markdownRemark }) => (
+          <PortfolioPageTemplate contentComponent={HTMLContent} title={markdownRemark.frontmatter.title} content={markdownRemark.html} />
+        )}
+      />
     </Layout>
   );
 };
@@ -57,8 +59,9 @@ const PortfolioPage = ({ data }: PortfolioPageProps) => {
 export default PortfolioPage;
 
 export const PortfolioPageQuery = graphql`
-  query PortfolioPage($id: String!) {
-    markdownRemark(id: { eq: $id }) {
+  query PortfolioPage {
+    markdownRemark(frontmatter: { templateKey: { eq: "portfolio-page" } }) {
+      ...TinaRemark
       html
       frontmatter {
         title

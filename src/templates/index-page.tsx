@@ -1,10 +1,13 @@
 import React, { ReactElement } from 'react';
 import { graphql } from 'gatsby';
+import { useLocalRemarkForm } from 'gatsby-tinacms-remark';
+import { RemarkNode } from 'gatsby-tinacms-remark/src/remark-node';
 
 import { Layout } from '../components/Layout';
 import Helmet from 'react-helmet';
 import Content, { HTMLContent } from '../components/Content';
 
+type IRemarkNode = RemarkNode & { html: string };
 type Props = {
   title: string;
   heading: string;
@@ -26,27 +29,24 @@ export const IndexPageTemplate = ({ heading, html, contentComponent }: Props) =>
 
 type PageProps = {
   data: {
-    markdownRemark: {
-      frontmatter: {
-        title: string;
-        heading: string;
-        description: string;
-      };
-      html: string;
-    };
+    markdownRemark: any;
   };
 };
 
 const IndexPage = ({ data }: PageProps) => {
-  const { frontmatter, html } = data.markdownRemark;
-
+  const [remark] = useLocalRemarkForm(data.markdownRemark);
   return (
     <Layout>
       <Helmet titleTemplate="Andrew Kiernan | %s">
-        <title>{`${frontmatter.title}`}</title>
-        <meta name="description" content={`${frontmatter.description}`} />
+        <title>{`${remark.frontmatter.title}`}</title>
+        <meta name="description" content={`${remark.frontmatter.description}`} />
       </Helmet>
-      <IndexPageTemplate title={frontmatter.title} heading={frontmatter.heading} html={html} contentComponent={HTMLContent} />
+      <IndexPageTemplate
+        title={remark.frontmatter.title}
+        heading={remark.frontmatter.heading}
+        html={(remark as IRemarkNode).html}
+        contentComponent={HTMLContent}
+      />
     </Layout>
   );
 };
@@ -56,6 +56,7 @@ export default IndexPage;
 export const pageQuery = graphql`
   query IndexPageTemplate {
     markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
+      ...TinaRemark
       frontmatter {
         title
         heading

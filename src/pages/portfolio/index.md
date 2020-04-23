@@ -1,6 +1,6 @@
 ---
-templateKey: portfolio-page
 title: Portfolio
+templateKey: portfolio-page
 ---
 ## [South Boston Waterfront Transportation Center](https://artofcontext.com/project/sbwtc-wayfinding)
 
