@@ -1,8 +1,7 @@
 ---
 title: Boston Based Web Development Solutions
 templateKey: index-page
-image: ../../static/img/filiberto-santillan-1hcb2gpk3ik-unsplash.jpg
-heading: Hi! I'm Andrew
+heading: ''
 subheading: Boston Based Web Development Solutions
 description: 'I am a Boston based web developer, currently employed at Salsify. '
 ---

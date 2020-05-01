@@ -22,7 +22,7 @@ export const PortfolioPageTemplate = ({ title, content, contentComponent }: Port
   const PageContent = contentComponent || Content;
 
   return (
-    <section className="section section--gradient">
+    <section className="section">
       <div className="container">
         <h1>{title}</h1>
         <PageContent className="content" content={content} />

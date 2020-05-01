@@ -1,26 +1,24 @@
 import React from 'react';
-import SVG from 'react-inlinesvg';
+import styled from 'styled-components';
 
-import logo from '../img/logo-inverted.svg';
+const FooterWrapper = styled.footer`
+  align-items: center;
+  border-top: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  height: 3rem;
 
-const Footer = class extends React.Component {
-  render() {
-    return (
-      <footer className="footer">
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'column'
-          }}
-        >
-          <SVG src={logo} alt="AK logo" style={{ width: '5em', height: '3.5em', marginBottom: '1rem' }} />
-          <span>&copy; Andrew Kiernan {new Date().getFullYear()}</span>
-        </div>
-      </footer>
-    );
+  @media screen and (min-width: 500px) {
+    height: 5rem;
   }
+`;
+
+const Footer = () => {
+  return (
+    <FooterWrapper>
+      <span>&copy; Andrew Kiernan {new Date().getFullYear()}</span>
+    </FooterWrapper>
+  );
 };
 
 export default Footer;
