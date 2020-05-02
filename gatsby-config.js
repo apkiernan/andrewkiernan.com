@@ -119,6 +119,7 @@ module.exports = {
         purgeOnly: ['/all.scss'] // applies purging only on the bulma css file
       }
     }, // must be after other CSS plugins,
+    { resolve: 'gatsby-plugin-styled-components' },
     'gatsby-plugin-netlify' // make sure to keep it last in the array
   ]
 };

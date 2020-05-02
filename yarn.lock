@@ -7212,6 +7212,13 @@ gatsby-plugin-sharp@^2.2.9:
     svgo "1.3.2"
     uuid "^3.3.3"
 
+gatsby-plugin-styled-components@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-styled-components/-/gatsby-plugin-styled-components-3.3.0.tgz#f2ed6a559c993542a37fe9b7a64d0c04e58bc9c2"
+  integrity sha512-NpOeC7QPZGLr3CBBi2LWKiPrpgM2KhvlZ5rb9sNKRb6T2meLf6lSCpQbYqAyOh/h3t8o7AefSY8Op8fxqPQ3TQ==
+  dependencies:
+    "@babel/runtime" "^7.9.2"
+
 gatsby-plugin-tinacms@0.1.33:
   version "0.1.33"
   resolved "https://npm.artofcontext.com/gatsby-plugin-tinacms/-/gatsby-plugin-tinacms-0.1.33.tgz#a70a1b2d955e34ee2f31525d68e0e32f7d876917"
