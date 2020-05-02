@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SVG from 'react-inlinesvg';
 
 import { Link } from './Link';
-import logo from '../img/logo-inverted.svg';
+import logo from '../img/logo.svg';
 
 const Nav = styled.nav`
   align-items: center;

@@ -50,7 +50,7 @@ const Content = styled.div`
 `;
 
 type LayoutProps = {
-  children: React.ReactElement;
+  children: React.ReactNode;
 };
 
 export const Layout = ({ children }: LayoutProps) => {
