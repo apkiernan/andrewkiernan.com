@@ -5,11 +5,16 @@ export type SiteTheme = 'light' | 'dark';
 const siteThemeNamespace = 'ak-site-theme';
 
 export const useSiteTheme = (): [SiteTheme, (s: SiteTheme) => void] => {
-  const preference = localStorage.getItem(siteThemeNamespace) as SiteTheme;
-  const [state, setState] = useState<SiteTheme>(preference ?? 'light');
+  let preference: SiteTheme = 'light';
+  if (typeof window !== 'undefined') {
+    preference = window.localStorage.getItem(siteThemeNamespace) as SiteTheme;
+  }
+  const [state, setState] = useState<SiteTheme>(preference);
 
   const setSiteTheme = (st: SiteTheme) => {
-    localStorage.setItem(siteThemeNamespace, st);
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(siteThemeNamespace, st);
+    }
     setState(st);
   };
 
