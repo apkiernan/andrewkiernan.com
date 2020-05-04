@@ -1,13 +1,40 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
+import styled, { ThemeProvider, ThemeProps, createGlobalStyle } from 'styled-components';
 
 import Footer from './Footer';
 import Navbar from './Navbar';
 import { Head } from './Head';
 import useSiteMetadata from './SiteMetadata';
+import { useSiteTheme } from '../hooks/useSiteTheme';
 
-const Global = createGlobalStyle`
+const lightTheme = {
+  font: {
+    main: '16px'
+  },
+  palette: {
+    backgroundColor: '#fafafa',
+    textColor: '#333',
+    primary: '#08234F',
+    linkColor: '#08234F'
+  }
+};
+
+const darkTheme = {
+  font: {
+    main: '16px'
+  },
+  palette: {
+    backgroundColor: '#282c35',
+    textColor: '#fff',
+    primary: '#729FE3',
+    linkColor: '#729FE3'
+  }
+};
+
+export type Theme = ThemeProps<typeof lightTheme | typeof darkTheme>;
+
+const Global = createGlobalStyle<Theme>`
   *,
   *::before,
   *::after {
@@ -16,25 +43,20 @@ const Global = createGlobalStyle`
   html {
     font-size: 16px;
     font-family: 'Rubik', sans-serif;
+    color: ${props => props.theme.palette.textColor};
   }
   body {
     margin: 0;
-    background: #fafafa
+    background: ${props => props.theme.palette.backgroundColor};
   }
   p,
   a {
     font-size: 1.25rem;
   }
-`;
-
-const theme = {
-  font: {
-    main: '16px'
-  },
-  palette: {
-    grayDark: '#333'
+  a {
+    color: ${props => props.theme.palette.linkColor}
   }
-};
+`;
 
 const Page = styled.main`
   display: flex;
@@ -55,14 +77,15 @@ type LayoutProps = {
 
 export const Layout = ({ children }: LayoutProps) => {
   const { title, description } = useSiteMetadata();
+  const [siteTheme, setSiteTheme] = useSiteTheme();
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={siteTheme === 'light' ? lightTheme : darkTheme}>
       <Global />
       <Page>
         <Helmet>
           <Head title={title} description={description} />
         </Helmet>
-        <Navbar />
+        <Navbar siteTheme={siteTheme} setSiteTheme={setSiteTheme} />
         <Content>{children}</Content>
         <Footer />
       </Page>

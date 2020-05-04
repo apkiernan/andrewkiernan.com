@@ -1,9 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
+import { Link } from 'gatsby';
+import styled, { ThemeContext } from 'styled-components';
 import SVG from 'react-inlinesvg';
 
-import { Link } from './Link';
-import logo from '../img/logo.svg';
+import { useSiteTheme, SiteTheme } from '../hooks/useSiteTheme';
+import logoLight from '../img/logo.svg';
+import logoDark from '../img/logo-inverted.svg';
 
 const Nav = styled.nav`
   align-items: center;
@@ -20,8 +22,11 @@ const Nav = styled.nav`
 
 const NavBrand = styled.div`
   display: flex;
-  flex: 50%;
   height: 100%;
+`;
+
+const SiteThemeToggle = styled.div`
+  flex: 1;
 `;
 
 const BrandLink = styled(Link)`
@@ -32,29 +37,54 @@ const BrandLink = styled(Link)`
 
 const NavMenu = styled.div`
   font-size: ${props => props.theme.font.main};
-  color: ${props => props.theme.palette.grayDark};
+  color: ${props => props.theme.palette.textColor};
 `;
 
 const NavLink = styled(Link)`
   text-decoration: none;
-  color: ${props => props.theme.palette.grayDark};
+  border-bottom: 0.3rem solid transparent;
+  color: ${props => props.theme.palette.textColor};
   padding: 2rem;
+  padding-bottom: 1.5rem;
   &::visited: {
-    color: ${props => props.theme.palette.grayDark};
+    color: ${props => props.theme.palette.textColor};
   }
 `;
 
-const Navbar = () => {
+type Props = {
+  siteTheme: SiteTheme;
+  setSiteTheme: (st: SiteTheme) => void;
+};
+
+const Navbar = (p: Props) => {
+  const theme = React.useContext(ThemeContext);
   return (
     <Nav>
       <NavBrand>
         <BrandLink to="/">
-          <SVG src={logo} style={{ height: '100%', width: 'auto' }} />
+          <SVG src={p.siteTheme === 'light' ? logoLight : logoDark} style={{ height: '100%', width: 'auto' }} />
         </BrandLink>
       </NavBrand>
+      <SiteThemeToggle>
+        <label htmlFor="site-theme">
+          <span>{p.siteTheme === 'light' ? 'Light mode' : 'Dark mode'}</span>
+          <input
+            id="site-theme"
+            type="checkbox"
+            checked={p.siteTheme === 'dark'}
+            onChange={() => {
+              p.setSiteTheme(p.siteTheme === 'light' ? 'dark' : 'light');
+            }}
+          />
+        </label>
+      </SiteThemeToggle>
       <NavMenu>
-        <NavLink to="/portfolio">Portfolio</NavLink>
-        <NavLink to="/contact">Contact</NavLink>
+        <NavLink activeStyle={{ borderBottomColor: theme.palette.primary }} to="/portfolio">
+          Portfolio
+        </NavLink>
+        <NavLink activeStyle={{ borderBottomColor: theme.palette.primary }} to="/contact">
+          Contact
+        </NavLink>
       </NavMenu>
     </Nav>
   );
