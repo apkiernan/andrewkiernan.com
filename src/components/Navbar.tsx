@@ -3,9 +3,11 @@ import { Link } from 'gatsby';
 import styled, { ThemeContext } from 'styled-components';
 import SVG from 'react-inlinesvg';
 
-import { useSiteTheme, SiteTheme } from '../hooks/useSiteTheme';
+import { SiteTheme } from '../hooks/useSiteTheme';
 import logoLight from '../img/logo.svg';
 import logoDark from '../img/logo-inverted.svg';
+import lightIcon from '../img/light-mode-icon.svg';
+import darkIcon from '../img/dark-mode-icon.svg';
 
 const Nav = styled.nav`
   align-items: center;
@@ -51,9 +53,39 @@ const NavLink = styled(Link)`
   }
 `;
 
+const SwitchContainer = styled.div`
+  align-items: center;
+  display: flex;
+`;
+const SwitchIcon = styled(SVG)`
+  border-radius: 2rem;
+  height: 2rem;
+  width: 2rem;
+  fill: ${props => props.theme.palette.textColor};
+`;
+
 type Props = {
   siteTheme: SiteTheme;
   setSiteTheme: (st: SiteTheme) => void;
+};
+
+const Switch = (p: Props) => {
+  return (
+    <label htmlFor="site-theme">
+      <SwitchContainer>
+        <SwitchIcon src={p.siteTheme === 'light' ? lightIcon : darkIcon} />
+      </SwitchContainer>
+      <input
+        id="site-theme"
+        type="checkbox"
+        hidden
+        checked={p.siteTheme === 'dark'}
+        onChange={() => {
+          p.setSiteTheme(p.siteTheme === 'light' ? 'dark' : 'light');
+        }}
+      />
+    </label>
+  );
 };
 
 const Navbar = (p: Props) => {
@@ -66,17 +98,7 @@ const Navbar = (p: Props) => {
         </BrandLink>
       </NavBrand>
       <SiteThemeToggle>
-        <label htmlFor="site-theme">
-          <span>{p.siteTheme === 'light' ? 'Light mode' : 'Dark mode'}</span>
-          <input
-            id="site-theme"
-            type="checkbox"
-            checked={p.siteTheme === 'dark'}
-            onChange={() => {
-              p.setSiteTheme(p.siteTheme === 'light' ? 'dark' : 'light');
-            }}
-          />
-        </label>
+        <Switch siteTheme={p.siteTheme} setSiteTheme={p.setSiteTheme} />
       </SiteThemeToggle>
       <NavMenu>
         <NavLink activeStyle={{ borderBottomColor: theme.palette.primary }} to="/portfolio">
