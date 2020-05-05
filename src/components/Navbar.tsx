@@ -44,12 +44,20 @@ const NavMenu = styled.div`
 
 const NavLink = styled(Link)`
   text-decoration: none;
+  font-size: 0.9rem;
   border-bottom: 0.3rem solid transparent;
   color: ${props => props.theme.palette.textColor};
-  padding: 2rem;
-  padding-bottom: 1.5rem;
+  padding: 1.5rem;
+  padding-bottom: 0.6rem;
+
   &::visited: {
     color: ${props => props.theme.palette.textColor};
+  }
+
+  @media screen and (min-width: 500px) {
+    font-size: 1.25rem;
+    padding: 2rem;
+    padding-bottom: 1.5rem;
   }
 `;
 
