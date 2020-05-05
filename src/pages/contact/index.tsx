@@ -1,5 +1,7 @@
 import React from 'react';
+import styled from 'styled-components';
 import { navigate } from 'gatsby-link';
+
 import { Layout } from '../../components/Layout';
 
 function encode(data) {
@@ -7,6 +9,32 @@ function encode(data) {
     .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
     .join('&');
 }
+
+const SubmitButton = styled.button`
+  background: ${props => props.theme.palette.primary};
+  border: 0;
+  border-radius: 0.25rem;
+  color: ${props => props.theme.palette.textColor};
+  padding: 0.5rem 1rem;
+`;
+
+const Input = styled.input`
+  border-radius: 0.25rem;
+  border: none;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+`;
+
+const TextArea = styled.textarea`
+  border-radius: 0.25rem;
+  border: none;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+`;
+
+const Field = styled.div`
+  padding: 0.5rem 0;
+`;
 
 export default class Index extends React.Component {
   constructor(props) {
@@ -55,35 +83,33 @@ export default class Index extends React.Component {
                     Don’t fill this out: <input name="bot-field" onChange={this.handleChange} />
                   </label>
                 </div>
-                <div className="field">
+                <Field>
                   <label className="label" htmlFor={'name'}>
                     Your name
                   </label>
                   <div className="control">
-                    <input className="input" type={'text'} name={'name'} onChange={this.handleChange} id={'name'} required={true} />
+                    <Input type="text" name="name" onChange={this.handleChange} id="name" required={true} />
                   </div>
-                </div>
-                <div className="field">
+                </Field>
+                <Field>
                   <label className="label" htmlFor={'email'}>
                     Email
                   </label>
                   <div className="control">
-                    <input className="input" type={'email'} name={'email'} onChange={this.handleChange} id={'email'} required={true} />
+                    <Input type="email" name="email" onChange={this.handleChange} id="email" required={true} />
                   </div>
-                </div>
-                <div className="field">
+                </Field>
+                <Field>
                   <label className="label" htmlFor={'message'}>
                     Message
                   </label>
                   <div className="control">
-                    <textarea className="textarea" name={'message'} onChange={this.handleChange} id={'message'} required={true} />
+                    <TextArea name="message" onChange={this.handleChange} id="message" required={true} />
                   </div>
-                </div>
-                <div className="field">
-                  <button className="button is-link" type="submit">
-                    Send
-                  </button>
-                </div>
+                </Field>
+                <Field>
+                  <SubmitButton type="submit">Send</SubmitButton>
+                </Field>
               </form>
             </div>
           </div>
