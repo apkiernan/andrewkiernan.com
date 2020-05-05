@@ -8,7 +8,7 @@ const FooterWrapper = styled.footer`
   justify-content: center;
   height: 3rem;
 
-  @media screen and (min-width: 500px) {
+  @media screen and (min-width: ${props => props.theme.breakpoints.medium}) {
     height: 5rem;
   }
 `;

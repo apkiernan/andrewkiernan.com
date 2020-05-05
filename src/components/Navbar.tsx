@@ -16,7 +16,7 @@ const Nav = styled.nav`
   height: 3rem;
   justify-content: space-between;
 
-  @media screen and (min-width: 500px) {
+  @media screen and (min-width: ${props => props.theme.breakpoints.medium}) {
     height: 5rem;
     padding: 0 2rem;
   }
@@ -54,7 +54,7 @@ const NavLink = styled(Link)`
     color: ${props => props.theme.palette.textColor};
   }
 
-  @media screen and (min-width: 500px) {
+  @media screen and (min-width: ${props => props.theme.breakpoints.medium}) {
     font-size: 1.25rem;
     padding: 2rem;
     padding-bottom: 1.5rem;

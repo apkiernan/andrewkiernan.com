@@ -12,6 +12,9 @@ const lightTheme = {
   font: {
     main: '16px'
   },
+  breakpoints: {
+    medium: '500px'
+  },
   palette: {
     backgroundColor: '#fafafa',
     textColor: '#333',
@@ -23,6 +26,9 @@ const lightTheme = {
 const darkTheme = {
   font: {
     main: '16px'
+  },
+  breakpoints: {
+    medium: '500px'
   },
   palette: {
     backgroundColor: '#282c35',
