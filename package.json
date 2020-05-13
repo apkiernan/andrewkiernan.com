@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "author": "Andrew Kiernan",
   "dependencies": {
+    "@types/lodash.kebabcase": "^4.1.6",
     "@types/styled-components": "^5.1.0",
     "gatsby": "^2.20.29",
     "gatsby-image": "^2.0.23",
@@ -28,6 +29,7 @@
     "gatsby-transformer-sharp": "^2.1.9",
     "lodash": "^4.17.15",
     "lodash-webpack-plugin": "^0.11.4",
+    "lodash.kebabcase": "^4.1.1",
     "parcel-bundler": "^1.9.4",
     "prop-types": "^15.6.0",
     "react": "^16.8.4",
@@ -47,7 +49,7 @@
   "scripts": {
     "clean": "gatsby clean",
     "start": "npm run develop",
-    "build": "npm run clean && gatsby build",
+    "build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
     "develop": "npm run clean && gatsby develop",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"{gatsby-*.js,src/**/*.js}\"",
     "test": "echo \"Error: no test specified\" && exit 1"
