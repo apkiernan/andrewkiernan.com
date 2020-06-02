@@ -1,20 +1,21 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import styled, { ThemeProvider, ThemeProps, createGlobalStyle } from 'styled-components';
 
 import Footer from './Footer';
 import Navbar from './Navbar';
-import { Head } from './Head';
-import useSiteMetadata from './SiteMetadata';
 import { useSiteTheme } from '../hooks/useSiteTheme';
 
-const lightTheme = {
+const baseTheme = {
   font: {
     main: '16px'
   },
   breakpoints: {
     medium: '500px'
-  },
+  }
+};
+
+const lightTheme = {
+  ...baseTheme,
   palette: {
     backgroundColor: '#fafafa',
     textColor: '#333',
@@ -24,12 +25,7 @@ const lightTheme = {
 };
 
 const darkTheme = {
-  font: {
-    main: '16px'
-  },
-  breakpoints: {
-    medium: '500px'
-  },
+  ...baseTheme,
   palette: {
     backgroundColor: '#282c35',
     textColor: '#fff',
@@ -82,15 +78,11 @@ type LayoutProps = {
 };
 
 export const Layout = ({ children }: LayoutProps) => {
-  const { title, description } = useSiteMetadata();
   const [siteTheme, setSiteTheme] = useSiteTheme();
   return (
     <ThemeProvider theme={siteTheme === 'light' ? lightTheme : darkTheme}>
       <Global />
       <Page>
-        <Helmet>
-          <Head title={title} description={description} />
-        </Helmet>
         <Navbar siteTheme={siteTheme} setSiteTheme={setSiteTheme} />
         <Content>{children}</Content>
         <Footer />
