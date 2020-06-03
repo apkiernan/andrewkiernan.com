@@ -49,7 +49,7 @@ module.exports = {
         jsxPragma: 'React'
       }
     },
-    'gatsby-plugin-react-helmet',
+    { resolve: 'gatsby-plugin-react-helmet' },
     {
       // keep as first gatsby-source-filesystem plugin for gatsby image support
       resolve: 'gatsby-source-filesystem',
@@ -72,8 +72,8 @@ module.exports = {
         name: 'images'
       }
     },
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
+    { resolve: 'gatsby-plugin-sharp' },
+    { resolve: 'gatsby-transformer-sharp' },
     {
       resolve: 'gatsby-transformer-remark',
       options: {
@@ -113,13 +113,15 @@ module.exports = {
       }
     },
     {
-      resolve: 'gatsby-plugin-purgecss', // purges all unused/unreferenced css rules
+      resolve: 'gatsby-source-strapi',
       options: {
-        develop: true, // Activates purging in npm run develop
-        purgeOnly: ['/all.scss'] // applies purging only on the bulma css file
+        apiURL: `http://localhost:1337`,
+        queryLimit: 1000, // Default to 100
+        contentTypes: [`blog-post`, `project`],
+        singleTypes: [`home`]
       }
-    }, // must be after other CSS plugins,
+    },
     { resolve: 'gatsby-plugin-styled-components' },
-    'gatsby-plugin-netlify' // make sure to keep it last in the array
+    { resolve: 'gatsby-plugin-netlify' } // make sure to keep it last in the array
   ]
 };

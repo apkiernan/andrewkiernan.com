@@ -1,10 +1,8 @@
 import React from 'react';
+import Markdown from 'react-markdown';
 
 type ContentProps = {
   content: string;
 };
-export const HTMLContent = ({ content }: ContentProps) => <div dangerouslySetInnerHTML={{ __html: content }} />;
 
-const Content = ({ content }: ContentProps) => <div>{content}</div>;
-
-export default Content;
+export const HTMLContent = ({ content }: ContentProps) => <Markdown source={content} />;

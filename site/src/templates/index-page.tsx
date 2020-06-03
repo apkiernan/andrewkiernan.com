@@ -1,68 +1,64 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
+import Helmet from 'react-helmet';
 import { graphql } from 'gatsby';
-import { useLocalRemarkForm } from 'gatsby-tinacms-remark';
-import { RemarkNode } from 'gatsby-tinacms-remark/src/remark-node';
+import Img, { GatsbyImageProps } from 'gatsby-image';
 
 import { Layout } from '../components/Layout';
-import Helmet from 'react-helmet';
-import Content, { HTMLContent } from '../components/Content';
+import { HTMLContent } from '../components/Content';
 
-type IRemarkNode = RemarkNode & { html: string };
 type Props = {
   title: string;
-  heading: string;
   html: string;
-  contentComponent: (p: any) => ReactElement;
+  image: GatsbyImageProps['fluid'];
 };
 
-export const IndexPageTemplate = ({ heading, html, contentComponent }: Props) => {
-  const PageContent = contentComponent || Content;
+export const IndexPageTemplate = ({ html, image }: Props) => {
   return (
     <section className="section">
-      <div>
-        <h1>{heading}</h1>
-        <PageContent content={html} />
-      </div>
+      <Img fluid={image} />
+      <HTMLContent content={html} />
     </section>
   );
 };
 
 type PageProps = {
   data: {
-    markdownRemark: any;
+    strapiHome: {
+      title: string;
+      body: string;
+      coverPhoto: {
+        childImageSharp: {
+          fluid: GatsbyImageProps['fluid'];
+        };
+      };
+    };
   };
 };
 
-const IndexPage = ({ data }: PageProps) => {
-  const [remark] = useLocalRemarkForm(data.markdownRemark);
-  return (
-    <Layout>
-      <Helmet titleTemplate="Andrew Kiernan | %s">
-        <title>{`${remark.frontmatter.title}`}</title>
-        <meta name="description" content={`${remark.frontmatter.description}`} />
-      </Helmet>
-      <IndexPageTemplate
-        title={remark.frontmatter.title}
-        heading={remark.frontmatter.heading}
-        html={(remark as IRemarkNode).html}
-        contentComponent={HTMLContent}
-      />
-    </Layout>
-  );
-};
+const IndexPage = ({ data }: PageProps) => (
+  <Layout>
+    <Helmet titleTemplate="Andrew Kiernan | %s">
+      <title>{`${data.strapiHome.title}`}</title>
+      <meta name="description" content={`${data.strapiHome.title}`} />
+    </Helmet>
+    <IndexPageTemplate title={data.strapiHome.title} html={data.strapiHome.body} image={data.strapiHome.coverPhoto.childImageSharp.fluid} />
+  </Layout>
+);
 
 export default IndexPage;
 
 export const pageQuery = graphql`
   query IndexPageTemplate {
-    markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
-      ...TinaRemark
-      frontmatter {
-        title
-        heading
-        description
+    strapiHome {
+      title
+      body
+      coverPhoto {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
       }
-      html
     }
   }
 `;
