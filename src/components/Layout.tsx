@@ -1,5 +1,9 @@
 import React from 'react';
-import styled, { ThemeProvider, ThemeProps, createGlobalStyle } from 'styled-components';
+import styled, {
+  ThemeProvider,
+  ThemeProps,
+  createGlobalStyle
+} from 'styled-components';
 
 import Footer from './Footer';
 import Navbar from './Navbar';
@@ -44,7 +48,7 @@ const Global = createGlobalStyle<Theme>`
   }
   html {
     font-size: 16px;
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Poppins', sans-serif;
     color: ${props => props.theme.palette.textColor};
   }
   body {
@@ -69,7 +73,7 @@ const Page = styled.main`
 const Content = styled.div`
   flex: 1;
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 1000px;
   padding: 2rem;
 `;
 

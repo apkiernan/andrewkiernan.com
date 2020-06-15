@@ -1,44 +1,57 @@
-const _ = require('lodash');
-const path = require('path');
-const { createFilePath } = require('gatsby-source-filesystem');
-const { fmImagesToRelative } = require('gatsby-remark-relative-images');
+const _ = require("lodash");
+const path = require("path");
+const { createFilePath } = require("gatsby-source-filesystem");
+const { fmImagesToRelative } = require("gatsby-remark-relative-images");
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions;
 
   return graphql(`
     {
-      allMarkdownRemark(limit: 1000) {
+      projects: allStrapiProject {
         edges {
           node {
-            id
-            fields {
-              slug
-            }
-            frontmatter {
-              templateKey
-            }
+            name
+            slug
+            featureBullets
+          }
+        }
+      }
+      blogPosts: allStrapiBlogPost {
+        edges {
+          node {
+            title
+            slug
+            content
           }
         }
       }
     }
-  `).then(result => {
+  `).then((result) => {
     if (result.errors) {
-      result.errors.forEach(e => console.error(e.toString()));
+      result.errors.forEach((e) => console.error(e.toString()));
       return Promise.reject(result.errors);
     }
 
-    const posts = result.data.allMarkdownRemark.edges;
+    const projects = result.data.projects.edges;
+    const blogPosts = result.data.blogPosts.edges;
 
-    posts.forEach(edge => {
-      const id = edge.node.id;
+    projects.forEach((project) => {
       createPage({
-        path: edge.node.fields.slug,
-        component: path.resolve(`src/templates/${String(edge.node.frontmatter.templateKey)}.tsx`),
-        // additional data can be passed via context
+        path: `/projects/${project.node.slug}`,
+        component: path.resolve(`src/pages/project.tsx`),
         context: {
-          id
-        }
+          slug: project.node.slug,
+        },
+      });
+    });
+    blogPosts.forEach((bp) => {
+      createPage({
+        path: `/${bp.node.slug}`,
+        component: path.resolve(`src/pages/blog-post.tsx`),
+        context: {
+          slug: bp.node.slug,
+        },
       });
     });
   });
@@ -53,7 +66,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     createNodeField({
       name: `slug`,
       node,
-      value
+      value,
     });
   }
 };
