@@ -62,6 +62,15 @@ const Global = createGlobalStyle<Theme>`
   a {
     color: ${props => props.theme.palette.linkColor}
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 0;
+  }
 `;
 
 const Page = styled.main`
@@ -73,6 +82,7 @@ const Page = styled.main`
 const Content = styled.div`
   flex: 1;
   margin: 0 auto;
+  width: 100%;
   max-width: 1000px;
   padding: 2rem;
 `;

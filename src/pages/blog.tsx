@@ -61,7 +61,7 @@ export const pageQuery = graphql`
           coverPhoto {
             childImageSharp {
               fluid {
-                ...GatsbyImageSharpFluid
+                ...GatsbyImageSharpFluid_tracedSVG
               }
             }
           }

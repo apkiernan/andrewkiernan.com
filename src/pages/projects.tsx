@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import Image from 'gatsby-image';
 import styled from 'styled-components';
 
@@ -8,8 +8,10 @@ import { Layout } from '../components/Layout';
 import { FluidObject } from 'gatsby-image';
 
 const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 40% 60%;
+  @media screen and (min-width: 625px) {
+    display: grid;
+    grid-template-columns: 40% 60%;
+  }
 `;
 
 type ProjectProps = {
@@ -19,17 +21,26 @@ type ProjectProps = {
   media: FluidObject;
 };
 
+const Section = styled.section`
+  margin-bottom: 2rem;
+`;
+
+const ProjectImage = styled(Image)`
+  border-radius: 10px;
+  max-height: 50vh;
+`;
+
 export const Project = ({ name, featureBullets, media }: ProjectProps) => {
   return (
-    <section className="section">
+    <Section>
       <div className="container">
         <h1>{name}</h1>
         <Grid>
-          <Image fluid={media} style={{ borderRadius: '10px' }} />
+          <ProjectImage fluid={media} />
           <Content content={featureBullets} />
         </Grid>
       </div>
-    </section>
+    </Section>
   );
 };
 
@@ -73,7 +84,7 @@ export default PortfolioPage;
 
 export const PortfolioPageQuery = graphql`
   query PortfolioPage {
-    allStrapiProject {
+    allStrapiProject(sort: { fields: updated_at, order: DESC }) {
       edges {
         node {
           name
@@ -82,7 +93,7 @@ export const PortfolioPageQuery = graphql`
           media {
             childImageSharp {
               fluid {
-                ...GatsbyImageSharpFluid
+                ...GatsbyImageSharpFluid_tracedSVG
               }
             }
           }
