@@ -1,10 +1,12 @@
 import React from 'react';
+import Markdown from 'react-markdown';
+
+import { CodeBlock } from './CodeBlock';
 
 type ContentProps = {
   content: string;
 };
-export const HTMLContent = ({ content }: ContentProps) => <div dangerouslySetInnerHTML={{ __html: content }} />;
 
-const Content = ({ content }: ContentProps) => <div>{content}</div>;
-
-export default Content;
+export const Content = ({ content }: ContentProps) => (
+  <Markdown source={content} renderers={{ code: CodeBlock }} />
+);

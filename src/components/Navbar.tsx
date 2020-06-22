@@ -57,7 +57,7 @@ const NavLink = styled(Link)`
   @media screen and (min-width: ${props => props.theme.breakpoints.medium}) {
     font-size: 1.25rem;
     padding: 2rem;
-    padding-bottom: 1.5rem;
+    padding-bottom: 1.3rem;
   }
 `;
 
@@ -102,17 +102,32 @@ const Navbar = (p: Props) => {
     <Nav>
       <NavBrand>
         <BrandLink to="/">
-          <SVG src={p.siteTheme === 'light' ? logoLight : logoDark} style={{ height: '100%', width: 'auto' }} />
+          <SVG
+            src={p.siteTheme === 'light' ? logoLight : logoDark}
+            style={{ height: '100%', width: 'auto' }}
+          />
         </BrandLink>
       </NavBrand>
       <SiteThemeToggle>
         <Switch siteTheme={p.siteTheme} setSiteTheme={p.setSiteTheme} />
       </SiteThemeToggle>
       <NavMenu>
-        <NavLink activeStyle={{ borderBottomColor: theme.palette.primary }} to="/portfolio">
-          Portfolio
+        <NavLink
+          activeStyle={{ borderBottomColor: theme.palette.primary }}
+          to="/blog"
+        >
+          Blog
         </NavLink>
-        <NavLink activeStyle={{ borderBottomColor: theme.palette.primary }} to="/contact">
+        <NavLink
+          activeStyle={{ borderBottomColor: theme.palette.primary }}
+          to="/projects"
+        >
+          Projects
+        </NavLink>
+        <NavLink
+          activeStyle={{ borderBottomColor: theme.palette.primary }}
+          to="/contact"
+        >
           Contact
         </NavLink>
       </NavMenu>
