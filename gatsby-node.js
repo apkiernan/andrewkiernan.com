@@ -1,7 +1,6 @@
-const _ = require("lodash");
-const path = require("path");
-const { createFilePath } = require("gatsby-source-filesystem");
-const { fmImagesToRelative } = require("gatsby-remark-relative-images");
+const path = require('path');
+const { createFilePath } = require('gatsby-source-filesystem');
+const { fmImagesToRelative } = require('gatsby-remark-relative-images');
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions;
@@ -27,31 +26,31 @@ exports.createPages = ({ actions, graphql }) => {
         }
       }
     }
-  `).then((result) => {
+  `).then(result => {
     if (result.errors) {
-      result.errors.forEach((e) => console.error(e.toString()));
+      result.errors.forEach(e => console.error(e.toString()));
       return Promise.reject(result.errors);
     }
 
     const projects = result.data.projects.edges;
     const blogPosts = result.data.blogPosts.edges;
 
-    projects.forEach((project) => {
+    projects.forEach(project => {
       createPage({
         path: `/projects/${project.node.slug}`,
         component: path.resolve(`src/pages/project.tsx`),
         context: {
-          slug: project.node.slug,
-        },
+          slug: project.node.slug
+        }
       });
     });
-    blogPosts.forEach((bp) => {
+    blogPosts.forEach(bp => {
       createPage({
         path: `/${bp.node.slug}`,
         component: path.resolve(`src/pages/blog-post.tsx`),
         context: {
-          slug: bp.node.slug,
-        },
+          slug: bp.node.slug
+        }
       });
     });
   });
@@ -66,7 +65,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     createNodeField({
       name: `slug`,
       node,
-      value,
+      value
     });
   }
 };

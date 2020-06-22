@@ -1,7 +1,15 @@
 import React from 'react';
+import { Link, graphql } from 'gatsby';
+import Image, { FluidObject } from 'gatsby-image';
+import styled from 'styled-components';
 
 import { Layout } from '../components/Layout';
-import { Link, graphql } from 'gatsby';
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 35% 65%;
+  grid-gap: 2rem;
+`;
 
 type BlogProps = {
   data: {
@@ -10,6 +18,12 @@ type BlogProps = {
         node: {
           title: string;
           slug: string;
+          overview: string;
+          coverPhoto: {
+            childImageSharp: {
+              fluid: FluidObject;
+            };
+          };
         };
       }[];
     };
@@ -20,11 +34,15 @@ const Blog = (props: BlogProps) => {
   return (
     <Layout>
       {props.data.allStrapiBlogPost.edges.map(bp => (
-        <div key={bp.node.slug}>
-          <Link to={`/${bp.node.slug}`}>
-            <h2>{bp.node.title}</h2>
-          </Link>
-        </div>
+        <Grid key={bp.node.slug}>
+          <Image fluid={bp.node.coverPhoto.childImageSharp.fluid} />
+          <div>
+            <Link to={`/${bp.node.slug}`}>
+              <p>{bp.node.title}</p>
+            </Link>
+            <p>{bp.node.overview}</p>
+          </div>
+        </Grid>
       ))}
     </Layout>
   );
@@ -39,6 +57,14 @@ export const pageQuery = graphql`
         node {
           title
           slug
+          overview
+          coverPhoto {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
         }
       }
     }
