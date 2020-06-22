@@ -24,7 +24,8 @@ const lightTheme = {
     backgroundColor: '#fafafa',
     textColor: '#333',
     primary: '#08234F',
-    linkColor: '#08234F'
+    linkColor: '#08234F',
+    codeColor: '#d5057a'
   }
 };
 
@@ -34,7 +35,8 @@ const darkTheme = {
     backgroundColor: '#282c35',
     textColor: '#fff',
     primary: '#729FE3',
-    linkColor: '#729FE3'
+    linkColor: '#729FE3',
+    codeColor: '#ff7ba4'
   }
 };
 
@@ -71,6 +73,10 @@ const Global = createGlobalStyle<Theme>`
   h6,
   p {
     margin-top: 0;
+  }
+
+  code {
+    color: ${props => props.theme.palette.codeColor};
   }
 `;
 
