@@ -68,7 +68,8 @@ const Global = createGlobalStyle<Theme>`
   h3,
   h4,
   h5,
-  h6 {
+  h6,
+  p {
     margin-top: 0;
   }
 `;

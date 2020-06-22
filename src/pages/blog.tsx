@@ -6,9 +6,21 @@ import styled from 'styled-components';
 import { Layout } from '../components/Layout';
 
 const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 35% 65%;
-  grid-gap: 2rem;
+  @media screen and (min-width: 700px) {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    grid-gap: 2rem;
+  }
+`;
+
+const Img = styled(Image)`
+  height: auto;
+  max-height: 25vh;
+  width: 100%;
+
+  @media screen and (min-width: 700px) {
+    max-height: unset;
+  }
 `;
 
 type BlogProps = {
@@ -35,7 +47,7 @@ const Blog = (props: BlogProps) => {
     <Layout>
       {props.data.allStrapiBlogPost.edges.map(bp => (
         <Grid key={bp.node.slug}>
-          <Image fluid={bp.node.coverPhoto.childImageSharp.fluid} />
+          <Img fluid={bp.node.coverPhoto.childImageSharp.fluid} />
           <div>
             <Link to={`/${bp.node.slug}`}>
               <p>{bp.node.title}</p>
