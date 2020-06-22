@@ -26,7 +26,7 @@ const BlogPost = (props: Props) => {
     <Layout>
       <h1>{props.data.strapiBlogPost.title}</h1>
       <Image
-        style={{ maxHeight: '450px' }}
+        style={{ maxHeight: '450px', marginBottom: '2rem' }}
         fluid={props.data.strapiBlogPost.coverPhoto.childImageSharp.fluid}
       />
       <Content content={props.data.strapiBlogPost.content} />
