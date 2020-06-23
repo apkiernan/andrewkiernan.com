@@ -9,6 +9,7 @@ import Footer from './Footer';
 import Navbar from './Navbar';
 import { useSiteTheme } from '../hooks/useSiteTheme';
 import Helmet from 'react-helmet';
+import { Head } from './Head';
 
 const baseTheme = {
   font: {
@@ -105,8 +106,7 @@ export const Layout = ({ children, title }: LayoutProps) => {
   return (
     <ThemeProvider theme={siteTheme === 'light' ? lightTheme : darkTheme}>
       <Helmet titleTemplate="Andrew Kiernan | %s">
-        <title>{title}</title>
-        <meta name="description" content={title} />
+        <Head title={title} description={title} />
       </Helmet>
       <Global />
       <Page>
