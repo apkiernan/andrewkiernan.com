@@ -67,7 +67,7 @@ const PortfolioPage = (props: PortfolioPageProps) => {
   const { allStrapiProject } = props.data;
 
   return (
-    <Layout>
+    <Layout title="A Boston based web developer specializing in performant web applications">
       {allStrapiProject.edges.map(({ node }) => (
         <Project
           name={node.name}

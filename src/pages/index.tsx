@@ -36,11 +36,7 @@ type PageProps = {
 };
 
 const IndexPage = ({ data }: PageProps) => (
-  <Layout>
-    <Helmet titleTemplate="Andrew Kiernan | %s">
-      <title>{`${data.strapiAbout.title}`}</title>
-      <meta name="description" content={`${data.strapiAbout.title}`} />
-    </Helmet>
+  <Layout title={data.strapiAbout.title}>
     <IndexPageTemplate
       title={data.strapiAbout.title}
       html={data.strapiAbout.content}

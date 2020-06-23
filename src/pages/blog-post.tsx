@@ -23,7 +23,7 @@ type Props = {
 
 const BlogPost = (props: Props) => {
   return (
-    <Layout>
+    <Layout title={props.data.strapiBlogPost.title}>
       <h1>{props.data.strapiBlogPost.title}</h1>
       <Image
         style={{ maxHeight: '450px', marginBottom: '2rem' }}

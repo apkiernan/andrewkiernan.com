@@ -8,6 +8,7 @@ import styled, {
 import Footer from './Footer';
 import Navbar from './Navbar';
 import { useSiteTheme } from '../hooks/useSiteTheme';
+import Helmet from 'react-helmet';
 
 const baseTheme = {
   font: {
@@ -96,12 +97,17 @@ const Content = styled.div`
 
 type LayoutProps = {
   children: React.ReactNode;
+  title: string;
 };
 
-export const Layout = ({ children }: LayoutProps) => {
+export const Layout = ({ children, title }: LayoutProps) => {
   const [siteTheme, setSiteTheme] = useSiteTheme();
   return (
     <ThemeProvider theme={siteTheme === 'light' ? lightTheme : darkTheme}>
+      <Helmet titleTemplate="Andrew Kiernan | %s">
+        <title>{title}</title>
+        <meta name="description" content={title} />
+      </Helmet>
       <Global />
       <Page>
         <Navbar siteTheme={siteTheme} setSiteTheme={setSiteTheme} />

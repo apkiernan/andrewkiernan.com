@@ -44,7 +44,7 @@ type BlogProps = {
 
 const Blog = (props: BlogProps) => {
   return (
-    <Layout>
+    <Layout title="A Boston based web developer specializing in performant web applications">
       {props.data.allStrapiBlogPost.edges.map(bp => (
         <Grid key={bp.node.slug}>
           <Img fluid={bp.node.coverPhoto.childImageSharp.fluid} />
