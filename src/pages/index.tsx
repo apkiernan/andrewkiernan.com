@@ -1,25 +1,10 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 import { graphql } from 'gatsby';
-import Img, { GatsbyImageProps } from 'gatsby-image';
+import { FluidObject } from 'gatsby-image';
 
 import { Layout } from '../components/Layout';
 import { Content } from '../components/Content';
-
-type Props = {
-  title: string;
-  html: string;
-  image: GatsbyImageProps['fluid'];
-};
-
-export const IndexPageTemplate = ({ html, image }: Props) => {
-  return (
-    <section className="section">
-      <Img fluid={image} />
-      <Content content={html} />
-    </section>
-  );
-};
+import { CoverPhoto } from '../components/CoverPhoto';
 
 type PageProps = {
   data: {
@@ -28,22 +13,25 @@ type PageProps = {
       content: string;
       coverPhoto: {
         childImageSharp: {
-          fluid: GatsbyImageProps['fluid'];
+          fluid: FluidObject;
         };
       };
     };
   };
 };
 
-const IndexPage = ({ data }: PageProps) => (
-  <Layout title={data.strapiAbout.title}>
-    <IndexPageTemplate
-      title={data.strapiAbout.title}
-      html={data.strapiAbout.content}
-      image={data.strapiAbout.coverPhoto.childImageSharp.fluid}
-    />
-  </Layout>
-);
+const IndexPage = ({ data }: PageProps) => {
+  const { strapiAbout: page } = data;
+
+  return (
+    <Layout title={page.title}>
+      <section>
+        <CoverPhoto image={page.coverPhoto.childImageSharp.fluid} />
+        <Content content={page.content} />
+      </section>
+    </Layout>
+  );
+};
 
 export default IndexPage;
 

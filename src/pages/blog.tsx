@@ -28,7 +28,7 @@ type BlogProps = {
     allStrapiBlogPost: {
       edges: {
         node: {
-          title: string;
+          Title: string;
           slug: string;
           overview: string;
           coverPhoto: {
@@ -50,7 +50,7 @@ const Blog = (props: BlogProps) => {
           <Img fluid={bp.node.coverPhoto.childImageSharp.fluid} />
           <div>
             <Link to={`/${bp.node.slug}`}>
-              <p>{bp.node.title}</p>
+              <p>{bp.node.Title}</p>
             </Link>
             <p>{bp.node.overview}</p>
           </div>
@@ -67,7 +67,7 @@ export const pageQuery = graphql`
     allStrapiBlogPost {
       edges {
         node {
-          title
+          Title
           slug
           overview
           coverPhoto {

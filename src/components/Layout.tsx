@@ -59,8 +59,7 @@ const Global = createGlobalStyle<Theme>`
     margin: 0;
     background: ${props => props.theme.palette.backgroundColor};
   }
-  p,
-  a {
+  p {
     font-size: 1.25rem;
   }
   a {

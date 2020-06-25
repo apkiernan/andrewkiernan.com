@@ -33,7 +33,7 @@ const ProjectImage = styled(Image)`
 export const Project = ({ name, featureBullets, media }: ProjectProps) => {
   return (
     <Section>
-      <div className="container">
+      <div>
         <h1>{name}</h1>
         <Grid>
           <ProjectImage fluid={media} />
@@ -70,6 +70,7 @@ const PortfolioPage = (props: PortfolioPageProps) => {
     <Layout title="A Boston based web developer specializing in performant web applications">
       {allStrapiProject.edges.map(({ node }) => (
         <Project
+          key={node.slug}
           name={node.name}
           slug={node.slug}
           featureBullets={node.featureBullets}
