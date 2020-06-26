@@ -24,7 +24,10 @@ const BlogPost = (props: Props) => {
   const { strapiBlogPost: post } = props.data;
 
   return (
-    <Layout title={post.Title}>
+    <Layout
+      title={post.Title}
+      imageUrl={post.coverPhoto.childImageSharp.fluid.src}
+    >
       <h1>{post.Title}</h1>
       <CoverPhoto image={post.coverPhoto.childImageSharp.fluid} />
       <Content content={post.content} />

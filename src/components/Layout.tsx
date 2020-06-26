@@ -97,13 +97,14 @@ const Content = styled.div`
 type LayoutProps = {
   children: React.ReactNode;
   title: string;
+  imageUrl: string;
 };
 
-export const Layout = ({ children, title }: LayoutProps) => {
+export const Layout = ({ children, title, imageUrl }: LayoutProps) => {
   const [siteTheme, setSiteTheme] = useSiteTheme();
   return (
     <ThemeProvider theme={siteTheme === 'light' ? lightTheme : darkTheme}>
-      <SEO title={title} description={title} />
+      <SEO title={title} description={title} imageUrl={imageUrl} />
       <Global />
       <Page>
         <Navbar siteTheme={siteTheme} setSiteTheme={setSiteTheme} />

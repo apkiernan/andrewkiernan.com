@@ -25,7 +25,14 @@ const Img = styled(Image)`
 
 type BlogProps = {
   data: {
-    allStrapiBlogPost: {
+    image: {
+      coverPhoto: {
+        childImageSharp: {
+          fluid: FluidObject;
+        };
+      };
+    };
+    posts: {
       edges: {
         node: {
           Title: string;
@@ -44,8 +51,11 @@ type BlogProps = {
 
 const Blog = (props: BlogProps) => {
   return (
-    <Layout title="A Boston based web developer specializing in performant web applications">
-      {props.data.allStrapiBlogPost.edges.map(bp => (
+    <Layout
+      title="A Boston based web developer specializing in performant web applications"
+      imageUrl={props.data.image.coverPhoto.childImageSharp.fluid.src}
+    >
+      {props.data.posts.edges.map(bp => (
         <Grid key={bp.node.slug}>
           <Img fluid={bp.node.coverPhoto.childImageSharp.fluid} />
           <div>
@@ -64,7 +74,16 @@ export default Blog;
 
 export const pageQuery = graphql`
   query BlogPosts {
-    allStrapiBlogPost {
+    image: strapiAbout {
+      coverPhoto {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid_tracedSVG
+          }
+        }
+      }
+    }
+    posts: allStrapiBlogPost {
       edges {
         node {
           Title

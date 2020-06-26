@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 type SEOProps = {
   title: string;
   description: string;
+  imageUrl: string;
 };
 
 export const SEO = (props: SEOProps) => {
@@ -12,7 +13,6 @@ export const SEO = (props: SEOProps) => {
     <Helmet>
       <html lang="en" />
       <title>{props.title}</title>
-      <meta name="description" content={props.description} />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link
         rel="apple-touch-icon"
@@ -36,15 +36,13 @@ export const SEO = (props: SEOProps) => {
         href={`${withPrefix('/')}img/safari-pinned-tab.svg`}
         color="#ff4400"
       />
-      <meta name="theme-color" content="#fff" />
 
-      <meta property="og:type" content="business.business" />
+      <meta name="description" content={props.description} />
+      <meta name="theme-color" content="#fff" />
+      <meta property="og:type" content="website" />
       <meta property="og:title" content={props.title} />
       <meta property="og:url" content="/" />
-      <meta
-        property="og:image"
-        content={`${withPrefix('/')}img/og-image.jpg`}
-      />
+      <meta property="og:image" content={props.imageUrl} />
     </Helmet>
   );
 };

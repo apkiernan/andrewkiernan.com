@@ -24,7 +24,10 @@ const IndexPage = ({ data }: PageProps) => {
   const { strapiAbout: page } = data;
 
   return (
-    <Layout title={page.title}>
+    <Layout
+      title={page.title}
+      imageUrl={page.coverPhoto.childImageSharp.fluid.src}
+    >
       <section>
         <CoverPhoto image={page.coverPhoto.childImageSharp.fluid} />
         <Content content={page.content} />

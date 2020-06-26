@@ -46,7 +46,14 @@ export const Project = ({ name, featureBullets, media }: ProjectProps) => {
 
 type PortfolioPageProps = {
   data: {
-    allStrapiProject: {
+    image: {
+      coverPhoto: {
+        childImageSharp: {
+          fluid: FluidObject;
+        };
+      };
+    };
+    projects: {
       edges: {
         node: {
           name: string;
@@ -64,11 +71,14 @@ type PortfolioPageProps = {
 };
 
 const PortfolioPage = (props: PortfolioPageProps) => {
-  const { allStrapiProject } = props.data;
+  const { projects, image } = props.data;
 
   return (
-    <Layout title="A Boston based web developer specializing in performant web applications">
-      {allStrapiProject.edges.map(({ node }) => (
+    <Layout
+      title="A Boston based web developer specializing in performant web applications"
+      imageUrl={image.coverPhoto.childImageSharp.fluid.src}
+    >
+      {projects.edges.map(({ node }) => (
         <Project
           key={node.slug}
           name={node.name}
@@ -85,7 +95,16 @@ export default PortfolioPage;
 
 export const PortfolioPageQuery = graphql`
   query PortfolioPage {
-    allStrapiProject(sort: { fields: updated_at, order: DESC }) {
+    image: strapiAbout {
+      coverPhoto {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid_tracedSVG
+          }
+        }
+      }
+    }
+    projects: allStrapiProject(sort: { fields: updated_at, order: DESC }) {
       edges {
         node {
           name

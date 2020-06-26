@@ -68,7 +68,10 @@ export default class Index extends React.Component {
 
   render() {
     return (
-      <Layout title="A Boston based web developer specializing in performant web applications">
+      <Layout
+        title="A Boston based web developer specializing in performant web applications"
+        imageUrl="/"
+      >
         <Section>
           <div>
             <div>
