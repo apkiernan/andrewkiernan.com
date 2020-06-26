@@ -14,26 +14,31 @@ const SubmitButton = styled.button`
   background: ${props => props.theme.palette.primary};
   border: 0;
   border-radius: 0.25rem;
-  color: ${props => props.theme.palette.textColor};
+  color: #fff;
   padding: 0.5rem 1rem;
 `;
 
 const Input = styled.input`
   border-radius: 0.25rem;
-  border: none;
+  border: 1px solid #333;
   padding: 0.5rem;
   font-size: 1.25rem;
 `;
 
 const TextArea = styled.textarea`
   border-radius: 0.25rem;
-  border: none;
+  border: 1px solid #333;
   padding: 0.5rem;
   font-size: 1.25rem;
 `;
 
 const Field = styled.div`
   padding: 0.5rem 0;
+`;
+
+const Section = styled.section`
+  display: flex;
+  justify-content: center;
 `;
 
 export default class Index extends React.Component {
@@ -63,10 +68,10 @@ export default class Index extends React.Component {
 
   render() {
     return (
-      <Layout>
-        <section className="section">
-          <div className="container">
-            <div className="content">
+      <Layout title="A Boston based web developer specializing in performant web applications">
+        <Section>
+          <div>
+            <div>
               <h1>Contact</h1>
               <form
                 name="contact"
@@ -80,31 +85,43 @@ export default class Index extends React.Component {
                 <input type="hidden" name="form-name" value="contact" />
                 <div hidden>
                   <label>
-                    Don’t fill this out: <input name="bot-field" onChange={this.handleChange} />
+                    Don’t fill this out:{' '}
+                    <input name="bot-field" onChange={this.handleChange} />
                   </label>
                 </div>
                 <Field>
-                  <label className="label" htmlFor={'name'}>
-                    Your name
-                  </label>
-                  <div className="control">
-                    <Input type="text" name="name" onChange={this.handleChange} id="name" required={true} />
+                  <label htmlFor={'name'}>Your name</label>
+                  <div>
+                    <Input
+                      type="text"
+                      name="name"
+                      onChange={this.handleChange}
+                      id="name"
+                      required={true}
+                    />
                   </div>
                 </Field>
                 <Field>
-                  <label className="label" htmlFor={'email'}>
-                    Email
-                  </label>
-                  <div className="control">
-                    <Input type="email" name="email" onChange={this.handleChange} id="email" required={true} />
+                  <label htmlFor={'email'}>Email</label>
+                  <div>
+                    <Input
+                      type="email"
+                      name="email"
+                      onChange={this.handleChange}
+                      id="email"
+                      required={true}
+                    />
                   </div>
                 </Field>
                 <Field>
-                  <label className="label" htmlFor={'message'}>
-                    Message
-                  </label>
-                  <div className="control">
-                    <TextArea name="message" onChange={this.handleChange} id="message" required={true} />
+                  <label htmlFor={'message'}>Message</label>
+                  <div>
+                    <TextArea
+                      name="message"
+                      onChange={this.handleChange}
+                      id="message"
+                      required={true}
+                    />
                   </div>
                 </Field>
                 <Field>
@@ -113,7 +130,7 @@ export default class Index extends React.Component {
               </form>
             </div>
           </div>
-        </section>
+        </Section>
       </Layout>
     );
   }

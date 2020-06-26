@@ -6,6 +6,7 @@
   "dependencies": {
     "@types/lodash.kebabcase": "^4.1.6",
     "@types/styled-components": "^5.1.0",
+    "dotenv": "^8.2.0",
     "gatsby": "^2.20.29",
     "gatsby-image": "^2.0.23",
     "gatsby-plugin-google-analytics": "^2.1.34",
