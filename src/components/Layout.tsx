@@ -8,8 +8,7 @@ import styled, {
 import Footer from './Footer';
 import Navbar from './Navbar';
 import { useSiteTheme } from '../hooks/useSiteTheme';
-import Helmet from 'react-helmet';
-import { Head } from './Head';
+import { SEO } from './SEO';
 
 const baseTheme = {
   font: {
@@ -104,9 +103,7 @@ export const Layout = ({ children, title }: LayoutProps) => {
   const [siteTheme, setSiteTheme] = useSiteTheme();
   return (
     <ThemeProvider theme={siteTheme === 'light' ? lightTheme : darkTheme}>
-      <Helmet titleTemplate="Andrew Kiernan | %s">
-        <Head title={title} description={title} />
-      </Helmet>
+      <SEO title={title} description={title} />
       <Global />
       <Page>
         <Navbar siteTheme={siteTheme} setSiteTheme={setSiteTheme} />
