@@ -8,7 +8,18 @@ export const useSiteTheme = (): [SiteTheme, (s: SiteTheme) => void] => {
   const [state, setState] = useState<SiteTheme>(() => {
     let preference: SiteTheme = 'light';
     if (typeof window !== 'undefined') {
-      preference = window.localStorage.getItem(siteThemeNamespace) as SiteTheme;
+      const preferDark = window.matchMedia('(prefers-color-scheme: dark)');
+      const fromLocal = window.localStorage.getItem(
+        siteThemeNamespace
+      ) as SiteTheme;
+
+      // Let saved setting take precedent,
+      // then fallback to browser setting
+      preference = fromLocal
+        ? fromLocal
+        : preferDark.matches
+        ? 'dark'
+        : 'light';
     }
     return preference;
   });

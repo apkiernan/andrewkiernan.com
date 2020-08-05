@@ -103,7 +103,7 @@ type LayoutProps = {
 export const Layout = ({ children, title, imageUrl }: LayoutProps) => {
   const [siteTheme, setSiteTheme] = useSiteTheme();
   return (
-    <ThemeProvider theme={siteTheme === 'light' ? lightTheme : darkTheme}>
+    <ThemeProvider theme={siteTheme === 'dark' ? darkTheme : lightTheme}>
       <SEO title={title} description={title} imageUrl={imageUrl} />
       <Global />
       <Page>
