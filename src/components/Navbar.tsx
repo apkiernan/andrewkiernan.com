@@ -37,11 +37,6 @@ const BrandLink = styled(Link)`
   padding: 0.5rem;
 `;
 
-const NavMenu = styled.div`
-  font-size: ${props => props.theme.font.main};
-  color: ${props => props.theme.palette.textColor};
-`;
-
 const NavLink = styled(Link)`
   text-decoration: none;
   font-size: 0.9rem;
@@ -111,7 +106,7 @@ const Navbar = (p: Props) => {
       <SiteThemeToggle>
         <Switch siteTheme={p.siteTheme} setSiteTheme={p.setSiteTheme} />
       </SiteThemeToggle>
-      <NavMenu>
+      <div>
         <NavLink
           activeStyle={{ borderBottomColor: theme.palette.primary }}
           to="/blog"
@@ -130,7 +125,7 @@ const Navbar = (p: Props) => {
         >
           Contact
         </NavLink>
-      </NavMenu>
+      </div>
     </Nav>
   );
 };
