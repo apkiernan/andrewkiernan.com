@@ -106,15 +106,6 @@ module.exports = {
         ]
       }
     },
-    {
-      resolve: 'gatsby-source-strapi',
-      options: {
-        apiURL: `http://${process.env.STRAPI_URL}`,
-        queryLimit: 1000, // Default to 100
-        contentTypes: [`project`, `blog-post`],
-        singleTypes: [`about`]
-      }
-    },
     { resolve: 'gatsby-plugin-styled-components' },
     { resolve: 'gatsby-plugin-netlify' } // make sure to keep it last in the array
   ]

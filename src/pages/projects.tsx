@@ -45,80 +45,17 @@ export const Project = ({ name, featureBullets, media }: ProjectProps) => {
 };
 
 type PortfolioPageProps = {
-  data: {
-    image: {
-      coverPhoto: {
-        childImageSharp: {
-          fluid: FluidObject;
-        };
-      };
-    };
-    projects: {
-      edges: {
-        node: {
-          name: string;
-          slug: string;
-          featureBullets: string;
-          media: {
-            childImageSharp: {
-              fluid: FluidObject;
-            };
-          };
-        };
-      }[];
-    };
-  };
+  data: {};
 };
 
 const PortfolioPage = (props: PortfolioPageProps) => {
-  const { projects, image } = props.data;
-
   return (
     <Layout
       title="A Boston based web developer specializing in performant web applications"
-      imageUrl={image.coverPhoto.childImageSharp.fluid.src}
+      imageUrl=""
     >
-      {projects.edges.map(({ node }) => (
-        <Project
-          key={node.slug}
-          name={node.name}
-          slug={node.slug}
-          featureBullets={node.featureBullets}
-          media={node.media.childImageSharp.fluid}
-        />
-      ))}
     </Layout>
   );
 };
 
 export default PortfolioPage;
-
-export const PortfolioPageQuery = graphql`
-  query PortfolioPage {
-    image: strapiAbout {
-      coverPhoto {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid_tracedSVG
-          }
-        }
-      }
-    }
-    projects: allStrapiProject(sort: { fields: updated_at, order: DESC }) {
-      edges {
-        node {
-          name
-          slug
-          featureBullets
-          media {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid_tracedSVG
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
