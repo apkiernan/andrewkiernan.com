@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 import { resolve } from 'path';
-const blog_post = require('../src/schemas/blog-post.json');
 
 module.exports = {
   siteMetadata: {
