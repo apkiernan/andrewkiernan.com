@@ -3,6 +3,6 @@
     "lib": ["ES2015", "DOM", "DOM.Iterable"],
     "esModuleInterop": true,
     "jsx": "react",
-    "types": ["./src/types"]
+    "typeRoots": ["node_modules", "./src/types"]
   }
 }

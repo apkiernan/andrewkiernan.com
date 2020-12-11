@@ -15,9 +15,13 @@ const Grid = styled.div`
 `;
 
 type ProjectProps = {
-  name: string;
+  title: string;
   slug: string;
-  featureBullets: string;
+  featureBullets: {
+    childMarkdownRemark: {
+      rawMarkdownBody: string;
+    };
+  };
   photos: FluidObject;
 };
 
@@ -30,14 +34,14 @@ const ProjectImage = styled(Image)`
   max-height: 50vh;
 `;
 
-export const Project = ({ name, featureBullets, photos }: ProjectProps) => {
+export const Project = ({ title, featureBullets, photos }: ProjectProps) => {
   return (
     <Section>
       <div>
-        <h1>{name}</h1>
+        <h1>{title}</h1>
         <Grid>
           <ProjectImage fluid={photos} />
-          <Content content={featureBullets} />
+          <Content content={featureBullets.childMarkdownRemark.rawMarkdownBody} />
         </Grid>
       </div>
     </Section>
@@ -49,9 +53,13 @@ type PortfolioPageProps = {
     projects: {
       edges: {
         node: {
-          name: string;
+          title: string;
           slug: string;
-          featureBullets: string;
+          featureBullets: {
+            childMarkdownRemark: {
+              rawMarkdownBody: string;
+            };
+          };
           photos: {
             fluid: FluidObject;
           }[];
@@ -63,7 +71,7 @@ type PortfolioPageProps = {
 
 const PortfolioPage = (props: PortfolioPageProps) => {
   const { projects } = props.data;
-  debugger;
+
   return (
     <Layout
       title="A Boston based web developer specializing in performant web applications"
@@ -72,7 +80,7 @@ const PortfolioPage = (props: PortfolioPageProps) => {
       {projects.edges.map(({ node }) => (
         <Project
           key={node.slug}
-          name={node.name}
+          title={node.title}
           slug={node.slug}
           featureBullets={node.featureBullets}
           photos={node.photos[0]?.fluid}
@@ -92,7 +100,9 @@ export const PortfolioPageQuery = graphql`
           title
           slug
           featureBullets {
-            raw
+            childMarkdownRemark {
+              rawMarkdownBody
+            }
           }
           photos {
             fluid {
