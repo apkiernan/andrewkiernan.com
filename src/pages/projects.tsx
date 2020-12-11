@@ -18,7 +18,7 @@ type ProjectProps = {
   name: string;
   slug: string;
   featureBullets: string;
-  media: FluidObject;
+  photos: FluidObject;
 };
 
 const Section = styled.section`
@@ -30,13 +30,13 @@ const ProjectImage = styled(Image)`
   max-height: 50vh;
 `;
 
-export const Project = ({ name, featureBullets, media }: ProjectProps) => {
+export const Project = ({ name, featureBullets, photos }: ProjectProps) => {
   return (
     <Section>
       <div>
         <h1>{name}</h1>
         <Grid>
-          <ProjectImage fluid={media} />
+          <ProjectImage fluid={photos} />
           <Content content={featureBullets} />
         </Grid>
       </div>
@@ -45,17 +45,62 @@ export const Project = ({ name, featureBullets, media }: ProjectProps) => {
 };
 
 type PortfolioPageProps = {
-  data: {};
+  data: {
+    projects: {
+      edges: {
+        node: {
+          name: string;
+          slug: string;
+          featureBullets: string;
+          photos: {
+            fluid: FluidObject;
+          }[];
+        };
+      }[];
+    };
+  };
 };
 
 const PortfolioPage = (props: PortfolioPageProps) => {
+  const { projects } = props.data;
+  debugger;
   return (
     <Layout
       title="A Boston based web developer specializing in performant web applications"
       imageUrl=""
     >
+      {projects.edges.map(({ node }) => (
+        <Project
+          key={node.slug}
+          name={node.name}
+          slug={node.slug}
+          featureBullets={node.featureBullets}
+          photos={node.photos[0]?.fluid}
+        />
+      ))}
     </Layout>
   );
 };
 
 export default PortfolioPage;
+
+export const PortfolioPageQuery = graphql`
+  query PortfolioPage {
+    projects: allContentfulProject(sort: { fields: updatedAt, order: DESC }) {
+      edges {
+        node {
+          title
+          slug
+          featureBullets {
+            raw
+          }
+          photos {
+            fluid {
+              ...GatsbyContentfulFluid_tracedSVG
+            }
+          }
+        }
+      }
+    }
+  }
+`;
