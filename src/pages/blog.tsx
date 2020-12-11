@@ -70,7 +70,7 @@ export const pageQuery = graphql`
           slug
           coverPhoto {
             fluid {
-              ...GatsbyContentfulFluid
+              ...GatsbyContentfulFluid_tracedSVG
             }
           }
         }
