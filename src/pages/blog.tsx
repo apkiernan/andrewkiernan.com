@@ -24,7 +24,19 @@ const Img = styled(Image)`
 `;
 
 type BlogProps = {
-  data: {};
+  data: {
+    posts: {
+      edges: {
+        node: {
+          title: string;
+          slug: string;
+          coverPhoto: {
+            fluid: FluidObject;
+          };
+        };
+      }[];
+    };
+  };
 };
 
 const Blog = (props: BlogProps) => {
@@ -33,8 +45,36 @@ const Blog = (props: BlogProps) => {
       title="A Boston based web developer specializing in performant web applications"
       imageUrl=""
     >
+      {props.data.posts.edges.map(bp => (
+        <Grid key={bp.node.slug}>
+          <Img fluid={bp.node.coverPhoto.fluid} />
+          <div>
+            <Link to={`/${bp.node.slug}`}>
+              <p>{bp.node.title}</p>
+            </Link>
+          </div>
+        </Grid>
+      ))}
     </Layout>
   );
 };
 
 export default Blog;
+
+export const pageQuery = graphql`
+  query BlogPosts {
+    posts: allContentfulBlogPost {
+      edges {
+        node {
+          title
+          slug
+          coverPhoto {
+            fluid {
+              ...GatsbyContentfulFluid
+            }
+          }
+        }
+      }
+    }
+  }
+`;

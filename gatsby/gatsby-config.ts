@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 import { resolve } from 'path';
+const blog_post = require('../src/schemas/blog-post.json');
 
 module.exports = {
   siteMetadata: {
@@ -74,6 +75,14 @@ module.exports = {
       options: {
         path: resolve(__dirname, '..', 'src', 'img'),
         name: 'images'
+      }
+    },
+    {
+      resolve: 'gatsby-source-contentful',
+      options: {
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_DELIVERY_TOKEN,
+        downloadLocal: true,
       }
     },
     { resolve: 'gatsby-plugin-sharp' },
