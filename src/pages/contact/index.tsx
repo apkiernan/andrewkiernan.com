@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { navigate } from 'gatsby-link';
+import { graphql } from 'gatsby';
 
 import { Layout } from '../../components/Layout';
 
@@ -46,8 +47,8 @@ type Props = {
     headshot: { file: { url: string } };
   };
 }
-export default class Index extends React.Component {
-  constructor(props) {
+export default class Index extends React.Component<Props> {
+  constructor(props: Props) {
     super(props);
     this.state = { isValidated: false };
   }
