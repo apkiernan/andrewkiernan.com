@@ -50,6 +50,7 @@ export const Project = ({ title, featureBullets, photos }: ProjectProps) => {
 
 type PortfolioPageProps = {
   data: {
+    headshot: { file: { url: string } };
     projects: {
       edges: {
         node: {
@@ -70,12 +71,12 @@ type PortfolioPageProps = {
 };
 
 const PortfolioPage = (props: PortfolioPageProps) => {
-  const { projects } = props.data;
+  const { projects, headshot } = props.data;
 
   return (
     <Layout
       title="A Boston based web developer specializing in performant web applications"
-      imageUrl=""
+      imageUrl={headshot.file.url}
     >
       {projects.edges.map(({ node }) => (
         <Project
@@ -94,6 +95,11 @@ export default PortfolioPage;
 
 export const PortfolioPageQuery = graphql`
   query PortfolioPage {
+    headshot: contentfulAsset(title: { eq: "Headshot" }) {
+      file {
+        url
+      }
+    }
     projects: allContentfulProject(sort: { fields: updatedAt, order: DESC }) {
       edges {
         node {

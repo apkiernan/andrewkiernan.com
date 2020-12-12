@@ -1,17 +1,20 @@
+import { graphql } from 'gatsby';
 import React from 'react';
 
 import { Layout } from '../components/Layout';
 
 type PageProps = {
-  data: {};
+  data: {
+    headshot: { file: { url: string } };
+  };
 };
 
 const IndexPage = ({ data }: PageProps) => {
 
   return (
     <Layout
-      title=""
-      imageUrl=""
+      title="A Boston based web developer specializing in performant web applications"
+      imageUrl={data.headshot.file.url}
     >
       <section>
         <p>I am a Boston based web developer, currently employed at <a href="https://www.salsify.com">Salsify</a>.</p>
@@ -25,3 +28,13 @@ const IndexPage = ({ data }: PageProps) => {
 };
 
 export default IndexPage;
+
+export const pageQuery = graphql`
+  query IndexPageQuery {
+    headshot: contentfulAsset(title: { eq: "Headshot" }) {
+      file {
+        url
+      }
+    }
+  }
+`

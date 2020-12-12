@@ -25,6 +25,9 @@ const Img = styled(Image)`
 
 type BlogProps = {
   data: {
+    headshot: {
+      file: { url: string }
+    }
     posts: {
       edges: {
         node: {
@@ -43,7 +46,7 @@ const Blog = (props: BlogProps) => {
   return (
     <Layout
       title="A Boston based web developer specializing in performant web applications"
-      imageUrl=""
+      imageUrl={props.data.headshot.file.url}
     >
       {props.data.posts.edges.map(bp => (
         <Grid key={bp.node.slug}>
@@ -63,6 +66,11 @@ export default Blog;
 
 export const pageQuery = graphql`
   query BlogPosts {
+    headshot: contentfulAsset(title: { eq: "Headshot" }) {
+      file {
+        url
+      }
+    }
     posts: allContentfulBlogPost {
       edges {
         node {

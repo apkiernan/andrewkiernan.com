@@ -41,6 +41,11 @@ const Section = styled.section`
   justify-content: center;
 `;
 
+type Props = {
+  data: {
+    headshot: { file: { url: string } };
+  };
+}
 export default class Index extends React.Component {
   constructor(props) {
     super(props);
@@ -70,7 +75,7 @@ export default class Index extends React.Component {
     return (
       <Layout
         title="A Boston based web developer specializing in performant web applications"
-        imageUrl="/"
+        imageUrl={this.props.data.headshot.file.url}
       >
         <Section>
           <div>
@@ -138,3 +143,13 @@ export default class Index extends React.Component {
     );
   }
 }
+
+export const pageQuery = graphql`
+  query ContactPageQuery {
+    headshot: contentfulAsset(title: { eq: "Headshot" }) {
+      file {
+        url
+      }
+    }
+  }
+`

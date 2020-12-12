@@ -1,8 +1,16 @@
+import { graphql } from 'gatsby';
 import React from 'react';
 import { Layout } from '../../components/Layout';
 
-export default () => (
-  <Layout title="" imageUrl="">
+type Props ={
+  data: {
+    headshot: {
+      file: { url: string }
+    }
+  }
+}
+export default (props: Props) => (
+  <Layout title="A Boston based web developer specializing in performant web applications" imageUrl={props.data.headshot.file.url}>
     <section className="section">
       <div className="container">
         <div className="content">
@@ -13,3 +21,13 @@ export default () => (
     </section>
   </Layout>
 );
+
+export const pageQuery = graphql`
+  query ContactPageThanksQuery {
+    headshot: contentfulAsset(title: { eq: "Headshot" }) {
+      file {
+        url
+      }
+    }
+  }
+`
