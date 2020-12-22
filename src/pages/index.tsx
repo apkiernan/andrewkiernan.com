@@ -15,19 +15,29 @@ type PageProps = {
 };
 
 const animation = keyframes`
-  25% {
+  12.5% {
     transform: translateX(2.5%)
   }
-  50% {
+  25% {
     transform: translateX(5%)
   }
-
-  75% {
+  37.5% {
     transform: translateX(7.5%)
   }
-
-  100% {
+  50% {
     transform: translateX(10%)
+  }
+  62.5% {
+    transform: translateX(7.5%)
+  }
+  75% {
+    transform: translateX(5%)
+  }
+  87.5% {
+    transform: translateX(2.5%)
+  }
+  100% {
+    transform: translateX(0)
   }
 `;
 
@@ -41,24 +51,36 @@ const H1 = styled.h1`
   margin: 0;
 `;
 
+const Flex = styled.div`
+  align-items: center;
+  display: flex;
+`;
+
+const TitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 4rem;
+`;
+
+const Headshot = styled(Image)`
+  border-radius: 15rem;
+  height: 15rem;
+  width: 15rem;
+`;
+
 const IndexPage = ({ data }: PageProps) => {
   return (
     <Layout
       title="A Boston based web developer specializing in performant web applications"
       imageUrl={data.headshot.file.url}
     >
-      <div style={{ display: 'flex' }}>
-        <div
-          style={{ display: 'flex', alignItems: 'center', marginRight: '4rem' }}
-        >
+      <Flex>
+        <TitleContainer>
           <H1>Hi, I'm Andrew</H1>
           <Arrow>&rarr;</Arrow>
-        </div>
-        <Image
-          style={{ height: '15rem', width: '15rem', borderRadius: '2rem' }}
-          fluid={data.headshot.fluid}
-        />
-      </div>
+        </TitleContainer>
+        <Headshot fluid={data.headshot.fluid} />
+      </Flex>
     </Layout>
   );
 };
@@ -69,7 +91,7 @@ export const pageQuery = graphql`
   query IndexPageQuery {
     headshot: contentfulAsset(title: { eq: "Headshot" }) {
       fluid {
-        ...GatsbyContentfulFluid
+        ...GatsbyContentfulFluid_tracedSVG
       }
       file {
         url
