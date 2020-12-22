@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import { ContentfulRichTextGatsbyReference, renderRichText, RenderRichTextData } from 'gatsby-source-contentful/rich-text';
 
 import { Layout } from '../components/Layout';
 import { FluidObject } from 'gatsby-image';
@@ -15,6 +16,7 @@ type Props = {
          rawMarkdownBody: string;
        };
       };
+      photoCredit: RenderRichTextData<ContentfulRichTextGatsbyReference>;
       coverPhoto: {
         fluid: FluidObject;
       };
@@ -32,6 +34,7 @@ const BlogPost = (props: Props) => {
     >
       <h1>{post.title}</h1>
       <CoverPhoto image={post.coverPhoto.fluid} />
+      {renderRichText(post.photoCredit)}
       <Content content={post.content.childMarkdownRemark.rawMarkdownBody} />
     </Layout>
   );
@@ -47,6 +50,9 @@ export const pageQuery = graphql`
         childMarkdownRemark {
           rawMarkdownBody
         }
+      }
+      photoCredit {
+        raw
       }
       coverPhoto {
         fluid {

@@ -1,28 +1,62 @@
-import { graphql } from 'gatsby';
 import React from 'react';
+import styled, { keyframes } from 'styled-components';
+import { graphql } from 'gatsby';
+import Image, { FluidObject } from 'gatsby-image';
 
 import { Layout } from '../components/Layout';
 
 type PageProps = {
   data: {
-    headshot: { file: { url: string } };
+    headshot: { 
+      fluid: FluidObject;
+      file: { url: string } 
+    };
   };
 };
 
-const IndexPage = ({ data }: PageProps) => {
+const animation = keyframes`
+  25% {
+    transform: translateX(2.5%)
+  }
+  50% {
+    transform: translateX(5%)
+  }
 
+  75% {
+    transform: translateX(7.5%)
+  }
+
+  100% {
+    transform: translateX(10%)
+  }
+`;
+
+const Arrow = styled.div`
+  animation: 1s ${animation} infinite;
+  padding: 0 1rem;
+  font-size: 3rem;
+`;
+
+const H1 = styled.h1`
+  margin: 0;
+`
+
+const IndexPage = ({ data }: PageProps) => {
   return (
     <Layout
       title="A Boston based web developer specializing in performant web applications"
       imageUrl={data.headshot.file.url}
     >
-      <section>
-        <p>I am a Boston based web developer, currently employed at <a href="https://www.salsify.com">Salsify</a>.</p>
-        <p>
-          I'm originally from Abington, Massachusetts, but have been living all around Boston for the last 8 years, currently residing in the North End neighborhood.
-          If I'm not working on various side projects, and it is between the months of October and June (playoffs permitting), you will most likely find me heading to the TD Garden for a Celtics game.
-        </p>
-      </section>
+      <div style={{display: 'flex'}}>
+        <div style={{display: 'flex', alignItems: 'center'}}>
+          <H1>Hi, I'm Andrew</H1>
+          <Arrow>&rarr;</Arrow>
+        </div>
+        <Image style={{height:'15rem', width: '30rem'}} fluid={data.headshot.fluid} />
+      </div>
+      <h2>
+        I make websites and web apps. Sometimes they look good
+      </h2>
     </Layout>
   );
 };
@@ -32,6 +66,9 @@ export default IndexPage;
 export const pageQuery = graphql`
   query IndexPageQuery {
     headshot: contentfulAsset(title: { eq: "Headshot" }) {
+      fluid {
+        ...GatsbyContentfulFluid
+      }
       file {
         url
       }

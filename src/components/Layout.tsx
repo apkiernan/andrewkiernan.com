@@ -65,6 +65,10 @@ const Global = createGlobalStyle<Theme>`
     color: ${props => props.theme.palette.linkColor}
   }
 
+  img {
+    max-width: 100%;
+  }
+
   h1,
   h2,
   h3,
