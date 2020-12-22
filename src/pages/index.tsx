@@ -7,9 +7,9 @@ import { Layout } from '../components/Layout';
 
 type PageProps = {
   data: {
-    headshot: { 
+    headshot: {
       fluid: FluidObject;
-      file: { url: string } 
+      file: { url: string };
     };
   };
 };
@@ -39,7 +39,7 @@ const Arrow = styled.div`
 
 const H1 = styled.h1`
   margin: 0;
-`
+`;
 
 const IndexPage = ({ data }: PageProps) => {
   return (
@@ -47,16 +47,18 @@ const IndexPage = ({ data }: PageProps) => {
       title="A Boston based web developer specializing in performant web applications"
       imageUrl={data.headshot.file.url}
     >
-      <div style={{display: 'flex'}}>
-        <div style={{display: 'flex', alignItems: 'center'}}>
+      <div style={{ display: 'flex' }}>
+        <div
+          style={{ display: 'flex', alignItems: 'center', marginRight: '4rem' }}
+        >
           <H1>Hi, I'm Andrew</H1>
           <Arrow>&rarr;</Arrow>
         </div>
-        <Image style={{height:'15rem', width: '30rem'}} fluid={data.headshot.fluid} />
+        <Image
+          style={{ height: '15rem', width: '15rem', borderRadius: '2rem' }}
+          fluid={data.headshot.fluid}
+        />
       </div>
-      <h2>
-        I make websites and web apps. Sometimes they look good
-      </h2>
     </Layout>
   );
 };
@@ -74,4 +76,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;
