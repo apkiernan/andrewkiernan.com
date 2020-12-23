@@ -50,7 +50,11 @@ const Global = createGlobalStyle<Theme>`
     margin: 0;
   }
   p {
-    font-size: 1.25rem;
+    font-size: 1rem;
+    
+    @media screen and (min-width: ${props => props.theme.breakpoints.medium}) {
+      font-size: 1.25rem;
+    }
   }
   a {
     color: var(--link-color);
@@ -70,8 +74,11 @@ const Global = createGlobalStyle<Theme>`
     margin-top: 0;
   }
 
-  h1 {
-    font-size: 3rem;
+  h2 {
+    font-size: 1.5rem;
+    @media screen and (min-width: ${props => props.theme.breakpoints.medium}) {
+      font-size: 2rem;
+    }
   }
 
   code {

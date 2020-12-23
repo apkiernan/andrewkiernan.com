@@ -49,23 +49,39 @@ const Arrow = styled.div`
 
 const H1 = styled.h1`
   margin: 0;
+  font-size: 2rem;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.medium}) {
+    font-size: 3rem;
+  }
 `;
 
-const Flex = styled.div`
+type FlexProps = {
+  reverse?: boolean;
+  marginBottom?: string;
+};
+
+const Flex = styled.div<FlexProps>`
   align-items: center;
   display: flex;
+  flex-direction: ${props => (props.reverse ? 'row-reverse' : 'row')};
+  margin-bottom: ${props => (props.marginBottom ? props.marginBottom : 0)};
 `;
 
 const TitleContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 4rem;
+  margin-right: 2rem;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.medium}) {
+    margin-right: 4rem;
+  }
 `;
 
 const Headshot = styled(Image)`
   border-radius: 5rem;
   height: 5rem;
-  width: 5rem;
+  width: 7rem;
 
   @media screen and (min-width: ${props => props.theme.breakpoints.medium}) {
     border-radius: 15rem;
@@ -80,12 +96,15 @@ const IndexPage = ({ data }: PageProps) => {
       title="A Boston based web developer specializing in performant web applications"
       imageUrl={data.headshot.file.url}
     >
-      <Flex>
+      <Flex marginBottom="2rem">
         <TitleContainer>
           <H1>Hi, I'm Andrew</H1>
           <Arrow>&rarr;</Arrow>
         </TitleContainer>
         <Headshot fluid={data.headshot.fluid} />
+      </Flex>
+      <Flex reverse>
+        <p>JavaScript ninja, CSS wizard, HTML rockstar. Master of hyperbole.</p>
       </Flex>
     </Layout>
   );

@@ -42,9 +42,9 @@ export default (props: Props) => (
         <div>
           <h1>Contact</h1>
           <p>
-            Are you looking to build a new site or web app? Want to talk about
-            why the Celtics are the best team in the NBA? Just want to say hi?
-            Feel free to contact me through the platforms listed below
+            Looking to build a new site or web app? Want to talk about why the
+            Celtics are the best team in the NBA? Just want to say hi? Feel free
+            to contact me through the platforms listed below
           </p>
           <Section>
             <IconContainer>
