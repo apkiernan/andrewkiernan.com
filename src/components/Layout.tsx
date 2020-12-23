@@ -7,7 +7,6 @@ import styled, {
 
 import Footer from './Footer';
 import Navbar from './Navbar';
-import { useSiteTheme } from '../hooks/useSiteTheme';
 import { SEO } from './SEO';
 
 const baseTheme = {
@@ -19,29 +18,7 @@ const baseTheme = {
   }
 };
 
-const lightTheme = {
-  ...baseTheme,
-  palette: {
-    backgroundColor: '#fafafa',
-    textColor: '#333',
-    primary: '#08234F',
-    linkColor: '#08234F',
-    codeColor: '#d5057a'
-  }
-};
-
-const darkTheme = {
-  ...baseTheme,
-  palette: {
-    backgroundColor: '#282c35',
-    textColor: '#fff',
-    primary: '#729FE3',
-    linkColor: '#729FE3',
-    codeColor: '#ff7ba4'
-  }
-};
-
-export type Theme = ThemeProps<typeof lightTheme | typeof darkTheme>;
+export type Theme = ThemeProps<typeof baseTheme>;
 
 const Global = createGlobalStyle<Theme>`
   *,
@@ -49,20 +26,34 @@ const Global = createGlobalStyle<Theme>`
   *::after {
     box-sizing: border-box;
   }
+  .theme-dark {
+    --primary-color: #729FE3;
+    --background-color: #282c35;
+    --text-color: #fff;
+    --link-color: #729FE3;
+    --code-color: #ff7ba4;
+  }
+  .theme-light {
+    --primary-color: #08234F;
+    --background-color: #fafafa;
+    --text-color: #333;
+    --link-color: #08234F;
+    --code-color: #d5057a;
+  }
   html {
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
-    color: ${props => props.theme.palette.textColor};
   }
   body {
+    background: var(--background-color);
+    color: var(--text-color);
     margin: 0;
-    background: ${props => props.theme.palette.backgroundColor};
   }
   p {
     font-size: 1.25rem;
   }
   a {
-    color: ${props => props.theme.palette.linkColor}
+    color: var(--link-color);
   }
 
   img {
@@ -79,8 +70,12 @@ const Global = createGlobalStyle<Theme>`
     margin-top: 0;
   }
 
+  h1 {
+    font-size: 3rem;
+  }
+
   code {
-    color: ${props => props.theme.palette.codeColor};
+    color: var(--code-color);
   }
 `;
 
@@ -104,17 +99,14 @@ type LayoutProps = {
   imageUrl: string;
 };
 
-export const Layout = ({ children, title, imageUrl }: LayoutProps) => {
-  const [siteTheme, setSiteTheme] = useSiteTheme();
-  return (
-    <ThemeProvider theme={siteTheme === 'dark' ? darkTheme : lightTheme}>
-      <SEO title={title} description={title} imageUrl={imageUrl} />
-      <Global />
-      <Page>
-        <Navbar siteTheme={siteTheme} setSiteTheme={setSiteTheme} />
-        <Content>{children}</Content>
-        <Footer />
-      </Page>
-    </ThemeProvider>
-  );
-};
+export const Layout = ({ children, title, imageUrl }: LayoutProps) => (
+  <ThemeProvider theme={baseTheme}>
+    <SEO title={title} description={title} imageUrl={imageUrl} />
+    <Global />
+    <Page>
+      <Navbar />
+      <Content>{children}</Content>
+      <Footer />
+    </Page>
+  </ThemeProvider>
+);

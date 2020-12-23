@@ -63,9 +63,15 @@ const TitleContainer = styled.div`
 `;
 
 const Headshot = styled(Image)`
-  border-radius: 15rem;
-  height: 15rem;
-  width: 15rem;
+  border-radius: 5rem;
+  height: 5rem;
+  width: 5rem;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.medium}) {
+    border-radius: 15rem;
+    height: 15rem;
+    width: 15rem;
+  }
 `;
 
 const IndexPage = ({ data }: PageProps) => {

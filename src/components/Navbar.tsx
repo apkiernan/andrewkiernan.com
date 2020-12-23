@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import styled, { ThemeContext } from 'styled-components';
+import styled from 'styled-components';
 import SVG from 'react-inlinesvg';
 
-import { SiteTheme } from '../hooks/useSiteTheme';
+import { SiteTheme, useSiteTheme } from '../hooks/useSiteTheme';
 import logoLight from '../img/logo.svg';
 import logoDark from '../img/logo-inverted.svg';
 import lightIcon from '../img/light-mode-icon.svg';
@@ -41,12 +41,16 @@ const NavLink = styled(Link)`
   text-decoration: none;
   font-size: 0.9rem;
   border-bottom: 0.3rem solid transparent;
-  color: ${props => props.theme.palette.textColor};
+  color: var(--text-color);
   padding: 1.5rem;
   padding-bottom: 0.6rem;
 
+  &.active {
+    border-bottom-color: var(--primary-color);
+  }
+
   &::visited: {
-    color: ${props => props.theme.palette.textColor};
+    color: var(--text-color);
   }
 
   @media screen and (min-width: ${props => props.theme.breakpoints.medium}) {
@@ -64,7 +68,7 @@ const SwitchIcon = styled(SVG)`
   border-radius: 2rem;
   height: 2rem;
   width: 2rem;
-  fill: ${props => props.theme.palette.textColor};
+  fill: var(--text-color);
 `;
 
 type Props = {
@@ -91,38 +95,29 @@ const Switch = (p: Props) => {
   );
 };
 
-const Navbar = (p: Props) => {
-  const theme = React.useContext(ThemeContext);
+const Navbar = () => {
+  const [theme, setTheme] = useSiteTheme();
   return (
     <Nav>
       <NavBrand>
         <BrandLink to="/">
           <SVG
-            src={p.siteTheme === 'light' ? logoLight : logoDark}
+            src={theme === 'light' ? logoLight : logoDark}
             style={{ height: '100%', width: 'auto' }}
           />
         </BrandLink>
       </NavBrand>
       <SiteThemeToggle>
-        <Switch siteTheme={p.siteTheme} setSiteTheme={p.setSiteTheme} />
+        <Switch siteTheme={theme} setSiteTheme={setTheme} />
       </SiteThemeToggle>
       <div>
-        <NavLink
-          activeStyle={{ borderBottomColor: theme.palette.primary }}
-          to="/blog"
-        >
+        <NavLink activeClassName="active" to="/blog">
           Blog
         </NavLink>
-        <NavLink
-          activeStyle={{ borderBottomColor: theme.palette.primary }}
-          to="/projects"
-        >
+        <NavLink activeClassName="active" to="/projects">
           Projects
         </NavLink>
-        <NavLink
-          activeStyle={{ borderBottomColor: theme.palette.primary }}
-          to="/contact"
-        >
+        <NavLink activeClassName="active" to="/contact">
           Contact
         </NavLink>
       </div>

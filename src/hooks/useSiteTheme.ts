@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export type SiteTheme = 'light' | 'dark';
 
-const siteThemeNamespace = 'ak-site-theme';
+export const siteThemeNamespace = 'ak-site-theme';
 
 export const useSiteTheme = (): [SiteTheme, (s: SiteTheme) => void] => {
   const [state, setState] = useState<SiteTheme>(() => {
@@ -25,7 +25,11 @@ export const useSiteTheme = (): [SiteTheme, (s: SiteTheme) => void] => {
   });
 
   const setSiteTheme = (st: SiteTheme) => {
+    let oldTheme: SiteTheme;
     if (typeof window !== 'undefined') {
+      oldTheme = window.localStorage.getItem(siteThemeNamespace) as SiteTheme;
+      document.body.classList.remove(`theme-${oldTheme}`);
+      document.body.classList.add(`theme-${st}`);
       window.localStorage.setItem(siteThemeNamespace, st);
     }
     setState(st);
