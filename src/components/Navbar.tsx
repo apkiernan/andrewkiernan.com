@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'gatsby';
 import styled from 'styled-components';
-import SVG from 'react-inlinesvg';
+import Image from 'next/image';
 
+import { Link } from './Link';
 import { SiteTheme, useSiteTheme } from '../hooks/useSiteTheme';
 import logoLight from '../img/logo.svg';
 import logoDark from '../img/logo-inverted.svg';
@@ -64,7 +64,7 @@ const SwitchContainer = styled.div`
   align-items: center;
   display: flex;
 `;
-const SwitchIcon = styled(SVG)`
+const SwitchIcon = styled(Image)`
   border-radius: 2rem;
   height: 2rem;
   width: 2rem;
@@ -101,9 +101,9 @@ const Navbar = () => {
     <Nav>
       <NavBrand>
         <BrandLink to="/">
-          <SVG
+          <Image
             src={theme === 'light' ? logoLight : logoDark}
-            style={{ height: '100%', width: 'auto' }}
+            // style={{ height: '100%', width: 'auto' }}
           />
         </BrandLink>
       </NavBrand>
@@ -111,15 +111,9 @@ const Navbar = () => {
         <Switch siteTheme={theme} setSiteTheme={setTheme} />
       </SiteThemeToggle>
       <div>
-        <NavLink activeClassName="active" to="/blog">
-          Blog
-        </NavLink>
-        <NavLink activeClassName="active" to="/projects">
-          Projects
-        </NavLink>
-        <NavLink activeClassName="active" to="/contact">
-          Contact
-        </NavLink>
+        <NavLink to="/blog">Blog</NavLink>
+        <NavLink to="/projects">Projects</NavLink>
+        <NavLink to="/contact">Contact</NavLink>
       </div>
     </Nav>
   );

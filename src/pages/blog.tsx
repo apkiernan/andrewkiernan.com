@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link, graphql } from 'gatsby';
-import Image, { FluidObject } from 'gatsby-image';
+import { Link } from '../components/Link';
+import Image from 'next/image';
 import styled from 'styled-components';
 
 import { Layout } from '../components/Layout';
+import { getAllPosts } from '../lib/api';
 
 const Grid = styled.div`
   @media screen and (min-width: 700px) {
@@ -24,36 +25,38 @@ const Img = styled(Image)`
 `;
 
 type BlogProps = {
-  data: {
-    headshot: {
-      file: { url: string }
-    }
-    posts: {
-      edges: {
-        node: {
-          title: string;
-          slug: string;
-          coverPhoto: {
-            fluid: FluidObject;
-          };
-        };
-      }[];
-    };
+  headshot: {
+    url: string;
   };
+  posts: {
+    title: string;
+    content: string;
+    slug: string;
+    coverPhoto: {
+      url: string;
+      height: number;
+      width: number;
+    };
+  }[];
 };
 
 const Blog = (props: BlogProps) => {
   return (
     <Layout
       title="A Boston based web developer specializing in performant web applications"
-      imageUrl={props.data.headshot.file.url}
+      imageUrl={props.headshot.url}
     >
-      {props.data.posts.edges.map(bp => (
-        <Grid key={bp.node.slug}>
-          <Img fluid={bp.node.coverPhoto.fluid} />
+      {props.posts.map(bp => (
+        <Grid key={bp.slug}>
+          <Img
+            layout="responsive"
+            src={bp.coverPhoto.url}
+            height={bp.coverPhoto.height}
+            width={bp.coverPhoto.width}
+          />
           <div>
-            <Link to={`/${bp.node.slug}`}>
-              <p>{bp.node.title}</p>
+            <Link to={`/${bp.slug}`}>
+              <p>{bp.title}</p>
             </Link>
           </div>
         </Grid>
@@ -64,25 +67,13 @@ const Blog = (props: BlogProps) => {
 
 export default Blog;
 
-export const pageQuery = graphql`
-  query BlogPosts {
-    headshot: contentfulAsset(title: { eq: "Headshot" }) {
-      file {
-        url
-      }
+export async function getStaticProps() {
+  const { headshot, posts } = await getAllPosts();
+  console.log(JSON.stringify(posts, null, 2));
+  return {
+    props: {
+      headshot,
+      posts
     }
-    posts: allContentfulBlogPost {
-      edges {
-        node {
-          title
-          slug
-          coverPhoto {
-            fluid {
-              ...GatsbyContentfulFluid_tracedSVG
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+  };
+}

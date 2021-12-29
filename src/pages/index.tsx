@@ -1,16 +1,14 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { graphql } from 'gatsby';
-import Image, { FluidObject } from 'gatsby-image';
-
+import Image from 'next/image';
 import { Layout } from '../components/Layout';
+import { fetchGraphQL } from '../lib/api';
 
 type PageProps = {
-  data: {
-    headshot: {
-      fluid: FluidObject;
-      file: { url: string };
-    };
+  headshot: {
+    url: string;
+    height: number;
+    width: number;
   };
 };
 
@@ -90,18 +88,22 @@ const Headshot = styled(Image)`
   }
 `;
 
-const IndexPage = ({ data }: PageProps) => {
+const IndexPage = (props: PageProps) => {
   return (
     <Layout
       title="A Boston based web developer specializing in performant web applications"
-      imageUrl={data.headshot.file.url}
+      imageUrl={props.headshot.url}
     >
       <Flex marginBottom="2rem">
         <TitleContainer>
           <H1>Hi, I'm Andrew</H1>
           <Arrow>&rarr;</Arrow>
         </TitleContainer>
-        <Headshot fluid={data.headshot.fluid} />
+        <Headshot
+          src={props.headshot.url}
+          height={props.headshot.height}
+          width={props.headshot.width}
+        />
       </Flex>
       <Flex reverse>
         <p>JavaScript ninja, CSS wizard, HTML rockstar. Master of hyperbole.</p>
@@ -112,15 +114,19 @@ const IndexPage = ({ data }: PageProps) => {
 
 export default IndexPage;
 
-export const pageQuery = graphql`
-  query IndexPageQuery {
-    headshot: contentfulAsset(title: { eq: "Headshot" }) {
-      fluid {
-        ...GatsbyContentfulFluid_tracedSVG
-      }
-      file {
+export async function getStaticProps() {
+  const { data } = await fetchGraphQL(`
+    query {
+      headshot: asset(id: "${process.env.CONTENTFUL_HEADSHOT_ID}") {
+        width
+        height
         url
       }
     }
-  }
-`;
+  `);
+  return {
+    props: {
+      headshot: data.headshot
+    }
+  };
+}

@@ -1,11 +1,10 @@
 import React from 'react';
-import { graphql } from 'gatsby';
-import Image from 'gatsby-image';
+import Image, { ImageProps } from 'next/image';
 import styled from 'styled-components';
 
 import { Content } from '../components/Content';
 import { Layout } from '../components/Layout';
-import { FluidObject } from 'gatsby-image';
+import { fetchGraphQL } from '../lib/api';
 
 const Grid = styled.div`
   @media screen and (min-width: 625px) {
@@ -22,7 +21,7 @@ type ProjectProps = {
       rawMarkdownBody: string;
     };
   };
-  photos: FluidObject;
+  photos: ImageProps['src'];
 };
 
 const Section = styled.section`
@@ -40,8 +39,10 @@ export const Project = ({ title, featureBullets, photos }: ProjectProps) => {
       <div>
         <h1>{title}</h1>
         <Grid>
-          <ProjectImage fluid={photos} />
-          <Content content={featureBullets.childMarkdownRemark.rawMarkdownBody} />
+          <ProjectImage src={photos} />
+          <Content
+            content={featureBullets.childMarkdownRemark.rawMarkdownBody}
+          />
         </Grid>
       </div>
     </Section>
@@ -50,21 +51,19 @@ export const Project = ({ title, featureBullets, photos }: ProjectProps) => {
 
 type PortfolioPageProps = {
   data: {
-    headshot: { file: { url: string } };
+    headshot: { url: string };
     projects: {
-      edges: {
-        node: {
-          title: string;
-          slug: string;
-          featureBullets: {
-            childMarkdownRemark: {
-              rawMarkdownBody: string;
-            };
+      items: {
+        title: string;
+        slug: string;
+        featureBullets: {
+          childMarkdownRemark: {
+            rawMarkdownBody: string;
           };
-          photos: {
-            fluid: FluidObject;
-          }[];
         };
+        photos: {
+          url: string;
+        }[];
       }[];
     };
   };
@@ -76,15 +75,15 @@ const PortfolioPage = (props: PortfolioPageProps) => {
   return (
     <Layout
       title="A Boston based web developer specializing in performant web applications"
-      imageUrl={headshot.file.url}
+      imageUrl={headshot.url}
     >
-      {projects.edges.map(({ node }) => (
+      {projects.items.map(node => (
         <Project
           key={node.slug}
           title={node.title}
           slug={node.slug}
           featureBullets={node.featureBullets}
-          photos={node.photos[0]?.fluid}
+          photos={node.photos[0]?.url}
         />
       ))}
     </Layout>
@@ -93,16 +92,14 @@ const PortfolioPage = (props: PortfolioPageProps) => {
 
 export default PortfolioPage;
 
-export const PortfolioPageQuery = graphql`
+export async function getStaticProps() {
+  const { data } = await fetchGraphQL(`
   query PortfolioPage {
-    headshot: contentfulAsset(title: { eq: "Headshot" }) {
-      file {
+    headshot: asset(id: "${process.env.CONTENTFUL_HEADSHOT_ID}") {
         url
-      }
     }
-    projects: allContentfulProject(sort: { fields: updatedAt, order: DESC }) {
-      edges {
-        node {
+    projects: projectCollection(sort: { fields: updatedAt, order: DESC }) {
+      items {
           title
           slug
           featureBullets {
@@ -111,12 +108,19 @@ export const PortfolioPageQuery = graphql`
             }
           }
           photos {
-            fluid {
-              ...GatsbyContentfulFluid_tracedSVG
-            }
+            url
           }
         }
       }
     }
   }
-`;
+`);
+
+  const { projects, headshot } = data;
+  return {
+    props: {
+      projects,
+      headshot
+    }
+  };
+}

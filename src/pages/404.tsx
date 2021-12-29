@@ -1,19 +1,15 @@
-import { graphql } from 'gatsby';
 import React from 'react';
 import { Layout } from '../components/Layout';
+import { fetchGraphQL } from '../lib/api';
 
 type Props = {
-  data: {
-    contentfulAsset: {
-      file: { url: string }
-    }
-  }  
+  data: { url: string };
 };
 
 const NotFoundPage = (props: Props) => (
-  <Layout 
-    title="A Boston based web developer specializing in performant web applications" 
-    imageUrl={props.data.contentfulAsset.file.url}
+  <Layout
+    title="A Boston based web developer specializing in performant web applications"
+    imageUrl={props.data.url}
   >
     <div>
       <h1>NOT FOUND</h1>
@@ -24,12 +20,20 @@ const NotFoundPage = (props: Props) => (
 
 export default NotFoundPage;
 
-export const pageQuewry = graphql`
-  query Headshot {
-    contentfulAsset(title: { eq: "Headshot" }) {
-      file {
+export async function getStaticProps() {
+  const response = await fetchGraphQL(`
+    query {
+      asset(id: "${process.env.CONTENTFUL_HEADSHOT_ID}") {
+        width 
+        height
         url
       }
     }
-  }
-`
+  `);
+
+  return {
+    props: {
+      data: response.data.asset
+    }
+  };
+}
