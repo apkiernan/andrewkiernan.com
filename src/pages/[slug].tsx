@@ -51,10 +51,10 @@ export async function getStaticProps({ params }) {
       }
     }
   `);
-  console.log(data);
+  const [post] = data.post.items;
   return {
     props: {
-      post: data.post.items[0]
+      post
     }
   };
 }

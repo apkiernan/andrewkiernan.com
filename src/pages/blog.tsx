@@ -69,7 +69,6 @@ export default Blog;
 
 export async function getStaticProps() {
   const { headshot, posts } = await getAllPosts();
-  console.log(JSON.stringify(posts, null, 2));
   return {
     props: {
       headshot,

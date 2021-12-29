@@ -16,12 +16,10 @@ const Grid = styled.div`
 type ProjectProps = {
   title: string;
   slug: string;
-  featureBullets: {
-    childMarkdownRemark: {
-      rawMarkdownBody: string;
-    };
-  };
-  photos: ImageProps['src'];
+  featureBullets: string;
+  photoUrl: string;
+  photoHeight: number;
+  photoWidth: number;
 };
 
 const Section = styled.section`
@@ -33,57 +31,59 @@ const ProjectImage = styled(Image)`
   max-height: 50vh;
 `;
 
-export const Project = ({ title, featureBullets, photos }: ProjectProps) => {
+export const Project = ({
+  title,
+  featureBullets,
+  photoUrl,
+  photoHeight,
+  photoWidth
+}: ProjectProps) => {
   return (
     <Section>
       <div>
         <h1>{title}</h1>
         <Grid>
-          <ProjectImage src={photos} />
-          <Content
-            content={featureBullets.childMarkdownRemark.rawMarkdownBody}
+          <ProjectImage
+            src={photoUrl}
+            height={photoHeight}
+            width={photoWidth}
           />
+          <Content content={featureBullets} />
         </Grid>
       </div>
     </Section>
   );
 };
 
+type Project = {
+  title: string;
+  slug: string;
+  featureBullets: string;
+  photosCollection: { items: { url: string; height: number; width: number }[] };
+};
+
 type PortfolioPageProps = {
-  data: {
-    headshot: { url: string };
-    projects: {
-      items: {
-        title: string;
-        slug: string;
-        featureBullets: {
-          childMarkdownRemark: {
-            rawMarkdownBody: string;
-          };
-        };
-        photos: {
-          url: string;
-        }[];
-      }[];
-    };
-  };
+  headshot: { url: string };
+  projects: Project[];
 };
 
 const PortfolioPage = (props: PortfolioPageProps) => {
-  const { projects, headshot } = props.data;
+  const { projects, headshot } = props;
 
   return (
     <Layout
       title="A Boston based web developer specializing in performant web applications"
       imageUrl={headshot.url}
     >
-      {projects.items.map(node => (
+      {projects.map(node => (
         <Project
           key={node.slug}
           title={node.title}
           slug={node.slug}
           featureBullets={node.featureBullets}
-          photos={node.photos[0]?.url}
+          photoUrl={node.photosCollection.items[0].url}
+          photoHeight={node.photosCollection.items[0].height}
+          photoWidth={node.photosCollection.items[0].width}
         />
       ))}
     </Layout>
@@ -96,30 +96,33 @@ export async function getStaticProps() {
   const { data } = await fetchGraphQL(`
   query PortfolioPage {
     headshot: asset(id: "${process.env.CONTENTFUL_HEADSHOT_ID}") {
-        url
+      url
+      height
+      width
     }
-    projects: projectCollection(sort: { fields: updatedAt, order: DESC }) {
+    projects:projectCollection(order: title_ASC) {
       items {
-          title
-          slug
-          featureBullets {
-            childMarkdownRemark {
-              rawMarkdownBody
-            }
-          }
-          photos {
+        title
+        slug
+        featureBullets
+        photosCollection {
+          items {
             url
+            height
+            width
           }
         }
       }
     }
   }
 `);
-
-  const { projects, headshot } = data;
+  const {
+    projects: { items },
+    headshot
+  } = data;
   return {
     props: {
-      projects,
+      projects: items,
       headshot
     }
   };

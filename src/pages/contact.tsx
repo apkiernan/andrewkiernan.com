@@ -28,14 +28,12 @@ const ExternalLink = styled.a`
 `;
 
 type Props = {
-  data: {
-    headshot: { url: string; height: number; width: number };
-  };
+  headshot: { url: string; height: number; width: number };
 };
-export default (props: Props) => (
+export default ({ headshot }: Props) => (
   <Layout
     title="Contact me to build a website or web app for you or your business"
-    imageUrl={props.data.headshot.url}
+    imageUrl={headshot.url}
   >
     <Section>
       <div>
@@ -78,8 +76,12 @@ export default (props: Props) => (
 
 export async function getStaticProps() {
   const response = await fetchGraphQL(`
-    headshot: asset(id: "${process.env.CONTENTFUL_HEADSHOT_ID}") {
-      url
+    query {
+      headshot: asset(id: "${process.env.CONTENTFUL_HEADSHOT_ID}") {
+        url
+        height
+        width
+      }
     }
   `);
   return {
