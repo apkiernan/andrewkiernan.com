@@ -1,8 +1,34 @@
 {
   "compilerOptions": {
-    "lib": ["ES2015", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ES2015",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "esModuleInterop": true,
-    "jsx": "react",
-    "typeRoots": ["node_modules", "./src/types"]
-  }
+    "jsx": "preserve",
+    "typeRoots": [
+      "node_modules",
+      "./src/types"
+    ],
+    "target": "es5",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
