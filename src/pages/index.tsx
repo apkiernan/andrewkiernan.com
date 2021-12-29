@@ -78,11 +78,18 @@ const TitleContainer = styled.div`
 
 const Headshot = styled(Image)`
   border-radius: 5rem;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints.medium}) {
+    border-radius: 15rem;
+  }
+`;
+
+const HeadshotWrapper = styled.div`
+  display: flex;
   height: 5rem;
   width: 7rem;
 
   @media screen and (min-width: ${props => props.theme.breakpoints.medium}) {
-    border-radius: 15rem;
     height: 15rem;
     width: 15rem;
   }
@@ -99,11 +106,13 @@ const IndexPage = (props: PageProps) => {
           <H1>Hi, I'm Andrew</H1>
           <Arrow>&rarr;</Arrow>
         </TitleContainer>
-        <Headshot
-          src={props.headshot.url}
-          height={props.headshot.height}
-          width={props.headshot.width}
-        />
+        <HeadshotWrapper>
+          <Headshot
+            src={props.headshot.url}
+            height={props.headshot.height}
+            width={props.headshot.width}
+          />
+        </HeadshotWrapper>
       </Flex>
       <Flex reverse>
         <p>JavaScript ninja, CSS wizard, HTML rockstar. Master of hyperbole.</p>
