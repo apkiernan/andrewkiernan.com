@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Markdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dark } from 'react-syntax-highlighter/dist/cjs/prism';
+import { dark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { Layout } from '../components/Layout';
 import { fetchGraphQL } from '../lib/api';
 
@@ -82,7 +82,14 @@ export const Project = ({
         <ProjectImage src={photoUrl} height={photoHeight} width={photoWidth} />
         <Markdown
           components={{
-            code({ node, inline, className, children, ...componentProps }) {
+            code({
+              node,
+              inline,
+              className,
+              children,
+              ref,
+              ...componentProps
+            }) {
               const match = /language-(\w+)/.exec(className || '');
               return !inline && match ? (
                 <SyntaxHighlighter
