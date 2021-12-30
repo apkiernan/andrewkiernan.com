@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import SVG from 'react-inlinesvg';
 import styled from 'styled-components';
 
 import { Layout } from '../components/Layout';
@@ -46,7 +46,7 @@ const Contact = ({ headshot }: Props) => (
           </p>
           <Section>
             <IconContainer>
-              <Image src={email} />
+              <SVG src={email.src} />
             </IconContainer>
             <ExternalLink href="mailto:apkiernan@gmail.com">
               Shoot me an email
@@ -54,7 +54,7 @@ const Contact = ({ headshot }: Props) => (
           </Section>
           <Section>
             <IconContainer>
-              <Image src={github} />
+              <SVG src={github.src} />
             </IconContainer>
             <ExternalLink href="https://github.com/apkiernan">
               Find me on Github
@@ -62,7 +62,7 @@ const Contact = ({ headshot }: Props) => (
           </Section>
           <Section>
             <IconContainer>
-              <Image src={twitter} />
+              <SVG src={twitter.src} />
             </IconContainer>
             <ExternalLink href="https://twitter.com/apkiernan">
               Find me on Twitter (I don&apos;t tweet at all, but my DMs are
@@ -89,7 +89,7 @@ export async function getStaticProps() {
   `);
   return {
     props: {
-      headshot: response.data.headshot,
-    },
+      headshot: response.data.headshot
+    }
   };
 }
