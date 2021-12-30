@@ -9,10 +9,10 @@ export async function fetchGraphQL(query, preview = false) {
           preview
             ? process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
             : process.env.CONTENTFUL_ACCESS_TOKEN
-        }`
+        }`,
       },
-      body: JSON.stringify({ query })
-    }
+      body: JSON.stringify({ query }),
+    },
   );
   const response = await result?.json();
   return response;
@@ -41,7 +41,7 @@ export async function getAllPosts() {
   `);
   const {
     posts: { items },
-    headshot
+    headshot,
   } = data;
   return { posts: items, headshot };
 }

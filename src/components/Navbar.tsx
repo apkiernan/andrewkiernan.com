@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Image from 'next/image';
+import SVG from 'react-inlinesvg';
 
 import { Link } from './Link';
 import { SiteTheme, useSiteTheme } from '../hooks/useSiteTheme';
@@ -37,6 +37,11 @@ const BrandLink = styled(Link)`
   padding: 0.5rem;
 `;
 
+const BrandLogo = styled(SVG)`
+  height: 100%;
+  width: auto;
+`;
+
 const NavLink = styled(Link)`
   text-decoration: none;
   font-size: 0.9rem;
@@ -63,8 +68,10 @@ const NavLink = styled(Link)`
 const SwitchContainer = styled.div`
   align-items: center;
   display: flex;
+  height: 100%;
+  width: auto;
 `;
-const SwitchIcon = styled(Image)`
+const SwitchIcon = styled(SVG)`
   border-radius: 2rem;
   height: 2rem;
   width: 2rem;
@@ -73,14 +80,16 @@ const SwitchIcon = styled(Image)`
 
 type Props = {
   siteTheme: SiteTheme;
-  setSiteTheme: (st: SiteTheme) => void;
+  setSiteTheme: (_st: SiteTheme) => void;
 };
 
 const Switch = (p: Props) => {
+  // @ts-ignore
+  const icon: string = p.siteTheme === 'light' ? lightIcon.src : darkIcon.src;
   return (
     <label htmlFor="site-theme">
       <SwitchContainer>
-        <SwitchIcon src={p.siteTheme === 'light' ? lightIcon : darkIcon} />
+        <SwitchIcon src={icon} />
       </SwitchContainer>
       <input
         id="site-theme"
@@ -101,10 +110,8 @@ const Navbar = () => {
     <Nav>
       <NavBrand>
         <BrandLink to="/">
-          <Image
-            src={theme === 'light' ? logoLight : logoDark}
-            // style={{ height: '100%', width: 'auto' }}
-          />
+          {/* @ts-ignore */}
+          <BrandLogo src={theme === 'light' ? logoLight.src : logoDark.src} />
         </BrandLink>
       </NavBrand>
       <SiteThemeToggle>

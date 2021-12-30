@@ -20,6 +20,7 @@ export const useSiteTheme = (): [SiteTheme, (s: SiteTheme) => void] => {
         : preferDark.matches
         ? 'dark'
         : 'light';
+      document.body.classList.add(`theme-${preference}`);
     }
     return preference;
   });

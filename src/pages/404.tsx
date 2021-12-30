@@ -33,7 +33,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      data: response.data.asset
-    }
+      data: response.data.asset,
+    },
   };
 }

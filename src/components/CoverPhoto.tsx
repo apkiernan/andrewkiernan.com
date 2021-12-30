@@ -13,13 +13,11 @@ type Props = {
   width: ImageProps['width'];
 };
 
-export const CoverPhoto = (props: Props) => {
-  return (
-    <Img
-      layout="responsive"
-      src={props.image}
-      height={props.height}
-      width={props.width}
-    />
-  );
-};
+export const CoverPhoto = (props: Props) => (
+  <Img
+    layout="responsive"
+    src={props.image}
+    height={props.height}
+    width={props.width}
+  />
+);

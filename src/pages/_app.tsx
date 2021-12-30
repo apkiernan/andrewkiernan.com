@@ -1,16 +1,17 @@
+import React from 'react';
 import {
   ThemeProps,
   createGlobalStyle,
-  ThemeProvider
+  ThemeProvider,
 } from 'styled-components';
 
 const baseTheme = {
   font: {
-    main: '16px'
+    main: '16px',
   },
   breakpoints: {
-    medium: '500px'
-  }
+    medium: '500px',
+  },
 };
 
 export type Theme = ThemeProps<typeof baseTheme>;

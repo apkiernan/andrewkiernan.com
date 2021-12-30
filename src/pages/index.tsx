@@ -95,31 +95,29 @@ const HeadshotWrapper = styled.div`
   }
 `;
 
-const IndexPage = (props: PageProps) => {
-  return (
-    <Layout
-      title="A Boston based web developer specializing in performant web applications"
-      imageUrl={props.headshot.url}
-    >
-      <Flex marginBottom="2rem">
-        <TitleContainer>
-          <H1>Hi, I'm Andrew</H1>
-          <Arrow>&rarr;</Arrow>
-        </TitleContainer>
-        <HeadshotWrapper>
-          <Headshot
-            src={props.headshot.url}
-            height={props.headshot.height}
-            width={props.headshot.width}
-          />
-        </HeadshotWrapper>
-      </Flex>
-      <Flex reverse>
-        <p>JavaScript ninja, CSS wizard, HTML rockstar. Master of hyperbole.</p>
-      </Flex>
-    </Layout>
-  );
-};
+const IndexPage = (props: PageProps) => (
+  <Layout
+    title="A Boston based web developer specializing in performant web applications"
+    imageUrl={props.headshot.url}
+  >
+    <Flex marginBottom="2rem">
+      <TitleContainer>
+        <H1>Hi, I&apos;m Andrew</H1>
+        <Arrow>&rarr;</Arrow>
+      </TitleContainer>
+      <HeadshotWrapper>
+        <Headshot
+          src={props.headshot.url}
+          height={props.headshot.height}
+          width={props.headshot.width}
+        />
+      </HeadshotWrapper>
+    </Flex>
+    <Flex reverse>
+      <p>JavaScript ninja, CSS wizard, HTML rockstar. Master of hyperbole.</p>
+    </Flex>
+  </Layout>
+);
 
 export default IndexPage;
 
@@ -135,7 +133,7 @@ export async function getStaticProps() {
   `);
   return {
     props: {
-      headshot: data.headshot
-    }
+      headshot: data.headshot,
+    },
   };
 }

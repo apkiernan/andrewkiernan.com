@@ -1,8 +1,10 @@
 import React from 'react';
-import Image, { ImageProps } from 'next/image';
+import Image from 'next/image';
 import styled from 'styled-components';
 
-import { Content } from '../components/Content';
+import Markdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dark } from 'react-syntax-highlighter/dist/cjs/prism';
 import { Layout } from '../components/Layout';
 import { fetchGraphQL } from '../lib/api';
 
@@ -31,31 +33,7 @@ const ProjectImage = styled(Image)`
   max-height: 50vh;
 `;
 
-export const Project = ({
-  title,
-  featureBullets,
-  photoUrl,
-  photoHeight,
-  photoWidth
-}: ProjectProps) => {
-  return (
-    <Section>
-      <div>
-        <h1>{title}</h1>
-        <Grid>
-          <ProjectImage
-            src={photoUrl}
-            height={photoHeight}
-            width={photoWidth}
-          />
-          <Content content={featureBullets} />
-        </Grid>
-      </div>
-    </Section>
-  );
-};
-
-type Project = {
+type ProjectDescription = {
   title: string;
   slug: string;
   featureBullets: string;
@@ -64,7 +42,7 @@ type Project = {
 
 type PortfolioPageProps = {
   headshot: { url: string };
-  projects: Project[];
+  projects: ProjectDescription[];
 };
 
 const PortfolioPage = (props: PortfolioPageProps) => {
@@ -89,6 +67,46 @@ const PortfolioPage = (props: PortfolioPageProps) => {
     </Layout>
   );
 };
+
+export const Project = ({
+  title,
+  featureBullets,
+  photoUrl,
+  photoHeight,
+  photoWidth
+}: ProjectProps) => (
+  <Section>
+    <div>
+      <h1>{title}</h1>
+      <Grid>
+        <ProjectImage src={photoUrl} height={photoHeight} width={photoWidth} />
+        <Markdown
+          components={{
+            code({ node, inline, className, children, ...componentProps }) {
+              const match = /language-(\w+)/.exec(className || '');
+              return !inline && match ? (
+                <SyntaxHighlighter
+                  style={dark}
+                  language={match[1]}
+                  PreTag="div"
+                  {...componentProps}
+                >
+                  {String(children).replace(/\n$/, '')}
+                </SyntaxHighlighter>
+              ) : (
+                <code className={className} {...componentProps}>
+                  {children}
+                </code>
+              );
+            }
+          }}
+        >
+          {featureBullets}
+        </Markdown>
+      </Grid>
+    </div>
+  </Section>
+);
 
 export default PortfolioPage;
 

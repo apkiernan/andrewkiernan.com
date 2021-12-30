@@ -30,7 +30,7 @@ const ExternalLink = styled.a`
 type Props = {
   headshot: { url: string; height: number; width: number };
 };
-export default ({ headshot }: Props) => (
+const Contact = ({ headshot }: Props) => (
   <Layout
     title="Contact me to build a website or web app for you or your business"
     imageUrl={headshot.url}
@@ -65,7 +65,8 @@ export default ({ headshot }: Props) => (
               <Image src={twitter} />
             </IconContainer>
             <ExternalLink href="https://twitter.com/apkiernan">
-              Find me on Twitter (I don't tweet at all, but my DMs are open)
+              Find me on Twitter (I don&apos;t tweet at all, but my DMs are
+              open)
             </ExternalLink>
           </Section>
         </div>
@@ -73,6 +74,8 @@ export default ({ headshot }: Props) => (
     </Section>
   </Layout>
 );
+
+export default Contact;
 
 export async function getStaticProps() {
   const response = await fetchGraphQL(`
@@ -86,7 +89,7 @@ export async function getStaticProps() {
   `);
   return {
     props: {
-      headshot: response.data.headshot
-    }
+      headshot: response.data.headshot,
+    },
   };
 }

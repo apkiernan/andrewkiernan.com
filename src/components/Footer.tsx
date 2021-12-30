@@ -13,12 +13,10 @@ const FooterWrapper = styled.footer`
   }
 `;
 
-const Footer = () => {
-  return (
-    <FooterWrapper>
-      <span>&copy; Andrew Kiernan {new Date().getFullYear()}</span>
-    </FooterWrapper>
-  );
-};
+const Footer = () => (
+  <FooterWrapper>
+    <span>&copy; Andrew Kiernan {new Date().getFullYear()}</span>
+  </FooterWrapper>
+);
 
 export default Footer;

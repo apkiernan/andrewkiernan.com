@@ -40,30 +40,28 @@ type BlogProps = {
   }[];
 };
 
-const Blog = (props: BlogProps) => {
-  return (
-    <Layout
-      title="A Boston based web developer specializing in performant web applications"
-      imageUrl={props.headshot.url}
-    >
-      {props.posts.map(bp => (
-        <Grid key={bp.slug}>
-          <Img
-            layout="responsive"
-            src={bp.coverPhoto.url}
-            height={bp.coverPhoto.height}
-            width={bp.coverPhoto.width}
-          />
-          <div>
-            <Link to={`/${bp.slug}`}>
-              <p>{bp.title}</p>
-            </Link>
-          </div>
-        </Grid>
-      ))}
-    </Layout>
-  );
-};
+const Blog = (props: BlogProps) => (
+  <Layout
+    title="A Boston based web developer specializing in performant web applications"
+    imageUrl={props.headshot.url}
+  >
+    {props.posts.map(bp => (
+      <Grid key={bp.slug}>
+        <Img
+          layout="responsive"
+          src={bp.coverPhoto.url}
+          height={bp.coverPhoto.height}
+          width={bp.coverPhoto.width}
+        />
+        <div>
+          <Link to={`/${bp.slug}`}>
+            <p>{bp.title}</p>
+          </Link>
+        </div>
+      </Grid>
+    ))}
+  </Layout>
+);
 
 export default Blog;
 
@@ -72,7 +70,7 @@ export async function getStaticProps() {
   return {
     props: {
       headshot,
-      posts
-    }
+      posts,
+    },
   };
 }
