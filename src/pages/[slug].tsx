@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout } from '../components/Layout';
 import Markdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { vscDarkPlus as dark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { CoverPhoto } from '../components/CoverPhoto';
 import { fetchGraphQL, getAllPosts } from '../lib/api';
 
