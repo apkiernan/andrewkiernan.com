@@ -61,7 +61,7 @@ const NavLink = styled(Link)`
   @media screen and (min-width: ${props => props.theme.breakpoints.medium}) {
     font-size: 1.25rem;
     padding: 2rem;
-    padding-bottom: 1.3rem;
+    padding-bottom: 1.45rem;
   }
 `;
 
