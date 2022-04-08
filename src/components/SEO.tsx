@@ -29,11 +29,7 @@ export const SEO = (props: SEOProps) => (
       href={'/img/favicon-16x16.png'}
       sizes="16x16"
     />
-    <link
-      rel="mask-icon"
-      href={'/img/safari-pinned-tab.svg'}
-      color="#ff4400"
-    />
+    <link rel="mask-icon" href={'/img/safari-pinned-tab.svg'} color="#ff4400" />
 
     <meta name="description" content={props.description} />
     <meta name="theme-color" content="#fff" />

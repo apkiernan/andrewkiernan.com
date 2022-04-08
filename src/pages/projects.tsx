@@ -82,14 +82,7 @@ export const Project = ({
         <ProjectImage src={photoUrl} height={photoHeight} width={photoWidth} />
         <Markdown
           components={{
-            code({
-              node,
-              inline,
-              className,
-              children,
-              ref,
-              ...componentProps
-            }) {
+            code({ node, inline, className, children, ...componentProps }) {
               const match = /language-(\w+)/.exec(className || '');
               return !inline && match ? (
                 <SyntaxHighlighter

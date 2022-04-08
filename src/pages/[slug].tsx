@@ -31,7 +31,7 @@ const BlogPost = (props: Props) => {
       />
       <Markdown
         components={{
-          code({ node, inline, className, children, ref, ...componentProps }) {
+          code({ node, inline, className, children, ...componentProps }) {
             const match = /language-(\w+)/.exec(className || '');
             return !inline && match ? (
               <SyntaxHighlighter
