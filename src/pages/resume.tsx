@@ -43,7 +43,7 @@ const ResumePage = (props: ResumePageProps) => {
           <span>January 2022 - Present</span>
         </JobHeader>
         <div>
-          <em>Tech Lead - Senior Front End Software Engineer</em>
+          <em>Tech Lead - Senior FrontEnd Engineer</em>
         </div>
         <section>
           <BulletList>
