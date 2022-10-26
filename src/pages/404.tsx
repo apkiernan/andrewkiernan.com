@@ -3,37 +3,39 @@ import { Layout } from '../components/Layout';
 import { fetchGraphQL } from '../lib/api';
 
 type Props = {
-  data: { url: string };
+	data: { url: string };
 };
 
 const NotFoundPage = (props: Props) => (
-  <Layout
-    title="A Boston based web developer specializing in performant web applications"
-    imageUrl={props.data.url}
-  >
-    <div>
-      <h1>NOT FOUND</h1>
-      <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-    </div>
-  </Layout>
+	<Layout
+		title="A Boston based web developer specializing in performant web applications"
+		imageUrl={props.data.url}
+	>
+		<div style={{ display: 'flex', alignItems: 'center' }}>
+			<p>
+				How...how did you get here? There&apos;s nothing to see here. It
+				doesn&apos;t exist.
+			</p>
+		</div>
+	</Layout>
 );
 
 export default NotFoundPage;
 
 export async function getStaticProps() {
-  const response = await fetchGraphQL(`
-    query {
-      asset(id: "${process.env.CONTENTFUL_HEADSHOT_ID}") {
-        width 
-        height
-        url
-      }
-    }
-  `);
+	const response = await fetchGraphQL(`
+		query {
+			asset(id: "${process.env.CONTENTFUL_HEADSHOT_ID}") {
+				width 
+				height
+				url
+			}
+		}
+	`);
 
-  return {
-    props: {
-      data: response.data.asset,
-    },
-  };
+	return {
+		props: {
+			data: response.data.asset
+		}
+	};
 }
