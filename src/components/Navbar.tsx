@@ -11,7 +11,6 @@ import darkIcon from '../img/dark-mode-icon.svg';
 
 const Nav = styled.nav`
 	align-items: center;
-	border-bottom: 1px solid #ccc;
 	display: flex;
 	height: 3rem;
 	justify-content: space-between;
@@ -52,10 +51,6 @@ const NavLink = styled(Link)`
 
 	&.active {
 		border-bottom-color: var(--primary-color);
-	}
-
-	&::visited: {
-		color: var(--text-color);
 	}
 
 	@media screen and (min-width: ${props => props.theme.breakpoints.medium}) {

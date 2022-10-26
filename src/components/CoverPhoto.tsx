@@ -11,13 +11,16 @@ type Props = {
 	image: ImageProps['src'];
 	height: ImageProps['height'];
 	width: ImageProps['width'];
+	blur: string;
 };
 
 export const CoverPhoto = (props: Props) => (
 	<Img
 		layout="responsive"
 		src={props.image}
-		height={props.height}
+		height={1000}
 		width={props.width}
+		blurDataURL={props.blur}
+		placeholder="blur"
 	/>
 );

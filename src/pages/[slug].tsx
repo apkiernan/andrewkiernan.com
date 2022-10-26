@@ -1,10 +1,12 @@
 import React from 'react';
-import { Layout } from '../components/Layout';
 import Markdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus as dark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import { CoverPhoto } from '../components/CoverPhoto';
-import { fetchGraphQL, getAllPosts } from '../lib/api';
+import { getPlaiceholder } from 'plaiceholder';
+
+import { Layout } from '$components/Layout';
+import { CoverPhoto } from '$components/CoverPhoto';
+import { fetchGraphQL, getAllPosts } from '$lib/api';
 
 type Props = {
 	post: {
@@ -14,6 +16,7 @@ type Props = {
 			url: string;
 			height: number;
 			width: number;
+			blur: string;
 		};
 	};
 };
@@ -24,11 +27,14 @@ const BlogPost = (props: Props) => {
 	return (
 		<Layout title={post.title} imageUrl={post.coverPhoto.url}>
 			<h1>{post.title}</h1>
-			<CoverPhoto
-				image={post.coverPhoto.url}
-				height={post.coverPhoto.height}
-				width={post.coverPhoto.width}
-			/>
+			<div style={{ marginBottom: '2rem' }}>
+				<CoverPhoto
+					image={post.coverPhoto.url}
+					height={post.coverPhoto.height}
+					width={post.coverPhoto.width}
+					blur={post.coverPhoto.blur}
+				/>
+			</div>
 			<Markdown
 				components={{
 					code({ node, inline, className, children, ...componentProps }) {
@@ -58,7 +64,7 @@ const BlogPost = (props: Props) => {
 
 export default BlogPost;
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params }): Promise<{ props: Props }> {
 	const { data } = await fetchGraphQL(`
 		query {
 			post: blogPostCollection(where: { slug: "${params.slug}" }) {
@@ -76,9 +82,19 @@ export async function getStaticProps({ params }) {
 		}
 	`);
 	const [post] = data.post.items;
+	const { img, base64 } = await getPlaiceholder(post.coverPhoto.url, {
+		size: 10
+	});
 	return {
 		props: {
-			post
+			post: {
+				...post,
+				coverPhoto: {
+					...post.coverPhoto,
+					url: img,
+					blur: base64
+				}
+			}
 		}
 	};
 }
