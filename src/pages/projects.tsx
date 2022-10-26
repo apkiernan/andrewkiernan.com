@@ -7,6 +7,7 @@ import { dark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import { Layout } from '$components/Layout';
 import { fetchGraphQL } from '$lib/api';
+import { getPlaiceholder } from 'plaiceholder';
 
 const Grid = styled.div`
 	@media screen and (min-width: 625px) {
@@ -19,9 +20,12 @@ type ProjectProps = {
 	title: string;
 	slug: string;
 	featureBullets: string;
-	photoUrl: string;
-	photoHeight: number;
-	photoWidth: number;
+	photo: {
+		url: string;
+		height: number;
+		width: number;
+		blur: string;
+	};
 };
 
 const Section = styled.section`
@@ -37,7 +41,12 @@ type ProjectDescription = {
 	title: string;
 	slug: string;
 	featureBullets: string;
-	photosCollection: { items: { url: string; height: number; width: number }[] };
+	photosCollection: {
+		url: string;
+		height: number;
+		width: number;
+		blur: string;
+	}[];
 };
 
 type PortfolioPageProps = {
@@ -59,27 +68,26 @@ const PortfolioPage = (props: PortfolioPageProps) => {
 					title={node.title}
 					slug={node.slug}
 					featureBullets={node.featureBullets}
-					photoUrl={node.photosCollection.items[0].url}
-					photoHeight={node.photosCollection.items[0].height}
-					photoWidth={node.photosCollection.items[0].width}
+					photo={node.photosCollection[0]}
 				/>
 			))}
 		</Layout>
 	);
 };
 
-export const Project = ({
-	title,
-	featureBullets,
-	photoUrl,
-	photoHeight,
-	photoWidth
-}: ProjectProps) => (
+export const Project = ({ title, featureBullets, photo }: ProjectProps) => (
 	<Section>
 		<div>
 			<h1>{title}</h1>
 			<Grid>
-				<ProjectImage src={photoUrl} height={photoHeight} width={photoWidth} />
+				<ProjectImage
+					src={photo.url}
+					height={photo.height}
+					width={photo.width}
+					layout="responsive"
+					blurDataURL={photo.blur}
+					placeholder="blur"
+				/>
 				<Markdown
 					components={{
 						code({ node, inline, className, children, ...componentProps }) {
@@ -138,9 +146,29 @@ export async function getStaticProps() {
 		projects: { items },
 		headshot
 	} = data;
+
+	const projects = await Promise.all(
+		items.map(async item => {
+			const photosCollection = await Promise.all(
+				item.photosCollection.items.map(async pc => {
+					const { img, base64 } = await getPlaiceholder(pc.url, { size: 10 });
+					return {
+						...pc,
+						url: img,
+						blur: base64
+					};
+				})
+			);
+			return {
+				...item,
+				photosCollection
+			};
+		})
+	);
+	console.log(JSON.stringify(projects, null, 2));
 	return {
 		props: {
-			projects: items,
+			projects,
 			headshot
 		}
 	};
