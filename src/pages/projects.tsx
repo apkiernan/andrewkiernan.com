@@ -87,6 +87,8 @@ export const Project = ({ title, featureBullets, photo }: ProjectProps) => (
 					layout="responsive"
 					blurDataURL={photo.blur}
 					placeholder="blur"
+					alt={`cover photo for ${title}`}
+					priority
 				/>
 				<Markdown
 					components={{
