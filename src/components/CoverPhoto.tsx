@@ -22,5 +22,6 @@ export const CoverPhoto = (props: Props) => (
 		width={props.width}
 		blurDataURL={props.blur}
 		placeholder="blur"
+		priority
 	/>
 );
