@@ -22,7 +22,7 @@ const NotFoundPage = (props: Props) => (
 
 export default NotFoundPage;
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	const response = await fetchGraphQL(`
 		query {
 			asset(id: "${process.env.CONTENTFUL_HEADSHOT_ID}") {
