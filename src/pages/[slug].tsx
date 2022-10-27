@@ -2,11 +2,11 @@ import React from 'react';
 import Markdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus as dark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import { getPlaiceholder } from 'plaiceholder';
 
 import { Layout } from '$components/Layout';
 import { CoverPhoto } from '$components/CoverPhoto';
 import { fetchGraphQL, getAllPosts } from '$lib/api';
+import { transformImage } from '$lib/transformImage';
 
 type Props = {
 	post: {
@@ -82,18 +82,12 @@ export async function getStaticProps({ params }): Promise<{ props: Props }> {
 		}
 	`);
 	const [post] = data.post.items;
-	const { img, base64 } = await getPlaiceholder(post.coverPhoto.url, {
-		size: 10
-	});
+	const image = await transformImage(post.coverPhoto);
 	return {
 		props: {
 			post: {
 				...post,
-				coverPhoto: {
-					...post.coverPhoto,
-					url: img,
-					blur: base64
-				}
+				coverPhoto: image
 			}
 		}
 	};

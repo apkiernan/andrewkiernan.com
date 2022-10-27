@@ -1,14 +1,17 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import Image from 'next/image';
-import { Layout } from '../components/Layout';
-import { fetchGraphQL } from '../lib/api';
+
+import { Layout } from '$components/Layout';
+import { fetchGraphQL } from '$lib/api';
+import { transformImage } from '$lib/transformImage';
 
 type PageProps = {
 	headshot: {
 		url: string;
 		height: number;
 		width: number;
+		blur: string;
 	};
 };
 
@@ -95,29 +98,33 @@ const HeadshotWrapper = styled.div`
 	}
 `;
 
-const IndexPage = (props: PageProps) => (
-	<Layout
-		title="A Boston based web developer specializing in performant web applications"
-		imageUrl={props.headshot.url}
-	>
-		<Flex marginBottom="2rem">
-			<TitleContainer>
-				<H1>Hi, I&apos;m Andrew</H1>
-				<Arrow>&rarr;</Arrow>
-			</TitleContainer>
-			<HeadshotWrapper>
-				<Headshot
-					src={props.headshot.url}
-					height={props.headshot.height}
-					width={props.headshot.width}
-				/>
-			</HeadshotWrapper>
-		</Flex>
-		<Flex reverse>
-			<p>JavaScript ninja, CSS wizard, HTML rockstar. Master of hyperbole.</p>
-		</Flex>
-	</Layout>
-);
+const IndexPage = (props: PageProps) => {
+	return (
+		<Layout
+			title="A Boston based web developer specializing in performant web applications"
+			imageUrl={props.headshot.url}
+		>
+			<Flex marginBottom="2rem">
+				<TitleContainer>
+					<H1>Hi, I&apos;m Andrew</H1>
+					<Arrow>&rarr;</Arrow>
+				</TitleContainer>
+				<HeadshotWrapper>
+					<Headshot
+						src={props.headshot.url}
+						height={props.headshot.height}
+						width={props.headshot.width}
+						blurDataURL={props.headshot.blur}
+						priority
+					/>
+				</HeadshotWrapper>
+			</Flex>
+			<Flex reverse>
+				<p>JavaScript ninja, CSS wizard, HTML rockstar. Master of hyperbole.</p>
+			</Flex>
+		</Layout>
+	);
+};
 
 export default IndexPage;
 
@@ -131,9 +138,11 @@ export async function getStaticProps() {
 			}
 		}
 	`);
+
+	const headshot = await transformImage(data.headshot);
 	return {
 		props: {
-			headshot: data.headshot
+			headshot
 		}
 	};
 }

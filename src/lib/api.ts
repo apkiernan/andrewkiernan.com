@@ -1,3 +1,5 @@
+import { transformImage } from './transformImage';
+
 export async function fetchGraphQL(query, preview = false) {
 	const result = await fetch(
 		`https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
@@ -43,5 +45,17 @@ export async function getAllPosts() {
 		posts: { items },
 		headshot
 	} = data;
-	return { posts: items, headshot };
+
+	const posts = await Promise.all(
+		items.map(async item => {
+			const image = await transformImage(item.coverPhoto);
+			console.log(image);
+			return {
+				...item,
+				coverPhoto: image
+			};
+		})
+	);
+
+	return { posts, headshot };
 }

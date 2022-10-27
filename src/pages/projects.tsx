@@ -7,7 +7,7 @@ import { dark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import { Layout } from '$components/Layout';
 import { fetchGraphQL } from '$lib/api';
-import { getPlaiceholder } from 'plaiceholder';
+import { transformImage } from '$lib/transformImage';
 
 const Grid = styled.div`
 	@media screen and (min-width: 625px) {
@@ -153,12 +153,8 @@ export async function getStaticProps() {
 		items.map(async item => {
 			const photosCollection = await Promise.all(
 				item.photosCollection.items.map(async pc => {
-					const { img, base64 } = await getPlaiceholder(pc.url, { size: 10 });
-					return {
-						...pc,
-						url: img,
-						blur: base64
-					};
+					const image = await transformImage(pc);
+					return image;
 				})
 			);
 			return {
@@ -167,7 +163,7 @@ export async function getStaticProps() {
 			};
 		})
 	);
-	console.log(JSON.stringify(projects, null, 2));
+
 	return {
 		props: {
 			projects,

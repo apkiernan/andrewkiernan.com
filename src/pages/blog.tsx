@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from '../components/Link';
 import Image from 'next/image';
 import styled from 'styled-components';
 
-import { Layout } from '../components/Layout';
-import { getAllPosts } from '../lib/api';
+import { Link } from '$components/Link';
+import { Layout } from '$components/Layout';
+import { getAllPosts } from '$lib/api';
 
 const Grid = styled.div`
 	@media screen and (min-width: 700px) {
@@ -36,6 +36,7 @@ type BlogProps = {
 			url: string;
 			height: number;
 			width: number;
+			blur: string;
 		};
 	}[];
 };
@@ -52,6 +53,7 @@ const Blog = (props: BlogProps) => (
 					src={bp.coverPhoto.url}
 					height={bp.coverPhoto.height}
 					width={bp.coverPhoto.width}
+					blurDataURL={bp.coverPhoto.blur}
 				/>
 				<div>
 					<Link to={`/${bp.slug}`}>
@@ -67,6 +69,7 @@ export default Blog;
 
 export async function getStaticProps() {
 	const { headshot, posts } = await getAllPosts();
+
 	return {
 		props: {
 			headshot,
