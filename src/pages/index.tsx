@@ -110,13 +110,17 @@ const IndexPage = (props: PageProps) => {
 					<Arrow>&rarr;</Arrow>
 				</TitleContainer>
 				<HeadshotWrapper>
-					<Headshot
-						src={props.headshot.url}
-						height={props.headshot.height}
-						width={props.headshot.width}
-						blurDataURL={props.headshot.blur}
-						priority
-					/>
+					<div style={{ height: '100%', width: '100%' }}>
+						<Headshot
+							src={props.headshot.url}
+							height={props.headshot.height}
+							width={props.headshot.width}
+							blurDataURL={props.headshot.blur}
+							priority
+							layout="responsive"
+							alt="my ugly mug"
+						/>
+					</div>
 				</HeadshotWrapper>
 			</Flex>
 			<Flex reverse>
