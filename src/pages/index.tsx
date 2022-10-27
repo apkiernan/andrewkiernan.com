@@ -118,6 +118,7 @@ const IndexPage = (props: PageProps) => {
 							blurDataURL={props.headshot.blur}
 							priority
 							layout="responsive"
+							placeholder="blur"
 							alt="my ugly mug"
 						/>
 					</div>

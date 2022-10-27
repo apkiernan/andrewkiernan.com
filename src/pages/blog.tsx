@@ -54,6 +54,7 @@ const Blog = (props: BlogProps) => (
 					height={bp.coverPhoto.height}
 					width={bp.coverPhoto.width}
 					blurDataURL={bp.coverPhoto.blur}
+					placeholder="blur"
 				/>
 				<div>
 					<Link to={`/${bp.slug}`}>
