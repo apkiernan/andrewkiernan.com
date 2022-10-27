@@ -64,7 +64,9 @@ const BlogPost = (props: Props) => {
 
 export default BlogPost;
 
-export async function getStaticProps({ params }): Promise<{ props: Props }> {
+export async function getServerSideProps({
+	params
+}): Promise<{ props: Props }> {
 	const { data } = await fetchGraphQL(`
 		query {
 			post: blogPostCollection(where: { slug: "${params.slug}" }) {
@@ -90,13 +92,5 @@ export async function getStaticProps({ params }): Promise<{ props: Props }> {
 				coverPhoto: image
 			}
 		}
-	};
-}
-
-export async function getStaticPaths() {
-	const { posts } = await getAllPosts();
-	return {
-		paths: posts.map(p => ({ params: { slug: p.slug } })),
-		fallback: false
 	};
 }

@@ -181,7 +181,7 @@ const ResumePage = (props: ResumePageProps) => {
 
 export default ResumePage;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 	const { data } = await fetchGraphQL(`
 	query ResumePage {
 		headshot: asset(id: "${process.env.CONTENTFUL_HEADSHOT_ID}") {

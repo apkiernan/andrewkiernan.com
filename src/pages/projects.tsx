@@ -120,7 +120,7 @@ export const Project = ({ title, featureBullets, photo }: ProjectProps) => (
 
 export default PortfolioPage;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 	const { data } = await fetchGraphQL(`
 	query PortfolioPage {
 		headshot: asset(id: "${process.env.CONTENTFUL_HEADSHOT_ID}") {

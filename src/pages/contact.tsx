@@ -77,7 +77,7 @@ const Contact = ({ headshot }: Props) => (
 
 export default Contact;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 	const response = await fetchGraphQL(`
 		query {
 			headshot: asset(id: "${process.env.CONTENTFUL_HEADSHOT_ID}") {

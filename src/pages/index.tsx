@@ -133,7 +133,7 @@ const IndexPage = (props: PageProps) => {
 
 export default IndexPage;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 	const { data } = await fetchGraphQL(`
 		query {
 			headshot: asset(id: "${process.env.CONTENTFUL_HEADSHOT_ID}") {

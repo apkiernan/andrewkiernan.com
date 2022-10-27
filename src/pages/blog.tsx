@@ -68,7 +68,7 @@ const Blog = (props: BlogProps) => (
 
 export default Blog;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 	const { headshot, posts } = await getAllPosts();
 
 	return {
