@@ -1,28 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
-import styled from 'styled-components';
 
 import { Link } from '$components/Link';
 import { Layout } from '$components/Layout';
 import { getAllPosts } from '$lib/api';
-
-const Grid = styled.div`
-	@media screen and (min-width: 700px) {
-		display: grid;
-		grid-template-columns: 35% 65%;
-		grid-gap: 2rem;
-	}
-`;
-
-const Img = styled(Image)`
-	height: auto;
-	max-height: 25vh;
-	width: 100%;
-
-	@media screen and (min-width: 700px) {
-		max-height: unset;
-	}
-`;
+import styles from '$styles/blog.module.css';
 
 type BlogProps = {
 	headshot: {
@@ -47,8 +29,9 @@ const Blog = (props: BlogProps) => (
 		imageUrl={props.headshot.url}
 	>
 		{props.posts.map(bp => (
-			<Grid key={bp.slug}>
-				<Img
+			<div className={styles.grid} key={bp.slug}>
+				<Image
+					className={styles.img}
 					layout="responsive"
 					src={bp.coverPhoto.url}
 					height={bp.coverPhoto.height}
@@ -61,7 +44,7 @@ const Blog = (props: BlogProps) => (
 						<p>{bp.title}</p>
 					</Link>
 				</div>
-			</Grid>
+			</div>
 		))}
 	</Layout>
 );

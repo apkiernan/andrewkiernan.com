@@ -1,22 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
 
-const FooterWrapper = styled.footer`
-	align-items: center;
-	border-top: 1px solid #ccc;
-	display: flex;
-	justify-content: center;
-	height: 3rem;
-
-	@media screen and (min-width: ${props => props.theme.breakpoints.medium}) {
-		height: 5rem;
-	}
-`;
+import styles from '$styles/footer.module.css';
 
 const Footer = () => (
-	<FooterWrapper>
+	<footer className={styles.footer}>
 		<span>&copy; Andrew Kiernan {new Date().getFullYear()}</span>
-	</FooterWrapper>
+	</footer>
 );
 
 export default Footer;

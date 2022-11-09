@@ -1,23 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 
-import Footer from './Footer';
-import Navbar from './Navbar';
-import { SEO } from './SEO';
-
-const Page = styled.main`
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-`;
-
-const Content = styled.div`
-	flex: 1;
-	margin: 0 auto;
-	width: 100%;
-	max-width: 1000px;
-	padding: 2rem;
-`;
+import styles from '$styles/layout.module.css';
+import Footer from '$components/Footer';
+import Navbar from '$components/Navbar';
+import { SEO } from '$components/SEO';
 
 type LayoutProps = {
 	children: React.ReactNode;
@@ -28,10 +14,10 @@ type LayoutProps = {
 export const Layout = ({ children, title, imageUrl }: LayoutProps) => (
 	<>
 		<SEO title={title} description={title} imageUrl={imageUrl} />
-		<Page>
+		<main className={styles.main}>
 			<Navbar />
-			<Content>{children}</Content>
+			<div className={styles.content}>{children}</div>
 			<Footer />
-		</Page>
+		</main>
 	</>
 );

@@ -3,9 +3,10 @@ import Markdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus as dark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
+import styles from '$styles/blog-post.module.css';
 import { Layout } from '$components/Layout';
 import { CoverPhoto } from '$components/CoverPhoto';
-import { fetchGraphQL, getAllPosts } from '$lib/api';
+import { fetchGraphQL } from '$lib/api';
 import { transformImage } from '$lib/transformImage';
 
 type Props = {
@@ -27,7 +28,7 @@ const BlogPost = (props: Props) => {
 	return (
 		<Layout title={post.title} imageUrl={post.coverPhoto.url}>
 			<h1>{post.title}</h1>
-			<div style={{ marginBottom: '2rem' }}>
+			<div className={styles.coverPhotoWrapper}>
 				<CoverPhoto
 					image={post.coverPhoto.url}
 					height={post.coverPhoto.height}

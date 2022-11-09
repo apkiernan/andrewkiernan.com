@@ -1,31 +1,13 @@
 import React from 'react';
 import SVG from 'react-inlinesvg';
-import styled from 'styled-components';
 
 import { Layout } from '../components/Layout';
 import github from '../img/github-icon.svg';
 import twitter from '../img/social/twitter.svg';
 import email from '../img/social/email.svg';
-import { fetchGraphQL } from '../lib/api';
+import { fetchGraphQL } from '$lib/api';
 
-const Section = styled.section`
-	align-items: center;
-	display: flex;
-	justify-content: flex-start;
-	padding: 1rem;
-`;
-
-const IconContainer = styled.div`
-	margin-right: 2rem;
-	flex: 1;
-	> svg {
-		fill: var(--primary-color);
-	}
-`;
-
-const ExternalLink = styled.a`
-	flex: 10;
-`;
+import styles from '$styles/contact.module.css';
 
 type Props = {
 	headshot: { url: string; height: number; width: number };
@@ -35,7 +17,7 @@ const Contact = ({ headshot }: Props) => (
 		title="Contact me to build a website or web app for you or your business"
 		imageUrl={headshot.url}
 	>
-		<Section>
+		<section className={styles.section}>
 			<div>
 				<div>
 					<h1>Contact</h1>
@@ -44,34 +26,43 @@ const Contact = ({ headshot }: Props) => (
 						Celtics are the best team in the NBA? Just want to say hi? Feel free
 						to contact me through the platforms listed below
 					</p>
-					<Section>
-						<IconContainer>
+					<section className={styles.section}>
+						<div className={styles.iconContainer}>
 							<SVG src={email.src} />
-						</IconContainer>
-						<ExternalLink href="mailto:apkiernan@gmail.com">
+						</div>
+						<a
+							className={styles.externalLink}
+							href="mailto:apkiernan@gmail.com"
+						>
 							Shoot me an email
-						</ExternalLink>
-					</Section>
-					<Section>
-						<IconContainer>
+						</a>
+					</section>
+					<section className={styles.section}>
+						<div className={styles.iconContainer}>
 							<SVG src={github.src} />
-						</IconContainer>
-						<ExternalLink href="https://github.com/apkiernan">
+						</div>
+						<a
+							className={styles.externalLink}
+							href="https://github.com/apkiernan"
+						>
 							Find me on Github
-						</ExternalLink>
-					</Section>
-					<Section>
-						<IconContainer>
+						</a>
+					</section>
+					<section className={styles.section}>
+						<div className={styles.iconContainer}>
 							<SVG src={twitter.src} />
-						</IconContainer>
-						<ExternalLink href="https://twitter.com/apkiernan">
+						</div>
+						<a
+							className={styles.externalLink}
+							href="https://twitter.com/apkiernan"
+						>
 							Find me on Twitter (I don&apos;t tweet at all, but my DMs are
 							open)
-						</ExternalLink>
-					</Section>
+						</a>
+					</section>
 				</div>
 			</div>
-		</Section>
+		</section>
 	</Layout>
 );
 

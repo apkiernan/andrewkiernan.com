@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
+import { useRouter } from 'next/router';
 import SVG from 'react-inlinesvg';
+import cx from 'classnames';
 
 import { Link } from './Link';
 import { SiteTheme, useSiteTheme } from '../hooks/useSiteTheme';
@@ -8,70 +9,7 @@ import logoLight from '../img/logo.svg';
 import logoDark from '../img/logo-inverted.svg';
 import lightIcon from '../img/light-mode-icon.svg';
 import darkIcon from '../img/dark-mode-icon.svg';
-
-const Nav = styled.nav`
-	align-items: center;
-	display: flex;
-	height: 3rem;
-	justify-content: space-between;
-
-	@media screen and (min-width: ${props => props.theme.breakpoints.medium}) {
-		height: 5rem;
-		padding: 0 2rem;
-	}
-`;
-
-const NavBrand = styled.div`
-	display: flex;
-	height: 100%;
-`;
-
-const SiteThemeToggle = styled.div`
-	flex: 1;
-`;
-
-const BrandLink = styled(Link)`
-	display: flex;
-	height: 100%;
-	padding: 0.5rem;
-`;
-
-const BrandLogo = styled(SVG)`
-	height: 100%;
-	width: auto;
-`;
-
-const NavLink = styled(Link)`
-	text-decoration: none;
-	font-size: 0.9rem;
-	border-bottom: 0.3rem solid transparent;
-	color: var(--text-color);
-	padding: 1.5rem;
-	padding-bottom: 0.6rem;
-
-	&.active {
-		border-bottom-color: var(--primary-color);
-	}
-
-	@media screen and (min-width: ${props => props.theme.breakpoints.medium}) {
-		font-size: 1.25rem;
-		padding: 2rem;
-		padding-bottom: 1.45rem;
-	}
-`;
-
-const SwitchContainer = styled.div`
-	align-items: center;
-	display: flex;
-	height: 100%;
-	width: auto;
-`;
-const SwitchIcon = styled(SVG)`
-	border-radius: 2rem;
-	height: 2rem;
-	width: 2rem;
-	fill: var(--text-color);
-`;
+import styles from '$styles/navbar.module.css';
 
 type Props = {
 	siteTheme: SiteTheme;
@@ -83,9 +21,9 @@ const Switch = (p: Props) => {
 	const icon: string = p.siteTheme === 'light' ? lightIcon.src : darkIcon.src;
 	return (
 		<label htmlFor="site-theme">
-			<SwitchContainer>
-				<SwitchIcon src={icon} />
-			</SwitchContainer>
+			<div className={styles.switchContainer}>
+				<SVG className={styles.switchIcon} src={icon} />
+			</div>
 			<input
 				id="site-theme"
 				type="checkbox"
@@ -100,25 +38,57 @@ const Switch = (p: Props) => {
 };
 
 const Navbar = () => {
+	const { pathname } = useRouter();
 	const [theme, setTheme] = useSiteTheme();
+
 	return (
-		<Nav>
-			<NavBrand>
-				<BrandLink to="/">
-					{/* @ts-ignore */}
-					<BrandLogo src={theme === 'light' ? logoLight.src : logoDark.src} />
-				</BrandLink>
-			</NavBrand>
-			<SiteThemeToggle>
-				<Switch siteTheme={theme} setSiteTheme={setTheme} />
-			</SiteThemeToggle>
-			<div>
-				<NavLink to="/blog">Blog</NavLink>
-				<NavLink to="/projects">Projects</NavLink>
-				<NavLink to="/resume">Resume</NavLink>
-				<NavLink to="/contact">Contact</NavLink>
+		<nav className={styles.nav}>
+			<div className={styles.navBrand}>
+				<Link className={styles.brandLink} to="/">
+					<SVG
+						className={styles.brandLogo}
+						src={theme === 'light' ? logoLight.src : logoDark.src}
+					/>
+				</Link>
 			</div>
-		</Nav>
+			<div className={styles.siteThemeToggle}>
+				<Switch siteTheme={theme} setSiteTheme={setTheme} />
+			</div>
+			<div>
+				<Link
+					className={cx(styles.navLink, {
+						[styles.active]: pathname === '/blog'
+					})}
+					to="/blog"
+				>
+					Blog
+				</Link>
+				<Link
+					className={cx(styles.navLink, {
+						[styles.active]: pathname === '/projects'
+					})}
+					to="/projects"
+				>
+					Projects
+				</Link>
+				<Link
+					className={cx(styles.navLink, {
+						[styles.active]: pathname === '/resume'
+					})}
+					to="/resume"
+				>
+					Resume
+				</Link>
+				<Link
+					className={cx(styles.navLink, {
+						[styles.active]: pathname === '/contact'
+					})}
+					to="/contact"
+				>
+					Contact
+				</Link>
+			</div>
+		</nav>
 	);
 };
 
