@@ -1,11 +1,12 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 </script>
 
 {#each data.posts as post}
-	<div class="grid">
+	<div class="grid" in:fade>
 		<img
 			alt="blog-post"
 			src={post.coverPhoto.url}
