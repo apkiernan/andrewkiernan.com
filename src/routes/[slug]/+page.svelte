@@ -1,16 +1,34 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import SvelteMarkdown from 'svelte-markdown';
+	import Code from './code.svelte';
 
 	export let data: PageData;
-
-	console.log(data.post.content);
 </script>
 
 <h1>{data.post.title}</h1>
-<img
-	alt="blog-cover"
-	src={data.post.coverPhoto.url}
-	height={data.post.coverPhoto.height}
-	width={data.post.coverPhoto.width}
+<div class="img-wrapper">
+	<img alt="blog-cover" src={data.post.coverPhoto.url} />
+</div>
+<SvelteMarkdown
+	source={data.post.content}
+	renderers={{
+		code: Code
+	}}
 />
-{@html data.post.content}
+
+<style lang="scss">
+	.img-wrapper {
+		max-height: 50vh;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 3rem;
+
+		img {
+			max-height: 50vh;
+			width: auto;
+		}
+	}
+</style>
