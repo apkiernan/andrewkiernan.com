@@ -1,31 +1,37 @@
-export async function fetchGraphQL(query, preview = false) {
-  const result = await fetch(
-    `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${
-          preview
-            ? process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
-            : process.env.CONTENTFUL_ACCESS_TOKEN
-        }`,
-      },
-      body: JSON.stringify({ query }),
-    },
-  );
-  const response = await result?.json();
-  return response;
+import { PUBLIC_CONTENTFUL_SPACE_ID, PUBLIC_CONTENTFUL_ACCESS_TOKEN } from '$env/static/public';
+
+export type Post = {
+	title: string;
+	content: string;
+	slug: string;
+	coverPhoto: {
+		url: string;
+		height: number;
+		width: number;
+	};
+};
+
+export async function fetchGraphQL(fetch: any, query: string) {
+	const result = await fetch(
+		`https://graphql.contentful.com/content/v1/spaces/${PUBLIC_CONTENTFUL_SPACE_ID}`,
+		{
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${PUBLIC_CONTENTFUL_ACCESS_TOKEN}`
+			},
+			body: JSON.stringify({ query })
+		}
+	);
+	const response = await result?.json();
+	return response;
 }
 
-export async function getAllPosts() {
-  const { data } = await fetchGraphQL(`
+export async function getAllPosts(fetch: any): Promise<{ posts: Post[] }> {
+	const { data } = await fetchGraphQL(
+		fetch,
+		`
     query BlogPosts {
-      headshot: asset(id: "${process.env.CONTENTFUL_HEADSHOT_ID}") {
-        url
-        height
-        width
-      }
       posts: blogPostCollection {
         items {
           title
@@ -38,10 +44,10 @@ export async function getAllPosts() {
         }
       }
     }
-  `);
-  const {
-    posts: { items },
-    headshot,
-  } = data;
-  return { posts: items, headshot };
+  `
+	);
+	const {
+		posts: { items }
+	} = data;
+	return { posts: items };
 }

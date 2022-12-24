@@ -1,50 +1,37 @@
 {
-  "name": "andrewkiernan.com",
-  "description": "Personal site for Andrew Kiernan",
-  "version": "0.1.0",
-  "author": "Andrew Kiernan",
-  "dependencies": {
-    "@types/node": "^14.14.12",
-    "@types/styled-components": "^5.1.0",
-    "dotenv": "^8.2.0",
-    "next": "^12.0.7",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-helmet": "^6.1.0",
-    "react-inlinesvg": "^1.2.0",
-    "react-markdown": "^7.1.1",
-    "react-syntax-highlighter": "^15.4.5",
-    "reset-css": "^5.0.1",
-    "sharp": "^0.29.3",
-    "styled-components": "^5.1.0",
-    "uuid": "^3.2.1"
-  },
-  "devDependencies": {
-    "@next/eslint-plugin-next": "^12.0.7",
-    "@types/react": "^16.9.14",
-    "@types/react-dom": "^16.9.4",
-    "@types/react-helmet": "^5.0.14",
-    "@types/react-syntax-highlighter": "^13.5.2",
-    "@typescript-eslint/eslint-plugin": "^5.8.1",
-    "@typescript-eslint/parser": "^5.8.1",
-    "eslint": "^8.5.0",
-    "eslint-plugin-react": "^7.28.0",
-    "prettier": "^1.19.1",
-    "typescript": "^4.5.4"
-  },
-  "keywords": [
-    "nextjs",
-    "react",
-    "typescript"
-  ],
-  "license": "MIT",
-  "main": "n/a",
-  "scripts": {
-    "start": "next start",
-    "build": "next build",
-    "dev": "next dev",
-    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"{src/**/*.js}\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "next lint"
-  }
+	"name": "andrewkiernan.com",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"lint": "prettier --plugin-search-dir . --check . && eslint .",
+		"format": "prettier --plugin-search-dir . --write ."
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "^1.0.0",
+		"@sveltejs/kit": "^1.0.0",
+		"@typescript-eslint/eslint-plugin": "^5.45.0",
+		"@typescript-eslint/parser": "^5.45.0",
+		"autoprefixer": "^10.4.13",
+		"eslint": "^8.28.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-svelte3": "^4.0.0",
+		"mdsvex": "^0.10.6",
+		"postcss": "^8.4.20",
+		"prettier": "^2.8.0",
+		"prettier-plugin-svelte": "^2.8.1",
+		"sass": "^1.56.2",
+		"svelte": "^3.54.0",
+		"svelte-check": "^2.9.2",
+		"svelte-inline-svg": "^1.2.0",
+		"tailwindcss": "^3.2.4",
+		"tslib": "^2.4.1",
+		"typescript": "^4.9.4",
+		"vite": "^4.0.0"
+	},
+	"type": "module"
 }
