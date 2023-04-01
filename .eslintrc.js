@@ -3,7 +3,11 @@ module.exports = {
 		browser: true,
 		es2021: true
 	},
-	extends: ['plugin:@next/next/recommended', 'plugin:react/recommended'],
+	extends: [
+		'plugin:@next/next/recommended',
+		'plugin:react/recommended',
+		'plugin:react/jsx-runtime'
+	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		ecmaFeatures: {
@@ -15,11 +19,10 @@ module.exports = {
 	plugins: ['react', '@typescript-eslint'],
 	rules: {
 		'object-curly-spacing': 'off',
-		'comma-dangle': 'off'
+		'comma-dangle': 'off',
+		'react/no-unescaped-entities': 'off'
 	},
 	settings: {
-		react: {
-			version: 'detect'
-		}
+		version: 'detect'
 	}
 };

@@ -1,22 +1,15 @@
-import React from 'react';
+'use client';
+
 import SVG from 'react-inlinesvg';
 
-import { Layout } from '../components/Layout';
-import github from '../img/github-icon.svg';
-import twitter from '../img/social/twitter.svg';
-import email from '../img/social/email.svg';
-import { fetchGraphQL } from '$lib/api';
+import github from '../../img/github-icon.svg';
+import twitter from '../../img/social/twitter.svg';
+import email from '../../img/social/email.svg';
 
-import styles from '$styles/contact.module.css';
+import styles from './contact.module.css';
 
-type Props = {
-	headshot: { url: string; height: number; width: number };
-};
-const Contact = ({ headshot }: Props) => (
-	<Layout
-		title="Contact me to build a website or web app for you or your business"
-		imageUrl={headshot.url}
-	>
+const Contact = () => {
+	return (
 		<section className={styles.section}>
 			<div>
 				<div>
@@ -63,24 +56,6 @@ const Contact = ({ headshot }: Props) => (
 				</div>
 			</div>
 		</section>
-	</Layout>
-);
-
+	);
+};
 export default Contact;
-
-export async function getServerSideProps() {
-	const response = await fetchGraphQL(`
-		query {
-			headshot: asset(id: "${process.env.CONTENTFUL_HEADSHOT_ID}") {
-				url
-				height
-				width
-			}
-		}
-	`);
-	return {
-		props: {
-			headshot: response.data.headshot
-		}
-	};
-}

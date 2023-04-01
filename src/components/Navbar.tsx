@@ -1,5 +1,6 @@
-import React from 'react';
-import { useRouter } from 'next/router';
+'use client';
+
+import { usePathname } from 'next/navigation';
 import SVG from 'react-inlinesvg';
 import cx from 'classnames';
 
@@ -38,7 +39,7 @@ const Switch = (p: Props) => {
 };
 
 const Navbar = () => {
-	const { pathname } = useRouter();
+	const pathname = usePathname();
 	const [theme, setTheme] = useSiteTheme();
 
 	return (

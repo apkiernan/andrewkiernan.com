@@ -1,13 +1,12 @@
-import React from 'react';
+'use client';
+
+import { FC } from 'react';
 import Markdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus as dark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
-import styles from '$styles/blog-post.module.css';
-import { Layout } from '$components/Layout';
+import styles from './blog-post.module.css';
 import { CoverPhoto } from '$components/CoverPhoto';
-import { fetchGraphQL } from '$lib/api';
-import { transformImage } from '$lib/transformImage';
 
 type Props = {
 	post: {
@@ -22,18 +21,16 @@ type Props = {
 	};
 };
 
-const BlogPost = (props: Props) => {
-	const { post } = props;
-
+export const Post: FC<Props> = props => {
 	return (
-		<Layout title={post.title} imageUrl={post.coverPhoto.url}>
-			<h1>{post.title}</h1>
+		<>
+			<h1>{props.post.title}</h1>
 			<div className={styles.coverPhotoWrapper}>
 				<CoverPhoto
-					image={post.coverPhoto.url}
-					height={post.coverPhoto.height}
-					width={post.coverPhoto.width}
-					blur={post.coverPhoto.blur}
+					image={props.post.coverPhoto.url}
+					height={props.post.coverPhoto.height}
+					width={props.post.coverPhoto.width}
+					blur={props.post.coverPhoto.blur}
 				/>
 			</div>
 			<Markdown
@@ -57,41 +54,8 @@ const BlogPost = (props: Props) => {
 					}
 				}}
 			>
-				{post.content}
+				{props.post.content}
 			</Markdown>
-		</Layout>
+		</>
 	);
 };
-
-export default BlogPost;
-
-export async function getServerSideProps({
-	params
-}): Promise<{ props: Props }> {
-	const { data } = await fetchGraphQL(`
-		query {
-			post: blogPostCollection(where: { slug: "${params.slug}" }) {
-				items {
-					title
-					content 
-					coverPhoto {
-						url
-						height
-						width
-					}
-				}
-
-			}
-		}
-	`);
-	const [post] = data.post.items;
-	const image = await transformImage(post.coverPhoto);
-	return {
-		props: {
-			post: {
-				...post,
-				coverPhoto: image
-			}
-		}
-	};
-}

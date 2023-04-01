@@ -1,4 +1,3 @@
-import React from 'react';
 import Image, { ImageProps } from 'next/image';
 
 import styles from '$styles/cover-photo.module.css';
@@ -12,8 +11,8 @@ type Props = {
 
 export const CoverPhoto = (props: Props) => (
 	<Image
+		alt="cover-photo"
 		className={styles.coverPhoto}
-		layout="responsive"
 		src={props.image}
 		height={1000}
 		width={props.width}

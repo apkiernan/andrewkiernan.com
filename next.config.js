@@ -16,8 +16,8 @@ module.exports = withPlaiceholder(
 	withMDX({
 		// Append the default value with md extensions
 		pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-		compiler: {
-			styledComponents: true
+		experimental: {
+			appDir: true
 		},
 		images: {
 			domains: ['images.ctfassets.net']

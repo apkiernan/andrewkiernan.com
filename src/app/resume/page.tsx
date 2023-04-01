@@ -1,52 +1,20 @@
-import React from 'react';
-import styled from 'styled-components';
+import styles from './resume.module.css';
 
-import { Layout } from '../components/Layout';
-import { fetchGraphQL } from '../lib/api';
-
-type ResumePageProps = {
-	headshot: { url: string };
-};
-
-const JobHeader = styled.div`
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 0.5rem;
-`;
-
-const JobBlock = styled.section`
-	margin-bottom: 2rem;
-`;
-
-const BulletList = styled.ul`
-	padding-left: 1rem;
-	display: grid;
-	grid-row-gap: 0.5rem;
-`;
-
-const CompanyName = styled.a`
-	text-decoration: none;
-	cursor: pointer;
-	font-size: 1.25rem;
-`;
-const ResumePage = (props: ResumePageProps) => {
-	const { headshot } = props;
-
+const ResumePage = () => {
 	return (
-		<Layout
-			title="A Boston based web developer specializing in performant web applications"
-			imageUrl={headshot.url}
-		>
-			<JobBlock>
-				<JobHeader>
-					<CompanyName href="https://connectrn.com">ConnectRN</CompanyName>
+		<>
+			<div className={styles['job-block']}>
+				<div className={styles['job-header']}>
+					<a className={styles['company-name']} href="https://connectrn.com">
+						ConnectRN
+					</a>
 					<span>January 2022 - Present</span>
-				</JobHeader>
+				</div>
 				<div>
 					<em>Tech Lead - Senior Frontend Engineer</em>
 				</div>
 				<section>
-					<BulletList>
+					<ul className={styles['bullet-list']}>
 						<li>
 							Implemented system to coordinate tech debt and codebase
 							improvements in web portals.
@@ -55,19 +23,21 @@ const ResumePage = (props: ResumePageProps) => {
 							Build out and expand infrastructure to improve unit and
 							integration testing of new and legacy code.
 						</li>
-					</BulletList>
+					</ul>
 				</section>
-			</JobBlock>
-			<JobBlock>
-				<JobHeader>
-					<CompanyName href="https://swell.is">Swell</CompanyName>
+			</div>
+			<div className={styles['job-block']}>
+				<div className={styles['job-header']}>
+					<a className={styles['company-name']} href="https://swell.is">
+						Swell
+					</a>
 					<span>April 2021 - December 2021</span>
-				</JobHeader>
+				</div>
 				<div>
 					<em>Full Stack Software Engineer</em>
 				</div>
 				<section>
-					<BulletList>
+					<ul className={styles['bullet-list']}>
 						<li>
 							Built ability to pause and restart user subscriptions for
 							e-commerce merchant stores
@@ -84,32 +54,34 @@ const ResumePage = (props: ResumePageProps) => {
 							Led triage of platform error reports via Sentry and wrote up
 							issues for development
 						</li>
-					</BulletList>
+					</ul>
 				</section>
-			</JobBlock>
-			<JobBlock>
-				<JobHeader>
-					<CompanyName href="https://salsify.com">Salsify</CompanyName>
+			</div>
+			<div className={styles['job-block']}>
+				<div className={styles['job-header']}>
+					<a className={styles['company-name']} href="https://salsify.com">
+						Salsify
+					</a>
 					<span>October 2020 - April 2021</span>
-				</JobHeader>
+				</div>
 				<div>
 					<em>Software Engineer 2</em>
 				</div>
 				<section>
-					<BulletList>
+					<ul className={styles['bullet-list']}>
 						<li>
 							Led project to build dashboard where customers can view their
 							usage and various entitlements in the platform, coordinating with
 							Design and Product Management
 						</li>
-					</BulletList>
+					</ul>
 				</section>
-				<JobHeader>
+				<div className={styles['job-header']}>
 					<em>Software Engineer</em>
 					<span>December 2019 - October 2020</span>
-				</JobHeader>
+				</div>
 				<section>
-					<BulletList>
+					<ul className={styles['bullet-list']}>
 						<li>
 							Rearchitected validation of property values in the new product
 							edit experience
@@ -118,19 +90,21 @@ const ResumePage = (props: ResumePageProps) => {
 							Added tree-browser style sidebar to product index page to help
 							users navigate their product categories
 						</li>
-					</BulletList>
+					</ul>
 				</section>
-			</JobBlock>
-			<JobBlock>
-				<JobHeader>
-					<CompanyName href="https://bondlink.com">BondLink</CompanyName>
+			</div>
+			<div className={styles['job-block']}>
+				<div className={styles['job-header']}>
+					<a className={styles['company-name']} href="https://bondlink.com">
+						BondLink
+					</a>
 					<span>January 2019 - December 2019</span>
-				</JobHeader>
+				</div>
 				<div>
 					<em>Full Stack Software Engineer</em>
 				</div>
 				<section>
-					<BulletList>
+					<ul className={styles['bullet-list']}>
 						<li>
 							Launched investor portal for users utilizing React, Typescript and
 							functional programming with fp-ts/io-ts/fp-ts-routing
@@ -151,16 +125,18 @@ const ResumePage = (props: ResumePageProps) => {
 							Implemented API methods to render newly redesigned static sites in
 							Scala
 						</li>
-					</BulletList>
+					</ul>
 				</section>
-			</JobBlock>
-			<JobBlock>
-				<JobHeader>
-					<CompanyName href="https://carbonite.com">Carbonite</CompanyName>
+			</div>
+			<div className={styles['job-block']}>
+				<div className={styles['job-header']}>
+					<a className={styles['company-name']} href="https://carbonite.com">
+						Carbonite
+					</a>
 					<span>September 2016 - January 2019</span>
-				</JobHeader>
+				</div>
 				<section>
-					<BulletList>
+					<ul className={styles['bullet-list']}>
 						<li>
 							Member of group tasked with researching technology and JavaScript
 							framework choices for new Carbonite Data Protection Console (CDPC)
@@ -172,29 +148,11 @@ const ResumePage = (props: ResumePageProps) => {
 							for CI/CD pipeline, using React, TypeScript, Apollo-GraphQL,
 							NodeJS
 						</li>
-					</BulletList>
+					</ul>
 				</section>
-			</JobBlock>
-		</Layout>
+			</div>
+		</>
 	);
 };
 
 export default ResumePage;
-
-export async function getServerSideProps() {
-	const { data } = await fetchGraphQL(`
-	query ResumePage {
-		headshot: asset(id: "${process.env.CONTENTFUL_HEADSHOT_ID}") {
-			url
-			height
-			width
-		}
-	}
-`);
-	const { headshot } = data;
-	return {
-		props: {
-			headshot
-		}
-	};
-}
