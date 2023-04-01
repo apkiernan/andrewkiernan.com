@@ -13,6 +13,7 @@ type Photo = {
 	width: number;
 	blur: string;
 };
+
 type Proj = {
 	title: string;
 	slug: string;
@@ -51,7 +52,7 @@ const Project = ({ title, featureBullets, photo }: ProjectProps) => (
 	<section className={styles.section}>
 		<div>
 			<h1>{title}</h1>
-			<div className="grid">
+			<div className={styles.grid}>
 				<Image
 					className={styles.image}
 					src={photo.url}
