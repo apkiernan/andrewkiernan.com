@@ -45,7 +45,7 @@ const Navbar = () => {
 	return (
 		<nav className={styles.nav}>
 			<div className={styles.navBrand}>
-				<Link className={styles.brandLink} to="/">
+				<Link className={styles.brandLink} to="/" ariaLabel="my logo">
 					<SVG
 						className={styles.brandLogo}
 						src={theme === 'light' ? logoLight.src : logoDark.src}

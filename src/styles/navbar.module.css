@@ -27,11 +27,11 @@
 
 .navLink {
 	text-decoration: none;
-	font-size: 0.9rem;
+	font-size: 0.875rem;
 	border-bottom: 0.3rem solid transparent;
 	color: var(--text-color);
-	padding: 1.5rem;
-	padding-bottom: 0.6rem;
+	padding: 1rem;
+	padding-bottom: 0.4rem;
 }
 
 .active {
@@ -52,7 +52,38 @@
 	fill: var(--text-color);
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (min-width: 500px) {
+	.navLink {
+		font-size: 1rem;
+		padding: 1.5rem;
+		padding-bottom: 0.6rem;
+	}
+
+	.switchIcon {
+		border-radius: 2.25rem;
+		height: 2.25rem;
+		width: 2.25rem;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.nav {
+		height: 5rem;
+		padding: 0 4rem;
+	}
+
+	.navLink {
+		font-size: 1.125rem;
+	}
+
+	.switchIcon {
+		border-radius: 2.5rem;
+		height: 2.5rem;
+		width: 2.5rem;
+	}
+}
+
+/* @media screen and (max-width: 500px) {
  .nav { 
 		height: 3rem;
 		padding: 0 1rem;
@@ -64,4 +95,4 @@
 		padding-bottom: 1.45rem;
 	}
 
-}
+} */

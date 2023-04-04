@@ -48,45 +48,47 @@ type ProjectProps = {
 	photo: Photo;
 };
 
-const Project = ({ title, featureBullets, photo }: ProjectProps) => (
-	<section className={styles.section}>
-		<div>
-			<h1>{title}</h1>
-			<div className={styles.grid}>
-				<Image
-					className={styles.image}
-					src={photo.url}
-					height={photo.height}
-					width={photo.width}
-					blurDataURL={photo.blur}
-					placeholder="blur"
-					alt={`cover photo for ${title}`}
-					priority
-				/>
-				<Markdown
-					components={{
-						code({ node, inline, className, children, ...componentProps }) {
-							const match = /language-(\w+)/.exec(className || '');
-							return !inline && match ? (
-								<SyntaxHighlighter
-									style={dark}
-									language={match[1]}
-									PreTag="div"
-									{...componentProps}
-								>
-									{String(children).replace(/\n$/, '')}
-								</SyntaxHighlighter>
-							) : (
-								<code className={className} {...componentProps}>
-									{children}
-								</code>
-							);
-						}
-					}}
-				>
-					{featureBullets}
-				</Markdown>
+const Project = ({ title, featureBullets, photo }: ProjectProps) => {
+	return (
+		<section className={styles.section}>
+			<div>
+				<h1>{title}</h1>
+				<div className={styles.grid}>
+					<Image
+						className={styles.image}
+						src={photo.url}
+						width={533}
+						height={300}
+						blurDataURL={photo.blur}
+						placeholder="blur"
+						alt={`Cover photo for ${title}`}
+						priority
+					/>
+					<Markdown
+						components={{
+							code({ node, inline, className, children, ...componentProps }) {
+								const match = /language-(\w+)/.exec(className || '');
+								return !inline && match ? (
+									<SyntaxHighlighter
+										style={dark}
+										language={match[1]}
+										PreTag="div"
+										{...componentProps}
+									>
+										{String(children).replace(/\n$/, '')}
+									</SyntaxHighlighter>
+								) : (
+									<code className={className} {...componentProps}>
+										{children}
+									</code>
+								);
+							}
+						}}
+					>
+						{featureBullets}
+					</Markdown>
+				</div>
 			</div>
-		</div>
-	</section>
-);
+		</section>
+	);
+};
