@@ -1,5 +1,9 @@
 import styles from './resume.module.css';
 
+export const metadata = {
+	title: 'My resume'
+};
+
 const ResumePage = () => {
 	return (
 		<>

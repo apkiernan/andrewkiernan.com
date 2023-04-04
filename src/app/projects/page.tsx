@@ -3,6 +3,10 @@ import { transformImage } from '$lib/transformImage';
 
 import { ProjectList } from './project';
 
+export const metadata = {
+	title: 'Just some of the projects I have worked on'
+};
+
 const PortfolioPage = async () => {
 	const { projects } = await getData();
 
