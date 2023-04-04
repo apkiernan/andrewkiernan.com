@@ -14,10 +14,12 @@ export const CoverPhoto = (props: Props) => (
 		alt="cover-photo"
 		className={styles.coverPhoto}
 		src={props.image}
-		height={1000}
-		width={props.width}
 		blurDataURL={props.blur}
 		placeholder="blur"
 		priority
+		fill
+		style={{
+			objectFit: 'cover'
+		}}
 	/>
 );
