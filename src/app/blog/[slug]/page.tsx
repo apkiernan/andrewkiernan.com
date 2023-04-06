@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 
-import { fetchGraphQL } from '$lib/api';
 import { transformImage } from '$lib/transformImage';
 import { Post } from './post';
 import { getClient } from '$lib/contentful';
@@ -50,7 +49,7 @@ async function getData(params) {
 	const [entry] = items;
 
 	const photo = {
-		url: `https:${entry.fields.coverPhoto.fields.file.url}?fm=jpg&fl=progressive&w=936`,
+		url: `https:${entry.fields.coverPhoto.fields.file.url}?fm=webp`,
 		height: (936 * 9) / 16,
 		width: 936 // max-width of content currently
 	};
