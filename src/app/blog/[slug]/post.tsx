@@ -28,7 +28,7 @@ export const Post: FC<Props> = props => {
 			<div className={styles.coverPhotoWrapper}>
 				<CoverPhoto
 					image={props.post.coverPhoto.url}
-					height={(props.post.coverPhoto.width * 9) / 16}
+					height={props.post.coverPhoto.height}
 					width={props.post.coverPhoto.width}
 					blur={props.post.coverPhoto.blur}
 				/>
