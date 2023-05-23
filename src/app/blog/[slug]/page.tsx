@@ -74,13 +74,19 @@ async function getData(params: Params) {
 
 	const [entry] = items;
 
+	const width = 936;
+	const height = Math.round((width * 9) / 16);
+	const url = `https:${entry.fields.coverPhoto.fields.file.url}?fm=webp`;
+
 	const photo = {
-		url: `https:${entry.fields.coverPhoto.fields.file.url}?fm=webp`,
-		height: (936 * 9) / 16,
-		width: 936 // max-width of content currently
+		url,
+		height,
+		width // max-width of content currently
 	};
 
 	const image = await transformImage(photo);
+
+	image.url = `${url}&h=${height}&w=${width}`;
 
 	return {
 		post: {
