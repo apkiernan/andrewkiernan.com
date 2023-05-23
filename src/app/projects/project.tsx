@@ -1,11 +1,11 @@
 'use client';
 
 import { FC } from 'react';
-import Image from 'next/image';
 import Markdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import styles from './projects.module.css';
+import { Img } from '$components/Img';
 
 type Photo = {
 	url: string;
@@ -54,7 +54,7 @@ const Project = ({ title, featureBullets, photo }: ProjectProps) => {
 			<div>
 				<h1>{title}</h1>
 				<div className={styles.grid}>
-					<Image
+					<Img
 						className={styles.image}
 						src={photo.url}
 						width={533}

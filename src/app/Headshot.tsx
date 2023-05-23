@@ -1,11 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 
 import styles from '$styles/home.module.css';
 import { TransformedImg } from '$lib/transformImage';
 import { FC } from 'react';
+import { Img } from '$components/Img';
 
 type Props = {
 	headshot: TransformedImg;
@@ -19,7 +19,7 @@ export const Headshot: FC<Props> = ({ headshot }) => {
 			transition={{ duration: 0.3 }}
 			style={{ height: '100%', width: '100%' }}
 		>
-			<Image
+			<Img
 				className={styles.headshot}
 				src={headshot.url}
 				height={headshot.height}

@@ -1,16 +1,15 @@
-import Image from 'next/image';
-
+import { Img } from '$components/Img';
 import { Link } from '$components/Link';
 import { getAllPosts } from '$lib/api';
 import styles from './blog.module.css';
 
-const Blog = async () => {
+export default async () => {
 	const { posts } = await getData();
 	return (
 		<>
 			{posts.map(bp => (
 				<div className={styles.grid} key={bp.slug}>
-					<Image
+					<Img
 						alt="blog-post-header"
 						className={styles.img}
 						src={bp.coverPhoto.url}
@@ -29,8 +28,6 @@ const Blog = async () => {
 		</>
 	);
 };
-
-export default Blog;
 
 async function getData() {
 	const { posts } = await getAllPosts();

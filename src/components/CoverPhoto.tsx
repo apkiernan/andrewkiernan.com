@@ -1,6 +1,8 @@
-import Image, { ImageProps } from 'next/image';
+'use client';
+import { ImageProps } from 'next/image';
 
 import styles from '$styles/cover-photo.module.css';
+import { Img } from './Img';
 
 type Props = {
 	image: ImageProps['src'];
@@ -10,7 +12,7 @@ type Props = {
 };
 
 export const CoverPhoto = (props: Props) => (
-	<Image
+	<Img
 		alt="cover-photo"
 		className={styles.coverPhoto}
 		src={props.image}

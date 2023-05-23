@@ -1,8 +1,11 @@
 import { Metadata } from 'next';
 
 import { transformImage } from '$lib/transformImage';
-import { Post } from './post';
+import { Post } from './Post';
 import { getClient } from '$lib/contentful';
+import styles from './blog-post.module.css';
+import { CoverPhoto } from '$components/CoverPhoto';
+import { getAllPosts } from '$lib/api';
 
 export async function generateMetadata({ params }): Promise<Metadata> {
 	const slug = params.slug as string;
@@ -11,13 +14,32 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 	};
 }
 
-const BlogPost = async ({ params }) => {
+export async function generateStaticParams() {
+	const { posts } = await getAllPosts();
+
+	return posts.map(post => ({
+		slug: post.slug
+	}));
+}
+
+export default async ({ params }) => {
 	const { post } = await getData(params);
 
-	return <Post post={post} />;
+	return (
+		<>
+			<h1>{post.title}</h1>
+			<div className={styles.coverPhotoWrapper}>
+				<CoverPhoto
+					image={post.coverPhoto.url}
+					height={post.coverPhoto.height}
+					width={post.coverPhoto.width}
+					blur={post.coverPhoto.blur}
+				/>
+			</div>
+			<Post post={post} />
+		</>
+	);
 };
-
-export default BlogPost;
 
 type ContentfulBlogPost = {
 	title: string;
@@ -39,7 +61,11 @@ type ContentfulAsset = {
 	};
 };
 
-async function getData(params) {
+type Params = {
+	slug: string;
+};
+
+async function getData(params: Params) {
 	const client = getClient();
 	const { items } = await client.getEntries<ContentfulBlogPost>({
 		content_type: 'blogPost',
