@@ -13,5 +13,6 @@ module.exports = withPlaiceholder({
 				hostname: 'images.ctfassets.net'
 			}
 		]
-	}
+	},
+	output: 'export'
 });
