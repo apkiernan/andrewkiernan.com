@@ -42,6 +42,7 @@ async function getData() {
 	`);
 
 	const headshot = await transformImage(data.headshot);
+	headshot.url = `${headshot.url}?fm=webp`;
 	return {
 		headshot
 	};

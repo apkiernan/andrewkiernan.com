@@ -8,9 +8,10 @@ import { CoverPhoto } from '$components/CoverPhoto';
 import { getAllPosts } from '$lib/api';
 
 export async function generateMetadata({ params }): Promise<Metadata> {
-	const slug = params.slug as string;
+	const { post } = await getData(params);
+
 	return {
-		title: slug.replace('-', ' ')
+		title: post.title
 	};
 }
 

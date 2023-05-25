@@ -49,7 +49,7 @@ export async function getAllPosts() {
 	const posts = await Promise.all(
 		items.map(async item => {
 			const image = await transformImage(item.coverPhoto);
-
+			image.url = `${image.url}?fm=webp`;
 			return {
 				...item,
 				coverPhoto: image

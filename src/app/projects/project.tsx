@@ -2,6 +2,7 @@
 
 import { FC } from 'react';
 import Markdown from 'react-markdown';
+import { motion } from 'framer-motion';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import styles from './projects.module.css';
@@ -14,7 +15,7 @@ type Photo = {
 	blur: string;
 };
 
-type Proj = {
+export type Proj = {
 	title: string;
 	slug: string;
 	featureBullets: string;
@@ -27,7 +28,11 @@ type Props = {
 
 export const ProjectList: FC<Props> = props => {
 	return (
-		<>
+		<motion.div
+			initial={{ translateY: '20%', opacity: 0 }}
+			animate={{ translateY: 0, opacity: 1 }}
+			transition={{ duration: 0.3 }}
+		>
 			{props.projects.map(node => (
 				<Project
 					key={node.slug}
@@ -37,7 +42,7 @@ export const ProjectList: FC<Props> = props => {
 					photo={node.photosCollection[0]}
 				/>
 			))}
-		</>
+		</motion.div>
 	);
 };
 
