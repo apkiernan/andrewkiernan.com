@@ -87,7 +87,7 @@ async function getData(params: Params) {
 
 	const image = await transformImage(photo);
 
-	image.url = `${url}&h=${height}&w=${width}`;
+	image.url = `${url}&h=${height}`;
 
 	return {
 		post: {

@@ -49,6 +49,7 @@ async function getData() {
 			const photosCollection = await Promise.all(
 				item.photosCollection.items.map(async pc => {
 					const image = await transformImage(pc);
+					image.url = `${image.url}?fm=webp`;
 					return image;
 				})
 			);
