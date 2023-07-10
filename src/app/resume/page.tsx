@@ -1,7 +1,7 @@
 import styles from './resume.module.css';
 
 export const metadata = {
-	title: 'My resume'
+	title: 'My resume',
 };
 
 const ResumePage = () => {
@@ -20,13 +20,20 @@ const ResumePage = () => {
 				<section>
 					<ul className={styles['bullet-list']}>
 						<li>
-							Implemented system to coordinate tech debt and codebase
-							improvements in web portals.
+							Hosted weekly front-end guild meetings to discuss new technologies
+							and establish new patterns/best practices to be adopted across
+							teams
 						</li>
 						<li>
-							Build out and expand infrastructure to improve unit and
-							integration testing of new and legacy code.
+							Held weekly office hours for engineers to answer architecture
+							questions and give feedback on current projects
 						</li>
+						<li>
+							Architected, planned, and executed on long-term feature
+							implementation in React-Native mobile app, delivering 8 months of
+							work within 2 weeks of target deadline
+						</li>
+						<li>Led TypeScript adoption among all front end projects</li>
 					</ul>
 				</section>
 			</div>
@@ -53,10 +60,6 @@ const ResumePage = () => {
 						<li>
 							Expanded reporting dashboard with subscription based metrics using
 							MongoDb aggregation pipeline
-						</li>
-						<li>
-							Led triage of platform error reports via Sentry and wrote up
-							issues for development
 						</li>
 					</ul>
 				</section>
