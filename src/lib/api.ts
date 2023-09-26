@@ -1,17 +1,18 @@
 import { transformImage } from './transformImage';
+import {
+	PUBLIC_CONTENTFUL_ACCESS_TOKEN,
+	PUBLIC_CONTENTFUL_HEADSHOT_ID,
+	PUBLIC_CONTENTFUL_SPACE_ID
+} from '$env/static/public';
 
-export async function fetchGraphQL(query, preview = false) {
+export async function fetchGraphQL(query: string, preview = false) {
 	const result = await fetch(
-		`https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
+		`https://graphql.contentful.com/content/v1/spaces/${PUBLIC_CONTENTFUL_SPACE_ID}`,
 		{
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `Bearer ${
-					preview
-						? process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
-						: process.env.CONTENTFUL_ACCESS_TOKEN
-				}`
+				Authorization: `Bearer ${PUBLIC_CONTENTFUL_ACCESS_TOKEN}`
 			},
 			body: JSON.stringify({ query })
 		}
@@ -23,7 +24,7 @@ export async function fetchGraphQL(query, preview = false) {
 export async function getAllPosts() {
 	const { data } = await fetchGraphQL(`
 		query BlogPosts {
-			headshot: asset(id: "${process.env.CONTENTFUL_HEADSHOT_ID}") {
+			headshot: asset(id: "${PUBLIC_CONTENTFUL_HEADSHOT_ID}") {
 				url
 				height
 				width
@@ -47,7 +48,7 @@ export async function getAllPosts() {
 	} = data;
 
 	const posts = await Promise.all(
-		items.map(async item => {
+		items.map(async (item: any) => {
 			const image = await transformImage(item.coverPhoto);
 			image.url = `${image.url}?fm=webp`;
 			return {

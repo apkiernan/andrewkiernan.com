@@ -1,28 +1,30 @@
 module.exports = {
-	env: {
-		browser: true,
-		es2021: true
-	},
+	root: true,
 	extends: [
-		'plugin:@next/next/recommended',
-		'plugin:react/recommended',
-		'plugin:react/jsx-runtime'
+		'eslint:recommended',
+		'plugin:@typescript-eslint/recommended',
+		'plugin:svelte/recommended',
+		'prettier'
 	],
 	parser: '@typescript-eslint/parser',
+	plugins: ['@typescript-eslint'],
 	parserOptions: {
-		ecmaFeatures: {
-			jsx: true
-		},
-		ecmaVersion: 13,
-		sourceType: 'module'
+		sourceType: 'module',
+		ecmaVersion: 2020,
+		extraFileExtensions: ['.svelte']
 	},
-	plugins: ['react', '@typescript-eslint'],
-	rules: {
-		'object-curly-spacing': 'off',
-		'comma-dangle': 'off',
-		'react/no-unescaped-entities': 'off'
+	env: {
+		browser: true,
+		es2017: true,
+		node: true
 	},
-	settings: {
-		version: 'detect'
-	}
+	overrides: [
+		{
+			files: ['*.svelte'],
+			parser: 'svelte-eslint-parser',
+			parserOptions: {
+				parser: '@typescript-eslint/parser'
+			}
+		}
+	]
 };
