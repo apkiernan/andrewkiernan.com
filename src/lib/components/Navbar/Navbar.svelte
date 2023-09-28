@@ -1,25 +1,24 @@
 <script lang="ts">
 	import Switch from './ThemeSwitcher.svelte';
 	import { page } from '$app/stores';
+	import { theme } from '$lib/theme/themeStore';
 
-	import logoLight from '$lib/img/logo.svg';
-	import logoDark from '$lib/img/logo-inverted.svg';
-
-	let theme: 'light' | 'dark' = 'light';
+	import Logo from '../Icons/Logo.svelte';
+	import LogoInverted from '../Icons/LogoInverted.svelte';
 </script>
 
 <nav class="nav">
 	<div class="nav-brand">
 		<a class="brand-link" href="/" aria-label="my logo">
-			{#if theme === 'light'}
-				{logoLight}
+			{#if $theme === 'light'}
+				<Logo />
 			{:else}
-				{logoDark}
+				<LogoInverted />
 			{/if}
 		</a>
 	</div>
 	<div class="site-theme-toggle">
-		<Switch {theme} />
+		<Switch />
 	</div>
 	<div>
 		<a class="nav-link" class:active={$page.url.pathname.startsWith('/blog')} href="/blog">
@@ -58,6 +57,12 @@
 		display: flex;
 		height: 100%;
 		padding: 0.5rem;
+		max-width: 5rem;
+	}
+
+	.brand-link :global(.logo) {
+		height: 100%;
+		width: auto;
 	}
 
 	.nav-link {

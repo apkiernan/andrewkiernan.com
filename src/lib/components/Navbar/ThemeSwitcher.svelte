@@ -1,23 +1,23 @@
 <script lang="ts">
-	import lightIcon from '$lib/img/light-mode-icon.svg';
-	import darkIcon from '$lib/img/dark-mode-icon.svg';
+	import LightIcon from '$lib/components/Icons/LightModeIcon.svelte';
+	import DarkIcon from '$lib/components/Icons/DarkModeIcon.svelte';
+	import { theme } from '$lib/theme/themeStore';
 
-	export let theme: 'light' | 'dark';
-	let icon: string;
-	$: icon = theme === 'light' ? lightIcon : darkIcon;
+	let icon: typeof DarkIcon | typeof LightIcon;
+	$: icon = $theme === 'light' ? LightIcon : DarkIcon;
 </script>
 
 <label for="site-theme">
 	<div class="switch-container">
-		{icon}
+		<svelte:component this={icon} />
 	</div>
 	<input
 		id="site-theme"
 		type="checkbox"
 		hidden
-		checked={theme === 'dark'}
+		checked={$theme === 'dark'}
 		on:change={() => {
-			theme === 'light' ? 'dark' : 'light';
+			theme.update($theme === 'light' ? 'dark' : 'light');
 		}}
 	/>
 </label>
@@ -28,5 +28,11 @@
 		display: flex;
 		height: 100%;
 		width: auto;
+	}
+
+	.switch-container :global(svg) {
+		height: 3rem;
+		width: 3rem;
+		fill: var(--text-color);
 	}
 </style>
