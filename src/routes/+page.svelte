@@ -1,18 +1,22 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import Image from '$lib/components/Image/Image.svelte';
 
 	export let data: PageData;
-
-	$: url = data.headshot?.url as string;
 </script>
 
-<div class="flex">
+<div class="flex mb-2">
 	<div class="titleContainer">
 		<h1 class="h1">Hi, I'm Andrew</h1>
 		<div class="arrow">&rarr;</div>
 	</div>
 	<div class="headshotWrapper">
-		<img alt="headshot" class="headshot" src={url} />
+		<Image
+			alt="headshot"
+			class="headshot"
+			src={data.headshot.url}
+			placeholder={data.headshot.blur}
+		/>
 	</div>
 </div>
 <div class="flex reverse">
@@ -80,10 +84,14 @@
 		width: 7rem;
 	}
 
-	.headshot {
+	.headshotWrapper :global(.headshot) {
 		border-radius: 5rem;
 		max-height: 100%;
 		max-width: 100%;
+	}
+
+	.mb-2 {
+		margin-bottom: 2rem;
 	}
 
 	@media screen and (min-width: 500px) {
@@ -100,7 +108,7 @@
 			width: 15rem;
 		}
 
-		.headshot {
+		.headshotWrapper :global(.headshot) {
 			border-radius: 15rem;
 		}
 	}
