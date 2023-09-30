@@ -1,8 +1,8 @@
 import { getClient } from '$lib/contentful';
-import type { PageLoad } from './$types';
+import type { PageServerLoad } from './$types';
 import { toPost } from './toPost';
 
-export const load: PageLoad = async () => {
+export const load: PageServerLoad = async () => {
 	const client = getClient();
 
 	const data = await client.getEntries({ content_type: 'blogPost' });

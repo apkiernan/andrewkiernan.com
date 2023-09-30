@@ -1,19 +1,14 @@
 import { getPlaiceholder } from 'plaiceholder';
 
-type Img = {
-	url: string;
-	height: number;
-	width: number;
-};
+export type TransformedImg = { url: string; blur: string };
 
-export type TransformedImg = Img & { blur: string };
-
-export const transformImage = async (image: Img): Promise<TransformedImg> => {
-	const data = await fetch(`https:${image.url}`);
+export const transformImage = async (url: string): Promise<TransformedImg> => {
+	const data = await fetch(`https:${url}`);
 	const buffer = Buffer.from(await data.arrayBuffer());
 	const { base64 } = await getPlaiceholder(buffer, { size: 10 });
+
 	return {
-		...image,
+		url,
 		blur: base64
 	};
 };

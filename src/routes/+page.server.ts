@@ -1,12 +1,12 @@
-import { fetchGraphQL } from '$lib/api';
+import { getClient } from '$lib/contentful';
 import { PUBLIC_CONTENTFUL_HEADSHOT_ID } from '$env/static/public';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad<{ headshot: Headshot }> = async () => {
+export const load: PageServerLoad = async () => {
 	const data = await getData();
 
 	return {
-		headshot: data.headshot
+		headshot: data.headshot?.fields?.file
 	};
 };
 
@@ -17,17 +17,10 @@ export type Headshot = {
 };
 
 async function getData() {
-	const { data } = await fetchGraphQL(`
-		query {
-			headshot: asset(id: "${PUBLIC_CONTENTFUL_HEADSHOT_ID}") {
-				width
-				height
-				url
-			}
-		}
-	`);
+	const client = getClient();
+	const headshot = await client.getAsset(PUBLIC_CONTENTFUL_HEADSHOT_ID);
 
 	return {
-		headshot: data.headshot
+		headshot
 	};
 }

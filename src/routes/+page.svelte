@@ -1,6 +1,9 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+
 	export let data: PageData;
+
+	$: url = data.headshot?.url as string;
 </script>
 
 <div class="flex">
@@ -9,7 +12,7 @@
 		<div class="arrow">&rarr;</div>
 	</div>
 	<div class="headshotWrapper">
-		<img alt="headshot" class="headshot" src={data.headshot.url} />
+		<img alt="headshot" class="headshot" src={url} />
 	</div>
 </div>
 <div class="flex reverse">

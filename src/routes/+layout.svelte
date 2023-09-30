@@ -9,10 +9,9 @@
 
 	export let data: PageData;
 
-	let sub: Unsubscriber;
+	let unsub: Unsubscriber;
 
 	onMount(() => {
-		console.log('MOUNTED', data);
 		if (data.theme === 'light') {
 			theme.set('light');
 			document.body.classList.add('theme-light');
@@ -21,7 +20,7 @@
 			document.body.classList.add('theme-dark');
 		}
 
-		sub = theme.subscribe((t) => {
+		unsub = theme.subscribe((t) => {
 			if (t === 'light') {
 				document.body.classList.remove('theme-dark');
 				document.body.classList.add('theme-light');
@@ -33,7 +32,7 @@
 	});
 
 	onDestroy(() => {
-		sub?.();
+		unsub?.();
 	});
 </script>
 
