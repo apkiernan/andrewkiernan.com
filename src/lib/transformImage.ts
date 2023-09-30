@@ -9,8 +9,9 @@ type Img = {
 export type TransformedImg = Img & { blur: string };
 
 export const transformImage = async (image: Img): Promise<TransformedImg> => {
-	console.log('IMG', image.url);
-	const { base64 } = await getPlaiceholder(image.url, { size: 10 });
+	const data = await fetch(`https:${image.url}`);
+	const buffer = Buffer.from(await data.arrayBuffer());
+	const { base64 } = await getPlaiceholder(buffer, { size: 10 });
 	return {
 		...image,
 		blur: base64
