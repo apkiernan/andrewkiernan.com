@@ -1,5 +1,3 @@
-import { getClient } from '$lib/contentful';
-import { PUBLIC_CONTENTFUL_HEADSHOT_ID } from '$env/static/public';
 import type { PageServerLoad } from './$types';
 import { transformImage } from '$lib/transformImage';
 
@@ -18,10 +16,7 @@ export type Headshot = {
 };
 
 async function getData() {
-	const client = getClient();
-	const headshot = await client.getAsset(PUBLIC_CONTENTFUL_HEADSHOT_ID);
-
-	const img = await transformImage(headshot.fields.file?.url as string);
+	const img = await transformImage('/Headshot.jpg');
 
 	return {
 		headshot: img

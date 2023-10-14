@@ -13,14 +13,14 @@
 <h1>{data.post.title}</h1>
 <div class="cover-photo-wrapper">
 	<Image
-		src={data.post.coverPhoto}
+		src={data.post.coverPhoto.url}
 		class="cover-photo"
 		placeholder={data.post.coverPhoto.blur}
 		alt={`Photo for ${data.post.title}`}
 	/>
 </div>
 
-<svelte:component this={data.post.content} />
+{@html data.post.content}
 
 <style>
 	.cover-photo-wrapper {
