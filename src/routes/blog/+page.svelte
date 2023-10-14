@@ -4,15 +4,13 @@
 	export let data: PageData;
 </script>
 
+<svelte:head>
+	<title>Blog | Andrew Kiernan</title>
+</svelte:head>
+
 {#each data.posts as post}
 	<div class="grid">
-		<img
-			alt="blog-post-header"
-			class="img"
-			src={post.coverPhoto.url}
-			height={post.coverPhoto.height}
-			width={post.coverPhoto.width}
-		/>
+		<img alt="blog-post-header" class="img" src={post.cover_photo} />
 		<div>
 			<a href={`/blog/${post.slug}`}>
 				<p>{post.title}</p>

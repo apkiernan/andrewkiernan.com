@@ -1,13 +1,28 @@
-import { getClient } from '$lib/contentful';
 import type { PageServerLoad } from './$types';
-import { toPost } from './toPost';
+
+export type GlobResult = {
+	default: unknown;
+	metadata: {
+		title: string;
+		description: string;
+		date_posted: string;
+		published: boolean;
+		slug: string;
+		cover_photo: string;
+	};
+};
 
 export const load: PageServerLoad = async () => {
-	const client = getClient();
+	const paths = import.meta.glob('/src/posts/*.md', { eager: true }) as Record<string, GlobResult>;
 
-	const data = await client.getEntries({ content_type: 'blogPost' });
+	const posts = Object.values(paths).reduce((posts, mod) => {
+		if (!mod.metadata.published) return posts;
+
+		posts.push(mod.metadata);
+		return posts;
+	}, [] as GlobResult['metadata'][]);
 
 	return {
-		posts: data.items.map(toPost)
+		posts
 	};
 };

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Image from '$lib/components/Image/Image.svelte';
-	import { parseMarkdown } from '../../projects/parseMarkdown';
 	import type { PageData } from './$types';
+	import './atom.css';
 
 	export let data: PageData;
 </script>
@@ -9,17 +9,18 @@
 <svelte:head>
 	<title>{data.post.title}</title>
 </svelte:head>
+
 <h1>{data.post.title}</h1>
 <div class="cover-photo-wrapper">
 	<Image
-		src={data.post.coverPhoto.url}
+		src={data.post.coverPhoto}
 		class="cover-photo"
 		placeholder={data.post.coverPhoto.blur}
 		alt={`Photo for ${data.post.title}`}
 	/>
 </div>
 
-{@html parseMarkdown(data.post.content)}
+<svelte:component this={data.post.content} />
 
 <style>
 	.cover-photo-wrapper {
