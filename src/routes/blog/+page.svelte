@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import Image from '$lib/components/Image/Image.svelte';
 
 	export let data: PageData;
 </script>
@@ -10,7 +11,12 @@
 
 {#each data.posts as post}
 	<div class="grid">
-		<img alt="blog-post-header" class="img" src={post.cover_photo} />
+		<Image
+			alt="blog-post-header"
+			class="img"
+			src={post.cover_photo.url}
+			placeholder={post.cover_photo.blur}
+		/>
 		<div>
 			<a href={`/blog/${post.slug}`}>
 				<p>{post.title}</p>
@@ -27,12 +33,12 @@
 			grid-gap: 2rem;
 		}
 
-		.img {
+		.grid :global(.img) {
 			max-height: unset;
 		}
 	}
 
-	.img {
+	.grid :global(.img) {
 		height: auto;
 		max-height: 25vh;
 		width: 100%;
