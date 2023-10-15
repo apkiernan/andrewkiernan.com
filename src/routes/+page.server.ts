@@ -1,8 +1,8 @@
 import type { PageServerLoad } from './$types';
 import { transformImage } from '$lib/transformImage';
 
-export const load: PageServerLoad = async () => {
-	const data = await getData();
+export const load: PageServerLoad = async ({ fetch }) => {
+	const data = await getData(fetch);
 
 	return {
 		headshot: data.headshot
@@ -15,10 +15,12 @@ export type Headshot = {
 	url: string;
 };
 
-async function getData() {
-	const img = await transformImage('/Headshot.jpg');
+async function getData(relFetch: typeof window.fetch) {
+	const res = await relFetch('/Headshot.jpg');
+	const buffer = await res.arrayBuffer();
+	const { blur } = await transformImage(Buffer.from(buffer));
 
 	return {
-		headshot: img
+		headshot: { url: '/Headshot.jpg', blur }
 	};
 }

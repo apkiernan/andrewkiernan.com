@@ -13,15 +13,17 @@ export type GlobResult = {
 	};
 };
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async ({ fetch }) => {
 	const paths = import.meta.glob('/src/posts/*.md', { eager: true }) as Record<string, GlobResult>;
 
 	const posts = [];
 
 	for (const mod of Object.values(paths)) {
 		if (mod.metadata.published) {
-			const img = await transformImage(mod.metadata.cover_photo);
-			posts.push({ ...mod.metadata, cover_photo: img });
+			const imgResponse = await fetch(mod.metadata.cover_photo);
+			const buffer = await imgResponse.arrayBuffer();
+			const { blur } = await transformImage(Buffer.from(buffer));
+			posts.push({ ...mod.metadata, cover_photo: { url: mod.metadata.cover_photo, blur } });
 		}
 	}
 
