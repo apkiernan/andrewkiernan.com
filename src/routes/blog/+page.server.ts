@@ -1,7 +1,7 @@
 import type { PageServerLoad } from './$types';
 
 export type GlobResult = {
-	default: unknown;
+	default: { render: () => { html: string } };
 	metadata: {
 		title: string;
 		description: string;

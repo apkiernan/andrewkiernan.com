@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Image from '$lib/components/Image/Image.svelte';
 	import type { PageData } from './$types';
-	import { parseMarkdown } from './parseMarkdown';
 
 	export let data: PageData;
 </script>
@@ -18,7 +17,7 @@
 						placeholder={project.photos[0].blur}
 						alt={`Cover photo for ${project.title}`}
 					/>
-					{@html parseMarkdown(project.featureBullets)}
+					{@html project.content}
 				</div>
 			</div>
 		</section>
@@ -40,5 +39,7 @@
 
 	.grid :global(.image) {
 		border-radius: 10px;
+		height: 100%;
+		width: 100%;
 	}
 </style>
