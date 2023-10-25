@@ -1,10 +1,11 @@
-import { getPlaiceholder } from 'plaiceholder';
+import jimp from 'jimp';
 
 export type TransformedImg = { blur: string };
 
 export const transformImage = async (data: Buffer): Promise<TransformedImg> => {
 	try {
-		const { base64 } = await getPlaiceholder(data, { size: 10 });
+		const img = await jimp.read(data);
+		const base64 = await img.blur(5).getBase64Async(jimp.MIME_JPEG);
 
 		return {
 			blur: base64
