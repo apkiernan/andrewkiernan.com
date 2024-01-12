@@ -23,6 +23,6 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 			}
 		};
 	} catch (err) {
-		throw error(404, 'Post not found');
+		error(404, 'Post not found');
 	}
 };
