@@ -24,14 +24,6 @@
 				</div>
 				<a class="externalLink" href="https://github.com/apkiernan"> Find me on Github </a>
 			</section>
-			<section class="section">
-				<div class="iconContainer">
-					<Twitter />
-				</div>
-				<a class="externalLink" href="https://twitter.com/apkiernan">
-					Find me on Twitter (I don&apos;t tweet at all, but my DMs are open)
-				</a>
-			</section>
 		</div>
 	</div>
 </section>

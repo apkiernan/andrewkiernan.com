@@ -1,10 +1,32 @@
 <div class="job-block">
 	<div class="job-header">
-		<a class="company-name" href="https://connectrn.com"> ConnectRN </a>
-		<span>January 2022 - Present</span>
+		<a class="company-name" href="https://klaviyo.com"> Klaviyo </a>
+		<span>Febuary 2024 - Present</span>
 	</div>
 	<div>
-		<em>Tech Lead - Senior Frontend Engineer</em>
+		<em>Senior Software Engineer</em>
+	</div>
+	<section>
+		<ul class="bullet-list">
+			<li>
+				Implement new workflow for users to set up disclosure information for SMS campaign
+				collection, increasing form publishing with privacy links by 7.1% and form publishing with
+				terms of service links by 8.2%
+			</li>
+			<li>
+				Built new touch points throughout platform to encourage users to set up SMS campaigns,
+				increasing relevant metrics by 2.8% and increasing attributable value by 1%
+			</li>
+		</ul>
+	</section>
+</div>
+<div class="job-block">
+	<div class="job-header">
+		<a class="company-name" href="https://connectrn.com"> ConnectRN </a>
+		<span>January 2022 - January 2024</span>
+	</div>
+	<div>
+		<em>Senior Frontend Engineer</em>
 	</div>
 	<section>
 		<ul class="bullet-list">
