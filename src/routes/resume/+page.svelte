@@ -1,7 +1,7 @@
 <div class="job-block">
 	<div class="job-header">
 		<a class="company-name" href="https://klaviyo.com"> Klaviyo </a>
-		<span>Febuary 2024 - Present</span>
+		<span>Febuary 2024 - February 2025</span>
 	</div>
 	<div>
 		<em>Senior Software Engineer</em>
