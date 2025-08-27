@@ -12,7 +12,9 @@ const config = {
 	extensions: ['.svelte', '.md'],
 	preprocess: [vitePreprocess(), mdsvex(mdsvexConfig)],
 	kit: {
-		adapter: adapter()
+		adapter: adapter({
+			runtime: 'nodejs22.x'
+		})
 	}
 };
 
