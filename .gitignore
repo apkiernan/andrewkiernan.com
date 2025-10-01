@@ -2,6 +2,7 @@
 node_modules
 /build
 /.vercel
+/.netlify
 /.svelte-kit
 /package
 .env
